@@ -40,7 +40,6 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("index");
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		String response = rt.getForObject(url, String.class);
-		System.out.println(response);
 		mv.addObject("actorResult", response);
 		return mv;
 	}
