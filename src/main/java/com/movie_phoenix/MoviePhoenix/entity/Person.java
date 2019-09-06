@@ -5,8 +5,6 @@ package com.movie_phoenix.MoviePhoenix.entity;
 
 import java.util.List;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,11 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Atiba
  *
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 
-public class Actor {
+public class Person {
 
-	
 	private Integer Id;
 	private String name;
 	@JsonProperty("Known_for_department")
@@ -26,7 +23,7 @@ public class Actor {
 	@JsonProperty("profile_path")
 	private String imageUrl;
 	@JsonProperty("Known_for")
-	List<Movie> KnownFor;
+	List<Movie> knownFor;
 	private String birthday;
 	private String deathday;
 	@JsonProperty("imdb_id")
@@ -34,8 +31,8 @@ public class Actor {
 	private String biography;
 	@JsonProperty("place_of_birth")
 	private String placeOfBirth;
-	
-	public Actor() {
+
+	public Person() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -73,11 +70,11 @@ public class Actor {
 	}
 
 	public List<Movie> getKnownFor() {
-		return KnownFor;
+		return knownFor;
 	}
 
 	public void setKnownFor(List<Movie> knownFor) {
-		KnownFor = knownFor;
+		this.knownFor = knownFor;
 	}
 
 	public String getBirthday() {
@@ -119,7 +116,5 @@ public class Actor {
 	public void setPlaceOfBirth(String placeOfBirth) {
 		this.placeOfBirth = placeOfBirth;
 	}
-	
-	
-	
+
 }
