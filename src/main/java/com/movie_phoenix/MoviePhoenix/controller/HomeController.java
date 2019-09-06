@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @author Ben Feinstein
  * @author Kevin Busch
+ * @author Atiba Franklin
  */
 
 @Controller
@@ -44,4 +45,5 @@ public class HomeController {
 		mv.addObject("actorResult", response);
 		return mv;
 	}
+	
 }
