@@ -35,12 +35,12 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping("/search-actor")
-	public ModelAndView actor(@RequestParam("query") String query) {
+	@RequestMapping("/search-result")
+	public ModelAndView personResult(@RequestParam("PersonResults") String PersonResults) {
 		ModelAndView mv = new ModelAndView("index");
-		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
+		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + PersonResults;
 		String response = rt.getForObject(url, String.class);
-		mv.addObject("actorResult", response);
+		mv.addObject("search-results", response);
 		return mv;
 	}
 }
