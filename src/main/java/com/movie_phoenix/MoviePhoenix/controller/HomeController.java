@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
+
 /**
  * @author Ben Feinstein
  * @author Kevin Busch
@@ -36,11 +38,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/search-result")
-	public ModelAndView personResult(@RequestParam("PersonResults") String PersonResults) {
-		ModelAndView mv = new ModelAndView("index");
-		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + PersonResults;
-		String response = rt.getForObject(url, String.class);
-		mv.addObject("search-results", response);
+	public ModelAndView personResult(@RequestParam("query") String query) {
+		ModelAndView mv = new ModelAndView("search-results");
+		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
+		PersonResults response = rt.getForObject(url, PersonResults.class);
+		mv.addObject("personResults", response.getResults());
 		return mv;
 	}
 }
