@@ -6,7 +6,6 @@ public class Genre {
 
 	public Genre() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {

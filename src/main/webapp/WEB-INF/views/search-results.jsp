@@ -7,10 +7,12 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-iqcNtN3rj6Y1HX/R0a3zu3ngmbdwEa9qQGHdkXwSRoiE+Gj71p0UNDSm99LcXiXV" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 	<c:forEach var="person" items="${personResults }">
-		<img src="https://image.tmdb.org/t/p/original${person.imageUrl }" style="max-width: 250px;">
+		<!--  style="max-width: 250px;"-->
+		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="No image provided" class="thumbnail">
 		<h1></h1>
 	</c:forEach>
 </body>
