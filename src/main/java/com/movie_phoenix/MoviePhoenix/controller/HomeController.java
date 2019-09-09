@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
+import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 
 /**
  * @author Ben
@@ -39,9 +40,9 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping("/search-result")
+	@RequestMapping("/person-result")
 	public ModelAndView personResult(@RequestParam("query") String query) {
-		ModelAndView mv = new ModelAndView("actor-results");
+		ModelAndView mv = new ModelAndView("person-results");
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
@@ -67,9 +68,12 @@ public class HomeController {
 	@RequestMapping("/person-details")
 	public ModelAndView personDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("person-details");
-		String url = BASE_URL + "/person/"+ id+"?api_key=" + mainKey;
-		Person response = rt.getForObject(url, Person.class);
+		String url1 = BASE_URL + "/person/"+ id+"?api_key=" + mainKey;
+		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
+		String url2 =  BASE_URL + "/person/"+ id+"movie_credits?api_key=" + mainKey;
+		FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
+		mv.addObject("pKnown", response1);
 		return mv;
 	}
 	
