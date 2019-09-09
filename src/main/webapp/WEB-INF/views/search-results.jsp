@@ -13,7 +13,17 @@
 	<c:forEach var="person" items="${personResults }">
 		<!-- Ben doesn't understand alt attribute -->
 		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
+		
 		<h1>${person.name }</h1>
+		
+		
 	</c:forEach>
+
+<%-- <h1>${person.birthday }</h1>
+		<h1>${person.placeOfBirth }</h1>
+		
+		<h1>
+		${person.biography }
+		</h1> --%>
 </body>
 </html>

@@ -5,10 +5,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Mission Possible</title>
+<img src="jeremy-yap-J39X2xX_8CQ-unsplash" height="42" width="42">
+
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-iqcNtN3rj6Y1HX/R0a3zu3ngmbdwEa9qQGHdkXwSRoiE+Gj71p0UNDSm99LcXiXV" crossorigin="anonymous">
 </head>
 <body>
+
 	<form action="search-result" method="post">
 		<input type="text" name="query" placeholder="Search by actor">
 		<input type="submit" value="Search">
