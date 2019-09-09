@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<form action="search-result" method="post">
+	<form action="person-search" method="post">
 		<input type="text" name="query" placeholder="Search by actor">
 		<input type="submit" value="Search">
 	</form>
