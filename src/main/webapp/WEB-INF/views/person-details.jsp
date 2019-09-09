@@ -18,7 +18,7 @@ ${pDeets.name }
 		
  
 		
-		<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}" alt="broken_image.png" class="thumbnail">
+		<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}" alt="broken_image.png" class="profile">
 	
 		
 		 
