@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TvCreditsByPerson {
 	@JsonProperty("Id")
-	private Integer Id;
+	private Integer actorId;
 	private ArrayList<TvShow> cast;
 	private ArrayList<TvShow> crew;
 	public TvCreditsByPerson() {
@@ -16,10 +16,10 @@ public class TvCreditsByPerson {
 		// TODO Auto-generated constructor stub
 	}
 	public Integer getId() {
-		return Id;
+		return actorId;
 	}
 	public void setId(Integer id) {
-		Id = id;
+		actorId = id;
 	}
 	public ArrayList<TvShow> getCast() {
 		return cast;
