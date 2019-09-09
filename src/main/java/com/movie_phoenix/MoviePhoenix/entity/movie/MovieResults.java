@@ -1,4 +1,4 @@
-package com.movie_phoenix.MoviePhoenix.entity;
+package com.movie_phoenix.MoviePhoenix.entity.movie;
 
 import java.util.ArrayList;
 

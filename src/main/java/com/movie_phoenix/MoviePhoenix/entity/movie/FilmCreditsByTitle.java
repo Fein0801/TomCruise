@@ -1,9 +1,10 @@
-package com.movie_phoenix.MoviePhoenix.entity;
+package com.movie_phoenix.MoviePhoenix.entity.movie;
 
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.movie_phoenix.MoviePhoenix.entity.Person;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FilmCreditsByTitle {
 	@JsonProperty("Id")
