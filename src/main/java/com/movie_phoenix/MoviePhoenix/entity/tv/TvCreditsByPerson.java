@@ -1,4 +1,4 @@
-package com.movie_phoenix.MoviePhoenix.entity;
+package com.movie_phoenix.MoviePhoenix.entity.tv;
 
 import java.util.ArrayList;
 
@@ -6,32 +6,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TvCreditsByTitle {
+public class TvCreditsByPerson {
 	@JsonProperty("Id")
-	private Integer filmId;
-	private ArrayList<Person> cast;
-	private ArrayList<Person> crew;
-	public TvCreditsByTitle() {
+	private Integer actorId;
+	private ArrayList<TvShow> cast;
+	private ArrayList<TvShow> crew;
+	public TvCreditsByPerson() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Integer getId() {
-		return filmId;
+		return actorId;
 	}
 	public void setId(Integer id) {
-		filmId = id;
+		actorId = id;
 	}
-	public ArrayList<Person> getCast() {
+	public ArrayList<TvShow> getCast() {
 		return cast;
 	}
-	public void setCast(ArrayList<Person> cast) {
+	public void setCast(ArrayList<TvShow> cast) {
 		this.cast = cast;
 	}
-	public ArrayList<Person> getCrew() {
+	public ArrayList<TvShow> getCrew() {
 		return crew;
 	}
-	public void setCrew(ArrayList<Person> crew) {
+	public void setCrew(ArrayList<TvShow> crew) {
 		this.crew = crew;
 	}
-
+	
 }
