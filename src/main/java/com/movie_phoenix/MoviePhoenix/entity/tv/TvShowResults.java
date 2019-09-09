@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TVShowResults {
+public class TvShowResults {
 
 	private Integer numResults;
 	private ArrayList<TvShow> results;
 
-	public TVShowResults() {
+	public TvShowResults() {
 		super();
 	}
 
