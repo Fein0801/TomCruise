@@ -15,6 +15,7 @@ import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TVShowResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 
 /**
@@ -65,7 +66,7 @@ public class HomeController {
 	public ModelAndView tvResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("tv-results");
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
-		PersonResults response = rt.getForObject(url, PersonResults.class);
+		TVShowResults response = rt.getForObject(url, TVShowResults.class);
 		mv.addObject("tvResults", response.getResults());
 		return mv;
 	}
