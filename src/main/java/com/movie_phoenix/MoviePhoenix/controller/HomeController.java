@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
+import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 
 /**
  * @author Ben
@@ -39,7 +40,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("test-page");
 		return mv;
 	}
-	
+
 	@RequestMapping("/person-search")
 	public ModelAndView personResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("person-results");
@@ -48,15 +49,16 @@ public class HomeController {
 		mv.addObject("personResults", response.getResults());
 		return mv;
 	}
-	
+
 	@RequestMapping("/movie-search")
 	public ModelAndView movieResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("movie-results");
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
-		PersonResults response = rt.getForObject(url, PersonResults.class);
+		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
 		return mv;
 	}
+
 	@RequestMapping("/tv-search")
 	public ModelAndView tvResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("tv-results");
@@ -65,10 +67,11 @@ public class HomeController {
 		mv.addObject("tvResults", response.getResults());
 		return mv;
 	}
+
 	@RequestMapping("/person-details")
 	public ModelAndView personDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("person-details");
-		String url1 = BASE_URL + "/person/"+ id+"?api_key=" + mainKey;
+		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
 		String url2 =  BASE_URL + "/person/"+ id+"/movie_credits?api_key=" + mainKey;
@@ -76,6 +79,5 @@ public class HomeController {
 		mv.addObject("pKnown", response1);
 		return mv;
 	}
-	
-	
+
 }

@@ -20,7 +20,6 @@
 		<h3>
 			Known For: <c:forEach var="film" items="${person.knownFor }">${film.ogTitle }</c:forEach>
 		</h3>
-		
 	</c:forEach>
 
 <%-- <h1>${person.birthday }</h1>
