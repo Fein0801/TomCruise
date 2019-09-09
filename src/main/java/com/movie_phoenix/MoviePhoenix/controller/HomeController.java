@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
+import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 
 /**
  * @author Ben
@@ -83,16 +85,16 @@ public class HomeController {
 	public ModelAndView movieDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("movie-details");
 		String url = BASE_URL + "/movie/"+id+"?api_key=" + mainKey;
-		MovieResults response = rt.getForObject(url, MovieResults.class);
-		mv.addObject("movieDeets", response.getResults());
+		Movie response = rt.getForObject(url, Movie.class);
+		mv.addObject("movieDeets", response);
 		return mv;
 	}
 	@RequestMapping("/tv-details")
 	public ModelAndView tvDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("tv-details");
 		String url = BASE_URL + "/tv/"+id+"?api_key=" + mainKey;
-		MovieResults response = rt.getForObject(url, MovieResults.class);
-		mv.addObject("tvDeets", response.getResults());
+		TvShow response = rt.getForObject(url,TvShow.class);
+		mv.addObject("tvDeets", response);
 		return mv;
 	}
 
