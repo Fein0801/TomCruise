@@ -11,9 +11,9 @@
 </head>
 <body>
 	<c:forEach var="person" items="${personResults }">
-		<!--  style="max-width: 250px;"-->
-		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="No image provided" class="thumbnail">
-		<h1></h1>
+		<!-- Ben doesn't understand alt attribute -->
+		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
+		<h1>${person.name }</h1>
 	</c:forEach>
 </body>
 </html>
