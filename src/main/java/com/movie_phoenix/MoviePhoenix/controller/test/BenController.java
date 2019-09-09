@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BenController {
 
-	@RequestMapping("/test-date")
-	public void test() {
-	}
+//	char heart = '♥';
+//	
+//	@RequestMapping("/test-date")
+//	public void test() {
+//		System.out.println(heart);
+//	}
+	
+	
 }
