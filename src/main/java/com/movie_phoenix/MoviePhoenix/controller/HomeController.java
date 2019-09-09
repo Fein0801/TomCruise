@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 
 /**
- * @author Ben Feinstein
- * @author Kevin Busch
+ * @author Ben
+ * @author kevinbusch
+ * @author Atiba
  */
 
 @Controller
