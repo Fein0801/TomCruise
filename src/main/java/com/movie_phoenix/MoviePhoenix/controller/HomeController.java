@@ -40,10 +40,27 @@ public class HomeController {
 	
 	@RequestMapping("/search-result")
 	public ModelAndView personResult(@RequestParam("query") String query) {
-		ModelAndView mv = new ModelAndView("search-results");
+		ModelAndView mv = new ModelAndView("actor-results");
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
+		return mv;
+	}
+	
+	@RequestMapping("/movie-search")
+	public ModelAndView movieResult(@RequestParam("query") String query) {
+		ModelAndView mv = new ModelAndView("movie-results");
+		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
+		PersonResults response = rt.getForObject(url, PersonResults.class);
+		mv.addObject("movieResults", response.getResults());
+		return mv;
+	}
+	@RequestMapping("/tv-search")
+	public ModelAndView tvResult(@RequestParam("query") String query) {
+		ModelAndView mv = new ModelAndView("tv-results");
+		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
+		PersonResults response = rt.getForObject(url, PersonResults.class);
+		mv.addObject("tvResults", response.getResults());
 		return mv;
 	}
 	
