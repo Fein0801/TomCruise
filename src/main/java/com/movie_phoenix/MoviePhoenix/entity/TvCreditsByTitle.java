@@ -3,15 +3,13 @@ package com.movie_phoenix.MoviePhoenix.entity;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TvCreditsByPerson {
-	@JsonProperty("Id")
+public class TvCreditsByTitle {
 	private Integer Id;
-	private ArrayList<TvShow> cast;
-	private ArrayList<TvShow> crew;
-	public TvCreditsByPerson() {
+	private ArrayList<Person> cast;
+	private ArrayList<Person> crew;
+	public TvCreditsByTitle() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -21,17 +19,17 @@ public class TvCreditsByPerson {
 	public void setId(Integer id) {
 		Id = id;
 	}
-	public ArrayList<TvShow> getCast() {
+	public ArrayList<Person> getCast() {
 		return cast;
 	}
-	public void setCast(ArrayList<TvShow> cast) {
+	public void setCast(ArrayList<Person> cast) {
 		this.cast = cast;
 	}
-	public ArrayList<TvShow> getCrew() {
+	public ArrayList<Person> getCrew() {
 		return crew;
 	}
-	public void setCrew(ArrayList<TvShow> crew) {
+	public void setCrew(ArrayList<Person> crew) {
 		this.crew = crew;
 	}
-	
+
 }

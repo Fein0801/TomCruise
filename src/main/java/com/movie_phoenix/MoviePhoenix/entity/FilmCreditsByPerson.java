@@ -3,22 +3,26 @@ package com.movie_phoenix.MoviePhoenix.entity;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FilmCreditsByPerson {
-	
-	private Integer Id;
+	@JsonProperty("Id")
+	private Integer actorId;
 	private ArrayList<Movie> cast;
 	private ArrayList<Movie> crew;
 	public FilmCreditsByPerson() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Integer getId() {
-		return Id;
+	
+	public Integer getActorId() {
+		return actorId;
 	}
-	public void setId(Integer id) {
-		Id = id;
+
+	public void setActorId(Integer actorId) {
+		this.actorId = actorId;
 	}
+
 	public ArrayList<Movie> getCast() {
 		return cast;
 	}
