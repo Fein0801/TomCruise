@@ -15,9 +15,19 @@ public class TvShow {
 	private String overview;
 	@JsonProperty("genre_ids")
 	private ArrayList<Integer> genreIds;
+	@JsonProperty("last_air_date")
+	private String lastAirDate;
 	
+
 	public TvShow() {
 		super();
+	}
+	public String getLastAirDate() {
+		return lastAirDate;
+	}
+	
+	public void setLastAirDate(String lastAirDate) {
+		this.lastAirDate = lastAirDate;
 	}
 
 	public Integer getId() {

@@ -14,6 +14,7 @@
 	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
 	<br>
 	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
+	<h3>Last episode date: ${tvDeets.lastAirDate }</h3>
 	<h1>Summary</h1>
 	<p>${tvDeets.overview }</p>
 </body>
