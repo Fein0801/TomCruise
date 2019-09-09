@@ -11,11 +11,15 @@
 </head>
 <body>
 	<c:forEach var="person" items="${personResults }">
+	<a href="/actor-details?id=${person.id}">
 		<!-- Ben doesn't understand alt attribute -->
 		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
+	</a>
 		
 		<h1>${person.name }</h1>
-		
+		<h3>
+			Known For: <c:forEach var="film" items="${person.knownFor }">${film.ogTitle }</c:forEach>
+		</h3>
 		
 	</c:forEach>
 
