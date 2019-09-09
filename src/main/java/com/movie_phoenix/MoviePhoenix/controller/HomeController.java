@@ -79,5 +79,21 @@ public class HomeController {
 		mv.addObject("pKnown", response1);
 		return mv;
 	}
+	@RequestMapping("/movie-details")
+	public ModelAndView movieDetails(@RequestParam("id") String id) {
+		ModelAndView mv = new ModelAndView("movie-details");
+		String url = BASE_URL + "/movie/"+id+"?api_key=" + mainKey;
+		MovieResults response = rt.getForObject(url, MovieResults.class);
+		mv.addObject("movieDeets", response.getResults());
+		return mv;
+	}
+	@RequestMapping("/tv-details")
+	public ModelAndView tvDetails(@RequestParam("id") String id) {
+		ModelAndView mv = new ModelAndView("tv-details");
+		String url = BASE_URL + "/tv/"+id+"?api_key=" + mainKey;
+		MovieResults response = rt.getForObject(url, MovieResults.class);
+		mv.addObject("tvDeets", response.getResults());
+		return mv;
+	}
 
 }
