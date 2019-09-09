@@ -23,7 +23,7 @@ public class Movie {
 	@JsonProperty("release_date")
 	private String releaseDate;
 	private String Status;
-	ArrayList<Genre> genre;
+	private ArrayList<Genre> genre;
 	private Integer id;
 	@JsonProperty("imdb_id")
 	private String imbd;
