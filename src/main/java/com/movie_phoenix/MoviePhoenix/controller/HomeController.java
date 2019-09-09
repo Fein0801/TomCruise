@@ -71,7 +71,7 @@ public class HomeController {
 		String url1 = BASE_URL + "/person/"+ id+"?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		String url2 =  BASE_URL + "/person/"+ id+"movie_credits?api_key=" + mainKey;
+		String url2 =  BASE_URL + "/person/"+ id+"/movie_credits?api_key=" + mainKey;
 		FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
 		mv.addObject("pKnown", response1);
 		return mv;
