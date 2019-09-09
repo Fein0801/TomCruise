@@ -40,7 +40,7 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping("/person-result")
+	@RequestMapping("/person-search")
 	public ModelAndView personResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("person-results");
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
