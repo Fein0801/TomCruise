@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:forEach var="person" items="${personResults }">
-	<a href="/actor-details?id=${person.id}">
+	<a href="/person-details?id=${person.id}">
 		<!-- Ben doesn't understand alt attribute -->
 		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
 	</a>

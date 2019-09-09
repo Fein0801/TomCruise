@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 
 /**
@@ -63,5 +64,14 @@ public class HomeController {
 		mv.addObject("tvResults", response.getResults());
 		return mv;
 	}
+	@RequestMapping("/person-details")
+	public ModelAndView personDetails(@RequestParam("id") String id) {
+		ModelAndView mv = new ModelAndView("person-details");
+		String url = BASE_URL + "/person/"+ id+"?api_key=" + mainKey;
+		Person response = rt.getForObject(url, Person.class);
+		mv.addObject("pDeets", response);
+		return mv;
+	}
+	
 	
 }
