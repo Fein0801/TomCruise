@@ -10,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+	<h1>${tvDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
+	<br>
+	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
+	<h1>Summary</h1>
+	<p>${tvDeets.overview }</p>
 </body>
 </html>
