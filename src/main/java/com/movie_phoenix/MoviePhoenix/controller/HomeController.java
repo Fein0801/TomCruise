@@ -42,7 +42,7 @@ public class HomeController {
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
 	private RestTemplate rt = new RestTemplate();
 	
-	@RequestMapping("/")
+	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
 		mv.addObject("clientId", clientId);
@@ -51,7 +51,7 @@ public class HomeController {
 		return mv;
 	}
 
-	@RequestMapping("/search")
+	@RequestMapping("/")
 	public ModelAndView search() {
 		return new ModelAndView("index", "key", mainKey);
 	}
