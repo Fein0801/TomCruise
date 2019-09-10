@@ -3,6 +3,7 @@
  */
 package com.movie_phoenix.MoviePhoenix.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
-import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
+import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 
 /**
  * @author Ben
@@ -29,12 +32,30 @@ public class HomeController {
 
 	@Value("${TMDbAPI.key}")
 	private String mainKey;
+	
+	@Value("${google.client_id}")
+	private String clientId;
+	
+	@Autowired
+	GoogleService gSuite;
+	
 	// The base url for api
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
 	private RestTemplate rt = new RestTemplate();
+	
+	@RequestMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("login");
+		GoogleAuthorizationCodeRequestUrl authCodeUrl = gSuite.getGoogleAuthCode();
+		mv.addObject("requestUrl", authCodeUrl.toURL().toString());
+		mv.addObject("clientId", clientId);
+		mv.addObject("redirectUri", "https://movie-phoenix.herokuapp.com");
+		mv.addObject("test", gSuite.getScopesUrlString());
+		return mv;
+	}
 
 	@RequestMapping("/")
-	public ModelAndView home() {
+	public ModelAndView search() {
 		return new ModelAndView("index", "key", mainKey);
 	}
 
@@ -98,5 +119,9 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
+//	@RequestMapping("search")
+//	public ModelAndView backToHome() {
+//		return new ModelAndView("redirect:/");
+//	}
 
 }
