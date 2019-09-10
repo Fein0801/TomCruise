@@ -1,0 +1,13 @@
+.thumbnail {
+	max-width: 75px;
+}
+
+.profile {
+	max-width: 325px;
+}
+
+body {
+  background-image: url("jakob-owens-HuNenPCNG84-unsplash.jpg");
+  background-size: 1400px 700px;
+}
+
