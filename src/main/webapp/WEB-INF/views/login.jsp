@@ -13,6 +13,6 @@ crossorigin="anonymous">
 </head>
 <body>
 	<a class="btn btn-primary" href="${requestUrl }">Google Login</a>
-	${test }
+	${test}
 </body>
 </html>
