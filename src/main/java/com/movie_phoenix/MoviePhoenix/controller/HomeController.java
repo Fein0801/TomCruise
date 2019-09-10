@@ -49,7 +49,7 @@ public class HomeController {
 		GoogleAuthorizationCodeRequestUrl authCodeUrl = gSuite.getGoogleAuthCode();
 		mv.addObject("requestUrl", authCodeUrl.toURL().toString());
 		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", "https://movie-phoenix.herokuapp.com/search");
+		mv.addObject("redirectUri", "https://movie-phoenix.herokuapp.com");
 		mv.addObject("test", gSuite.getScopesUrlString());
 		return mv;
 	}

@@ -66,9 +66,10 @@ public class GoogleService {
 	public GoogleAuthorizationCodeRequestUrl getGoogleAuthCode() {
 		
 		List<String> scopes = getScopes();
-		String redirectUri = OUR_URL + "search";
+		String redirectUri = OUR_URL;
 		GoogleAuthorizationCodeFlow a = new GoogleAuthorizationCodeFlow(new NetHttpTransport(), new JacksonFactory(), clientId, clientSecret, scopes);
 		GoogleAuthorizationCodeRequestUrl authCodeUrl = a.newAuthorizationUrl();
+		authCodeUrl.setRedirectUri(redirectUri);
 		return authCodeUrl;
 	}
 

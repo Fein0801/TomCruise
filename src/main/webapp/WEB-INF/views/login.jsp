@@ -13,6 +13,7 @@ crossorigin="anonymous">
 </head>
 <body>
 	<a class="btn btn-primary" href="${requestUrl }">Google Login</a>
-	${test}
+	<a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=490474699637-28km14ohul4qfafmc0h429lslt19irgs.apps.googleusercontent.com&key=AIzaSyAZqRL8cxDO252QcnlzquJUhcyUjb3lWKA&redirect_uri=https://movie-phoenix.herokuapp.com/&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">Hello</a>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 </html>
