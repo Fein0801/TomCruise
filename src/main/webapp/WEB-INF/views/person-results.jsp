@@ -7,13 +7,13 @@
 <meta charset="ISO-8859-1">
 <title>Results</title>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-iqcNtN3rj6Y1HX/R0a3zu3ngmbdwEa9qQGHdkXwSRoiE+Gj71p0UNDSm99LcXiXV" crossorigin="anonymous">
-<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 
 	<c:forEach var="person" items="${personResults }">
+	<h4>${person.name }</h4>
 	<a href="/person-details?id=${person.id}">
-<h1 align = "center"><font size="18pt" color="white">${person.name }</h1>
 	<c:choose>
 		<c:when test="${person.imageUrl != null}">
 			<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
