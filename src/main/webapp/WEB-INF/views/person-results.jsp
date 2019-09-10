@@ -12,8 +12,14 @@
 <body>
 	<c:forEach var="person" items="${personResults }">
 	<a href="/person-details?id=${person.id}">
-		<!-- Ben doesn't understand alt attribute -->
+	<c:choose>
+	<c:when test="${person.imageUrl != null}">
 		<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">
+	</c:when>
+	<c:otherwise>
+		<img src="broken_image.png" class="thumbnail">
+	</c:otherwise>
+	</c:choose>
 	</a>
 		
 		<h1>${person.name }</h1>
