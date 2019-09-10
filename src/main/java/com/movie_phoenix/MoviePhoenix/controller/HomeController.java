@@ -3,6 +3,8 @@
  */
 package com.movie_phoenix.MoviePhoenix.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
@@ -43,21 +44,33 @@ public class HomeController {
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
 	private RestTemplate rt = new RestTemplate();
 	
-	@RequestMapping("/login")
+	@RequestMapping("/")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
-		GoogleAuthorizationCodeRequestUrl authCodeUrl = gSuite.getGoogleAuthCode();
-		mv.addObject("requestUrl", authCodeUrl.toURL().toString());
-		mv.addObject("clientId", clientId);
-		mv.addObject("redirectUri", "https://movie-phoenix.herokuapp.com");
-		mv.addObject("test", gSuite.getScopesUrlString());
+		StringBuilder urlParams = new StringBuilder("?scope=profile&client_id=");
+		urlParams.append(clientId);
+		urlParams.append("&redirect_uri=http://localhost:8080/verify&response_type=code");
+		mv.addObject("params", urlParams.toString());
 		return mv;
 	}
-
-	@RequestMapping("/")
-	public ModelAndView search() {
-		return new ModelAndView("index", "key", mainKey);
+	
+	@RequestMapping("/verify")
+	public ModelAndView verify(@RequestParam("code") String code) {
+			ModelAndView mv = new ModelAndView("index", "accessCode", code);
+			String token = "Oh god";
+			try {
+				token = gSuite.getAccessToken(code);
+			} catch (NullPointerException e) {
+				System.out.println("Oh shit");
+			}
+			mv.addObject("token", token);
+			return mv;
 	}
+
+//	@RequestMapping("/")
+//	public ModelAndView search(@RequestParam("code") String code) {
+//		return new ModelAndView("index", "key", mainKey);
+//	}
 
 	@RequestMapping("/test")
 	public ModelAndView test() {
@@ -119,6 +132,7 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
+	
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
 //		return new ModelAndView("redirect:/");

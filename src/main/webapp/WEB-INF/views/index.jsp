@@ -37,6 +37,9 @@
 			type="submit" value="Search">
 	</form>
 	<br>
+	
+	Code: ${accessCode }
+	<p>Token: ${token }</p>
 
 </body>
 </html>
