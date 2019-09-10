@@ -35,6 +35,12 @@ public class FilmCreditsByPerson {
 	public void setCrew(ArrayList<Movie> crew) {
 		this.crew = crew;
 	}
+
+	@Override
+	public String toString() {
+		return "FilmCreditsByPerson , cast=" + cast + ", crew=" + crew + "]";
+	}
+	
 	
 
 }
