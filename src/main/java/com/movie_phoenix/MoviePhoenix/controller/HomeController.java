@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
@@ -45,6 +46,8 @@ public class HomeController {
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
+		GoogleAuthorizationCodeRequestUrl authCodeUrl = gSuite.getGoogleAuthCode();
+		mv.addObject("requestUrl", authCodeUrl.toURL().toString());
 		mv.addObject("clientId", clientId);
 		mv.addObject("redirectUri", "https://movie-phoenix.herokuapp.com/search");
 		mv.addObject("test", gSuite.getScopesUrlString());

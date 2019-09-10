@@ -12,7 +12,7 @@ integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlA
 crossorigin="anonymous">
 </head>
 <body>
-	<a class="btn btn-primary" href="https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId }&redirect_uri=${redirectUri}&scope=${test}">Google Login</a>
-	
+	<a class="btn btn-primary" href="${requestUrl }">Google Login</a>
+	${test }
 </body>
 </html>
