@@ -11,7 +11,7 @@
 </head>
 <body>
 <c:forEach var="show" items="${tvResults }" varStatus="i">
-		<a href="/tv-details?id=${show.id}"> 
+		<a href="/tv-details?id=${show.id}">
 			<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" alt="broken_image.png" class="thumbnail">
 		</a>
 		<h1>${show.name }</h1>
