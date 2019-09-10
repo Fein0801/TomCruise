@@ -19,6 +19,10 @@ public class GoogleService {
 	@Value("${google.client_secret}")
 	String clientSecret;
 
+	
+	@Value("${google.client_id}")
+	String clientId;
 	RestTemplate rt = new RestTemplate();
 
+	
 }
