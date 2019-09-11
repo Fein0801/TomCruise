@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
@@ -58,13 +62,20 @@ public class HomeController {
 	@RequestMapping("/verify")
 	public ModelAndView verify(@RequestParam("code") String code) {
 			ModelAndView mv = new ModelAndView("index", "accessCode", code);
-			String token = "Oh god";
+			String test = "Oh god";
 			try {
-				token = gSuite.getAccessToken(code);
+				GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
+				GoogleTokenResponse response = gSuite.getTokenResponse(request);
+				GoogleIdToken idToken = gSuite.getIdToken(response);
+				Payload p = idToken.getPayload();
+				test = idToken.toString();
 			} catch (NullPointerException e) {
 				System.out.println("Oh shit");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			mv.addObject("token", token);
+			mv.addObject("token", test);
 			return mv;
 	}
 
