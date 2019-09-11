@@ -17,7 +17,8 @@
 
 
 	<h1>${pDeets.name }</h1>
-	<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}" alt="broken_image.png" class="profile">
+	<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
+		alt="broken_image.png" class="profile">
 
 	<h3>Bio:</h3>
 	<p>${pDeets.biography }</p>
@@ -29,6 +30,7 @@
 	<p>${pDeets.knownFor }</p>
 
 
+<<<<<<< HEAD
 	<%-- <h4>Credits:</h4>
 	<p>${pKnown.cast }</p>
 
@@ -46,6 +48,43 @@
   </tr>
   </c:forEach>
 </table>
+=======
+	<h4>Credits:</h4>
+	<a href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
+	<a href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
+
+<h3>Cast:</h3>
+	<table class="table">
+		<tr>
+			<th>Release Year</th>
+			<th>Title</th>
+			<th>Character</th>
+		</tr>
+		<c:forEach var="movie" items="${pKnown.cast }">
+		<tr>
+			<td>${movie.releaseDate }</td>
+			<td>${movie.title }</td>
+			<td>${movie.character }</td>
+		</tr>
+		</c:forEach>
+	</table>
+
+	
+	<p>${pKnown.crew }</p>
+	
+	<h3>Crew:</h3>
+	<table>
+		<tr>
+			<th>Column 1 Heading</th>
+			<th>Column 2 Heading</th>
+		</tr>
+		<tr>
+			<td>Row 1: Col 1</td>
+			<td>Row 1: Col 2</td>
+		</tr>
+	</table>
+
+>>>>>>> 0c34b9c1d28353a4d5c3c250e881864d1fffd1aa
 
 
 </body>

@@ -36,6 +36,7 @@ public class Movie {
 	private Long revenue;
 	private String tagline;
 	private Integer runtime;
+	private String character;
 
 	public Movie() {
 		super();
@@ -153,6 +154,7 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "Movie [posterUrl=" + posterUrl + ", backdropUrl=" + backdropUrl + ", ogTitle=" + ogTitle + ", title="
@@ -161,5 +163,14 @@ public class Movie {
 				+ tagline + ", runtime=" + runtime + "]";
 	}
 	
+=======
+	public String getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(String character) {
+		this.character = character;
+	}
+>>>>>>> 0c34b9c1d28353a4d5c3c250e881864d1fffd1aa
 
 }

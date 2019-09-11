@@ -13,7 +13,7 @@
 
 	<c:forEach var="person" items="${personResults }">
 	<h4>${person.name }</h4>
-	<a href="/person-details?id=${person.id}">
+	<a href="/person-details?id=${person.id}&credit_type=MOVIE">
 	<c:choose>
 		<c:when test="${person.imageUrl != null}">
 			<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}" alt="broken_image.png" class="thumbnail">

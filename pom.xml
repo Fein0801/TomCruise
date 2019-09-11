@@ -81,10 +81,26 @@
 			<artifactId>google-api-client-java6</artifactId>
 			<version>1.30.2</version>
 		</dependency>
+<<<<<<< HEAD
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency> -->
+=======
+
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev379-1.25.0</version>
+		</dependency>
+
+		<!-- Credentials API -->
+		<dependency>
+			<groupId>com.google.auth</groupId>
+			<artifactId>google-auth-library-oauth2-http</artifactId>
+			<version>0.17.1</version>
+		</dependency>
+>>>>>>> 0c34b9c1d28353a4d5c3c250e881864d1fffd1aa
 	</dependencies>
 
 	<build>

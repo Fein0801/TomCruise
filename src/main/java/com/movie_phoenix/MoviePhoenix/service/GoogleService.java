@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
@@ -74,9 +76,12 @@ public class GoogleService {
 	public GoogleUser getGoogleUser(GoogleIdToken idToken) {
 		Payload idPayload = idToken.getPayload();
 		System.out.println(idPayload);
-		//TODO return an actual user
 		return null;
 	}
+	
+//	public Credentials authorize() {
+//		
+//	}
 
 //	public String getAccessToken(String code) {
 //		Map<String, String> params = new HashMap<>();
