@@ -29,11 +29,23 @@
 	<p>${pDeets.knownFor }</p>
 
 
-	<h4>Credits:</h4>
+	<%-- <h4>Credits:</h4>
 	<p>${pKnown.cast }</p>
 
-	<p>${pKnown.crew }</p>
+	<p>${pKnown.crew }</p> --%>
 
+	<table class="table">
+  <tr>
+    <th>Movie Credits</th>
+    
+  </tr>
+  <c:forEach var="movie" items="${test }" varStatus="i">
+  <tr>
+    <td>${movie.toString }</td>
+    
+  </tr>
+  </c:forEach>
+</table>
 
 
 </body>

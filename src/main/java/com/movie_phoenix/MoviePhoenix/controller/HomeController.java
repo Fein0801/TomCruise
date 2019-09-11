@@ -4,6 +4,7 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
+import com.movie_phoenix.MoviePhoenix.entity.movie.MovieRepo;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
@@ -44,6 +46,9 @@ public class HomeController {
 
 	@Autowired
 	GoogleService gSuite;
+//	
+//	@Autowired
+//	MovieRepo MR;
 
 	TvShow tvShow1 = new TvShow();
 
@@ -161,7 +166,7 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-
+	
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
 //		return new ModelAndView("redirect:/");

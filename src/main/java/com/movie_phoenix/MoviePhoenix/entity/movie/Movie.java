@@ -5,6 +5,8 @@ package com.movie_phoenix.MoviePhoenix.entity.movie;
 
 import java.util.ArrayList;
 
+
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.movie_phoenix.MoviePhoenix.entity.Genre;
 
@@ -12,6 +14,8 @@ import com.movie_phoenix.MoviePhoenix.entity.Genre;
  * @author kevinbusch
  *
  */
+
+
 public class Movie {
 	@JsonProperty("poster_path")
 	private String posterUrl;
@@ -148,5 +152,14 @@ public class Movie {
 	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
 	}
+
+	@Override
+	public String toString() {
+		return "Movie [posterUrl=" + posterUrl + ", backdropUrl=" + backdropUrl + ", ogTitle=" + ogTitle + ", title="
+				+ title + ", overview=" + overview + ", releaseDate=" + releaseDate + ", Status=" + Status + ", genre="
+				+ genre + ", id=" + id + ", imbd=" + imbd + ", budget=" + budget + ", revenue=" + revenue + ", tagline="
+				+ tagline + ", runtime=" + runtime + "]";
+	}
+	
 
 }
