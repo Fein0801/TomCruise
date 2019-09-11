@@ -152,7 +152,7 @@ public class DateConverter {
 	 * @param dayOfMonth
 	 * @return
 	 */
-	private static String getRankedNumber(int dayOfMonth) {
+	public static String getRankedNumber(int dayOfMonth) {
 		String str = Integer.toString(dayOfMonth);
 
 		if (str.endsWith("1")) {
@@ -172,7 +172,7 @@ public class DateConverter {
 	 * @param word
 	 * @return
 	 */
-	private static String getCapitalizedWord(String word) {
+	public static String getCapitalizedWord(String word) {
 		if (word.length() < 2) {
 			return word;
 		}

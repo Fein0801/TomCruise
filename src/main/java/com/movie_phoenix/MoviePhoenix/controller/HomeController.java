@@ -4,6 +4,8 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +23,7 @@ import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
+import com.movie_phoenix.MoviePhoenix.util.DateConverter;
 
 /**
  * @author Ben
@@ -39,6 +42,10 @@ public class HomeController {
 	
 	@Autowired
 	GoogleService gSuite;
+	
+	TvShow tvShow1 = new TvShow();
+	
+	
 	
 	// The base url for api
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
@@ -101,7 +108,19 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("tv-results");
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
+		
+		String s = tvShow1.getFirstAirDate();
+		
+		try {
+			String englishDate = DateConverter.getEnglishDate(s);	
+			tvShow1.setFirstAirDate(englishDate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		mv.addObject("tvResults", response.getResults());
+
 		return mv;
 	}
 
@@ -132,6 +151,8 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
+	
+	
 	
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
