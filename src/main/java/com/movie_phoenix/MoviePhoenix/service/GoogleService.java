@@ -79,10 +79,9 @@ public class GoogleService {
 		return null;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Credential authorize() {
-		return new GoogleCredential.Builder().setClientSecrets(clientId, clientSecret).setJsonFactory(JacksonFactory.getDefaultInstance()).build();
-	}
+//	public Credentials authorize() {
+//		
+//	}
 
 //	public String getAccessToken(String code) {
 //		Map<String, String> params = new HashMap<>();

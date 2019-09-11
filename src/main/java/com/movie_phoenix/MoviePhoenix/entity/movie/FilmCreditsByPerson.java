@@ -10,6 +10,7 @@ public class FilmCreditsByPerson {
 	private Integer actorId;
 	private ArrayList<Movie> cast;
 	private ArrayList<Movie> crew;
+	
 	public FilmCreditsByPerson() {
 		super();
 		// TODO Auto-generated constructor stub

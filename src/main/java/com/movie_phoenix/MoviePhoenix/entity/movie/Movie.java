@@ -32,6 +32,7 @@ public class Movie {
 	private Long revenue;
 	private String tagline;
 	private Integer runtime;
+	private String character;
 
 	public Movie() {
 		super();
@@ -147,6 +148,14 @@ public class Movie {
 
 	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
+	}
+
+	public String getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(String character) {
+		this.character = character;
 	}
 
 }

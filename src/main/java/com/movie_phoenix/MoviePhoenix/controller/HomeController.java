@@ -17,11 +17,13 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
@@ -133,14 +135,20 @@ public class HomeController {
 	}
 
 	@RequestMapping("/person-details")
-	public ModelAndView personDetails(@RequestParam("id") String id) {
+	public ModelAndView personDetails(@RequestParam("id") String id, @RequestParam("credit_type") MediaType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
-		FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
-		mv.addObject("pKnown", response1);
+		if(type == MediaType.MOVIE) {
+			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
+			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
+			mv.addObject("pKnown", response1);
+		} else {
+			String url2 = BASE_URL + "/person/" + id + "/tv_credits?api_key=" + mainKey;
+			TvCreditsByPerson response1 = rt.getForObject(url2, TvCreditsByPerson.class);
+			mv.addObject("pKnown", response1);
+		}
 		return mv;
 	}
 
