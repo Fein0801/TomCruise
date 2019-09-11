@@ -39,7 +39,7 @@
 	<br>
 	
 	Code: ${accessCode }
-	<p>Token: ${token }</p>
+	<p>Welcome, ${token }</p>
 
 </body>
 </html>

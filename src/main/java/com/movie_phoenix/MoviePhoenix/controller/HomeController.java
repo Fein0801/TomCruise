@@ -4,8 +4,6 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,50 +38,49 @@ public class HomeController {
 
 	@Value("${TMDbAPI.key}")
 	private String mainKey;
-	
+
 	@Value("${google.client_id}")
 	private String clientId;
-	
+
 	@Autowired
 	GoogleService gSuite;
-	
+
 	TvShow tvShow1 = new TvShow();
-	
-	
-	
+
 	// The base url for api
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
 	private RestTemplate rt = new RestTemplate();
-	
+
 	@RequestMapping("/")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
-		StringBuilder urlParams = new StringBuilder("?scope=profile https://www.googleapis.com/auth/calendar&client_id=");
+		StringBuilder urlParams = new StringBuilder(
+				"?scope=profile https://www.googleapis.com/auth/calendar&client_id=");
 		urlParams.append(clientId);
 		urlParams.append("&redirect_uri=http://localhost:8080/verify&response_type=code&access_type=offline");
 		mv.addObject("params", urlParams.toString());
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping("/verify")
 	public ModelAndView verify(@RequestParam("code") String code) {
-			ModelAndView mv = new ModelAndView("index", "accessCode", code);
-			String test = "Oh god";
-			try {
-				GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
-				GoogleTokenResponse response = gSuite.getTokenResponse(request);
-				GoogleIdToken idToken = gSuite.getIdToken(response);
-				Payload p = idToken.getPayload();
-				test = idToken.toString();
-			} catch (NullPointerException e) {
-				System.out.println("Oh shit");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			mv.addObject("token", test);
-			return mv;
+		ModelAndView mv = new ModelAndView("index", "accessCode", code);
+		String test = "Oh god";
+		try {
+			GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
+			GoogleTokenResponse response = gSuite.getTokenResponse(request);
+			GoogleIdToken idToken = gSuite.getIdToken(response);
+			Payload p = idToken.getPayload();
+			test = p.get("given_name").toString();
+		} catch (NullPointerException e) {
+			System.out.println("Oh shit");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.addObject("token", test);
+		return mv;
 	}
 
 //	@RequestMapping("/")
@@ -120,17 +117,16 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("tv-results");
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
-		
+
 		String s = tvShow1.getFirstAirDate();
-		
+
 		try {
-			String englishDate = DateConverter.getEnglishDate(s);	
+			String englishDate = DateConverter.getEnglishDate(s);
 			tvShow1.setFirstAirDate(englishDate);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		mv.addObject("tvResults", response.getResults());
 
 		return mv;
@@ -142,30 +138,30 @@ public class HomeController {
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		String url2 =  BASE_URL + "/person/"+ id+"/movie_credits?api_key=" + mainKey;
+		String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 		FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
 		mv.addObject("pKnown", response1);
 		return mv;
 	}
+
 	@RequestMapping("/movie-details")
 	public ModelAndView movieDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("movie-details");
-		String url = BASE_URL + "/movie/"+id+"?api_key=" + mainKey;
+		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
 		mv.addObject("movieDeets", response);
 		return mv;
 	}
+
 	@RequestMapping("/tv-details")
 	public ModelAndView tvDetails(@RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView("tv-details");
-		String url = BASE_URL + "/tv/"+id+"?api_key=" + mainKey;
-		TvShow response = rt.getForObject(url,TvShow.class);
+		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
+		TvShow response = rt.getForObject(url, TvShow.class);
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-	
-	
-	
+
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
 //		return new ModelAndView("redirect:/");
