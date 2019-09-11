@@ -153,17 +153,7 @@ public class Movie {
 	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
 	}
-
-<<<<<<< HEAD
-	@Override
-	public String toString() {
-		return "Movie [posterUrl=" + posterUrl + ", backdropUrl=" + backdropUrl + ", ogTitle=" + ogTitle + ", title="
-				+ title + ", overview=" + overview + ", releaseDate=" + releaseDate + ", Status=" + Status + ", genre="
-				+ genre + ", id=" + id + ", imbd=" + imbd + ", budget=" + budget + ", revenue=" + revenue + ", tagline="
-				+ tagline + ", runtime=" + runtime + "]";
-	}
 	
-=======
 	public String getCharacter() {
 		return character;
 	}
@@ -171,6 +161,5 @@ public class Movie {
 	public void setCharacter(String character) {
 		this.character = character;
 	}
->>>>>>> 0c34b9c1d28353a4d5c3c250e881864d1fffd1aa
 
 }
