@@ -19,7 +19,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.Calendar;
 import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
@@ -76,23 +76,25 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("index", "accessCode", code);
 		String test = "";
 		try {
-			// These three lines shall never be deleted! We need access tokens!!!
+			// These three lines shall never be deleted! We need id tokens!!!
 			GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
 			GoogleTokenResponse response = gSuite.getTokenResponse(request);
 			GoogleIdToken idToken = gSuite.getIdToken(response);
 			String refreshToken = gSuite.getRefreshToken(response);
 			gSuite.setRefreshToken(refreshToken);
 			GoogleCredential credentials = gSuite.authorize();
-			
+
 			// This calendar is a service
-			Calendar service = new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("XYZ").build();
-			
+			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
+					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
+
 //			Calendar calendar = new Calendar();
-			com.google.api.services.calendar.model.Calendar cal = new com.google.api.services.calendar.model.Calendar();
-			cal.setSummary("This is the summary");
+			Calendar cal = new Calendar();
+
+			cal.setSummary("Movie Phoenix");
 			cal.setTimeZone("America/Detroit");
-			
-			com.google.api.services.calendar.model.Calendar createdCal = service.calendars().insert(cal).execute();
+
+			Calendar createdCal = service.calendars().insert(cal).execute();
 			System.out.println(createdCal.getId());
 		} catch (NullPointerException e) {
 			System.out.println("Oh shit");
@@ -159,7 +161,7 @@ public class HomeController {
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		if(type == MediaType.MOVIE) {
+		if (type == MediaType.MOVIE) {
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
 			mv.addObject("pKnown", response1);
@@ -188,7 +190,7 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-	
+
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
 //		return new ModelAndView("redirect:/");
