@@ -17,6 +17,7 @@ public class TvShow {
 	private ArrayList<Integer> genreIds;
 	@JsonProperty("last_air_date")
 	private String lastAirDate;
+	private String character;
 	
 
 	public TvShow() {
@@ -76,6 +77,12 @@ public class TvShow {
 
 	public void setGenreIds(ArrayList<Integer> genreIds) {
 		this.genreIds = genreIds;
+	}
+	public String getCharacter() {
+		return character;
+	}
+	public void setCharacter(String character) {
+		this.character = character;
 	}
 	
 	

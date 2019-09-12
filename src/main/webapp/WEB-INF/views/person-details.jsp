@@ -69,6 +69,22 @@
 		</c:forEach>
 	</table>
 </c:if>
+<c:if test="${creditType == 1}">
+	<table class="table">
+		<tr>
+			<th>Release Year</th>
+			<th>Title</th>
+			<th>Character</th>
+		</tr>
+		<c:forEach var="movie" items="${pKnown.cast }">
+		<tr>
+			<td>${movie.firstAirDate }</td>
+			<td>${movie.name }</td>
+			<td>${movie.character }</td>
+		</tr>
+		</c:forEach>
+	</table>
+</c:if>
 
 	
 	
