@@ -91,7 +91,6 @@ public class HomeController {
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
 			if(!repo.existsByName(user.getName())) {
-				repo.save(user);
 				com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
 						new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
 				
@@ -102,10 +101,12 @@ public class HomeController {
 				cal.setTimeZone("America/Detroit");
 				
 				Calendar createdCal = service.calendars().insert(cal).execute();
+				user.setCalendarId(createdCal.getId());
+				repo.save(user);
 			}
 			// This calendar is a service
 			
-			test = gSuite.getMoreUserInfo(credentials);
+//			test = gSuite.getMoreUserInfo(credentials);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			System.out.println("Oh shit");
