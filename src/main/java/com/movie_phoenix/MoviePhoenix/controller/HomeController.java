@@ -4,6 +4,8 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +21,10 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Calendar;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
@@ -90,9 +95,10 @@ public class HomeController {
 			GoogleCredential credentials = gSuite.authorize();
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
+			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
+					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
+			
 			if(!repo.existsByName(user.getName())) {
-				com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
-						new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
 				
 //			Calendar calendar = new Calendar();
 				Calendar cal = new Calendar();
@@ -104,6 +110,32 @@ public class HomeController {
 				user.setCalendarId(createdCal.getId());
 				repo.save(user);
 			}
+			
+//			Calendar calendar = service.calendars().get(user.getCalendarId()).execute();
+			
+			String calendarId = "778de7lc5r9f6057qa6c1qs5lo@group.calendar.google.com";
+			
+//			vent event = new Event()
+//				    .setSummary("Google I/O 2015")
+//				    .setLocation("800 Howard St., San Francisco, CA 94103")
+//				    .setDescription("A chance to hear more about Google's developer products.");
+			Event event = new Event();
+			
+			DateTime startDateTime = new DateTime("2019-09-12T15:00:00-07:00");
+			EventDateTime start = new EventDateTime()
+			    .setDateTime(startDateTime)
+			    .setTimeZone("America/Detroit");
+			event.setStart(start);
+
+			DateTime endDateTime = new DateTime("2019-09-12T15:30:00-07:00");
+			EventDateTime end = new EventDateTime()
+			    .setDateTime(endDateTime)
+			    .setTimeZone("America/Detroit");
+			event.setEnd(end);
+			
+			event.setSummary("MVP Demos");
+			
+			event = service.events().insert(calendarId, event).execute();
 			// This calendar is a service
 			
 //			test = gSuite.getMoreUserInfo(credentials);
