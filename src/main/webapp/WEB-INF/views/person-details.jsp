@@ -53,6 +53,7 @@
 	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
 
 <h4>Filmography:</h4>
+<c:if test="${creditType == 0}">
 	<table class="table">
 		<tr>
 			<th>Release Year</th>
@@ -67,6 +68,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+</c:if>
 
 	
 	
