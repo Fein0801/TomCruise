@@ -64,8 +64,12 @@ public class GoogleService {
 		return response.getAccessToken();
 	}
 
-	public GoogleIdToken getIdToken(GoogleTokenResponse response) throws IOException {
+	public GoogleIdToken getIdToken(GoogleTokenResponse response) throws IOException {		
 		return response.parseIdToken();
+	}
+	
+	public String getRefreshToken(GoogleTokenResponse response) {
+		return response.getRefreshToken();
 	}
 	
 	/**
