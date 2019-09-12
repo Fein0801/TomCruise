@@ -12,14 +12,6 @@ import com.google.api.services.calendar.CalendarRequestInitializer;
 
 @Controller
 public class CalendarController {
-	
-	@Value("${googleAPI.key}")
-	private static String googleKey;
-	
-	public static final GoogleClientRequestInitializer KEY_INITIALIZER = new CalendarRequestInitializer(googleKey);
-	private static Calendar client;
-	
-	
 	public void getCalendar() {
 		
 	}

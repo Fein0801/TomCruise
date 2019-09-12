@@ -29,6 +29,7 @@ public class GoogleService {
 	String clientId;
 
 	RestTemplate rt = new RestTemplate();
+	String refreshToken;
 
 	/**
 	 * Get a GoogleTokenResponse object from the request. This method sets the
@@ -69,6 +70,8 @@ public class GoogleService {
 	}
 	
 	public String getRefreshToken(GoogleTokenResponse response) {
+		refreshToken = response.getRefreshToken();
+		System.out.println(refreshToken);
 		return response.getRefreshToken();
 	}
 	
@@ -81,6 +84,22 @@ public class GoogleService {
 		Payload idPayload = idToken.getPayload();
 		System.out.println(idPayload);
 		return null;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public GoogleCredential authorize() {
+		GoogleCredential credentials;
+		GoogleCredential.Builder builder = new GoogleCredential.Builder();
+		builder.setClientSecrets(clientId, clientSecret);
+		builder.setJsonFactory(JacksonFactory.getDefaultInstance());
+		builder.setTransport(new NetHttpTransport());
+		credentials = builder.build();//build();
+		credentials.setRefreshToken(refreshToken);
+		return credentials;
+	}
+	
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 	
 //	public Credentials authorize() {

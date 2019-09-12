@@ -4,7 +4,6 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +14,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.calendar.Calendar;
 import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
@@ -72,13 +74,26 @@ public class HomeController {
 	@RequestMapping("/verify")
 	public ModelAndView verify(@RequestParam("code") String code) {
 		ModelAndView mv = new ModelAndView("index", "accessCode", code);
-		String test = "Oh god";
+		String test = "";
 		try {
+			// These three lines shall never be deleted! We need access tokens!!!
 			GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
 			GoogleTokenResponse response = gSuite.getTokenResponse(request);
 			GoogleIdToken idToken = gSuite.getIdToken(response);
-			Payload p = idToken.getPayload();
-			test = p.get("given_name").toString();
+			String refreshToken = gSuite.getRefreshToken(response);
+			gSuite.setRefreshToken(refreshToken);
+			GoogleCredential credentials = gSuite.authorize();
+			
+			// This calendar is a service
+			Calendar service = new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("XYZ").build();
+			
+//			Calendar calendar = new Calendar();
+			com.google.api.services.calendar.model.Calendar cal = new com.google.api.services.calendar.model.Calendar();
+			cal.setSummary("This is the summary");
+			cal.setTimeZone("America/Detroit");
+			
+			com.google.api.services.calendar.model.Calendar createdCal = service.calendars().insert(cal).execute();
+			System.out.println(createdCal.getId());
 		} catch (NullPointerException e) {
 			System.out.println("Oh shit");
 		} catch (IOException e) {

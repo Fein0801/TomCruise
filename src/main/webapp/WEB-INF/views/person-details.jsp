@@ -49,8 +49,8 @@
 	
 
 	<h4>Credits:</h4>
-	<button><a href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a></button>
-	<button><a href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a></button>
+	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
+	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
 
 <h4>Filmography:</h4>
 	<table class="table">
