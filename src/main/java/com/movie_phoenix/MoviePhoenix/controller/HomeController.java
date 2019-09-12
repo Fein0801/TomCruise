@@ -235,7 +235,8 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-	
+//	@RequestMapping("home-page")
+//	return("/redirect")
 	
 //	private String getEmail(GoogleCredential c) {
 //		

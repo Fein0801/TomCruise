@@ -16,8 +16,8 @@
 </head>
 
 <h1 align ="center" class="background"><font color="white"> Welcome to Movie Phoenix</font></h1>
-<h2 align = "center"><font color="white">Search your favorite Actors, Movies and Tv Shows</font></h2>
-<h2 align = "center"><font color="white">Add them to your Profile!</font></h2>
+<h2 align = "center"><font color="black">Search your favorite Actors, Movies and Tv Shows</font></h2>
+<h2 align = "center"><font color="black">Add them to your Profile!</font></h2>
 <body>
 
 	<form action="person-search" method="post">
