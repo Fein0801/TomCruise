@@ -23,7 +23,7 @@
 		</c:otherwise>
 	</c:choose>
 	</a>
-		
+		<a class="btn btn-primary" href="home-page">Back to search</a>
 		
 	
  

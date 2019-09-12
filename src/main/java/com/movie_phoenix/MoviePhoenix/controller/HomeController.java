@@ -235,9 +235,10 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-//	@RequestMapping("home-page")
-//	return("/redirect")
-	
+	@RequestMapping("home-page")
+	public ModelAndView home() {
+	return new ModelAndView ("/index");
+	}
 //	private String getEmail(GoogleCredential c) {
 //		
 //	}
