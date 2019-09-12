@@ -121,13 +121,13 @@ public class HomeController {
 //				    .setDescription("A chance to hear more about Google's developer products.");
 			Event event = new Event();
 			
-			DateTime startDateTime = new DateTime("2019-09-12T15:00:00-07:00");
+			DateTime startDateTime = new DateTime("2019-09-12T15:15:00-04:00");
 			EventDateTime start = new EventDateTime()
 			    .setDateTime(startDateTime)
 			    .setTimeZone("America/Detroit");
 			event.setStart(start);
 
-			DateTime endDateTime = new DateTime("2019-09-12T15:30:00-07:00");
+			DateTime endDateTime = new DateTime("2019-09-12T16:00:00-04:00");
 			EventDateTime end = new EventDateTime()
 			    .setDateTime(endDateTime)
 			    .setTimeZone("America/Detroit");
