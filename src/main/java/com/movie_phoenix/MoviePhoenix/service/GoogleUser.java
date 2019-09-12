@@ -1,28 +1,39 @@
 package com.movie_phoenix.MoviePhoenix.service;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="user")
 public class GoogleUser {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer entryId;
 	private String email;
 	private String name;
+	private String calendarId;
 
 	public GoogleUser() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public GoogleUser(Integer entryId, String email, String name) {
+	public GoogleUser(String email, String name, String calendarId) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.calendarId = calendarId;
+	}
+
+	public GoogleUser(Integer entryId, String email, String name, String calendarId) {
 		super();
 		this.entryId = entryId;
 		this.email = email;
 		this.name = name;
-	}
-
-	public GoogleUser(String email, String name) {
-		super();
-		this.email = email;
-		this.name = name;
+		this.calendarId = calendarId;
 	}
 
 	public Integer getEntryId() {
@@ -47,6 +58,14 @@ public class GoogleUser {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCalendarId() {
+		return calendarId;
+	}
+
+	public void setCalendarId(String calendarId) {
+		this.calendarId = calendarId;
 	}
 
 }

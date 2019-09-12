@@ -1,19 +1,22 @@
 package com.movie_phoenix.MoviePhoenix.service;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -27,6 +30,9 @@ public class GoogleService {
 
 	@Value("${google.client_id}")
 	String clientId;
+	
+	@Value("${googleAPI.key}")
+	String googleKey;
 
 	RestTemplate rt = new RestTemplate();
 	String refreshToken;
@@ -71,7 +77,6 @@ public class GoogleService {
 	
 	public String getRefreshToken(GoogleTokenResponse response) {
 		refreshToken = response.getRefreshToken();
-		System.out.println(refreshToken);
 		return response.getRefreshToken();
 	}
 	
@@ -80,9 +85,21 @@ public class GoogleService {
 	 * @param idToken
 	 * @return
 	 */
-	public GoogleUser getGoogleUser(GoogleIdToken idToken) {
-		Payload idPayload = idToken.getPayload();
-		System.out.println(idPayload);
+	public GoogleUser parseGoogleUser(GoogleIdToken idToken) {
+		
+		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier(new NetHttpTransport(), JacksonFactory.getDefaultInstance());
+		try {
+			idToken.verify(verifier);
+			Payload idPayload = idToken.getPayload();
+			String email = idPayload.getEmail();
+			System.out.println(email);
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -93,13 +110,25 @@ public class GoogleService {
 		builder.setClientSecrets(clientId, clientSecret);
 		builder.setJsonFactory(JacksonFactory.getDefaultInstance());
 		builder.setTransport(new NetHttpTransport());
-		credentials = builder.build();//build();
+		credentials = builder.build();
 		credentials.setRefreshToken(refreshToken);
 		return credentials;
 	}
 	
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
+	}
+	
+	public String getMoreUserInfo(GoogleCredential credentials) throws IOException {
+		credentials.refreshToken();
+		String accessToken = credentials.getAccessToken();
+		String url = "https://www.googleapis.com/oauth2/v2/userinfo";
+		Map<String, String> uriVariables = new HashMap<>();
+		uriVariables.put("oauth_token", accessToken);
+		uriVariables.put("alt", "json");
+		uriVariables.put("key", googleKey);
+		String userInfo = rt.getForObject(url, String.class, uriVariables);
+		return userInfo;
 	}
 	
 //	public Credentials authorize() {
@@ -120,11 +149,11 @@ public class GoogleService {
 
 	private List<String> getScopes() {
 		List<String> scopes = new ArrayList<>();
-		scopes.add("https://www.googleapis.com/auth/calendar");
-		scopes.add("https://www.googleapis.com/auth/userinfo.email");
-		scopes.add("email");
-		scopes.add("profile");
 		scopes.add("openid");
+		scopes.add("email");
+//		scopes.add("profile");
+//		scopes.add("https://www.googleapis.com/auth/userinfo.email");
+//		scopes.add("https://www.googleapis.com/auth/calendar");
 		return scopes;
 	}
 

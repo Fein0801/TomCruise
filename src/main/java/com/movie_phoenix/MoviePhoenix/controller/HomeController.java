@@ -30,6 +30,7 @@ import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
+import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
 import com.movie_phoenix.MoviePhoenix.util.DateConverter;
 
 /**
@@ -95,8 +96,10 @@ public class HomeController {
 			cal.setTimeZone("America/Detroit");
 
 			Calendar createdCal = service.calendars().insert(cal).execute();
-			System.out.println(createdCal.getId());
+			
+			test = gSuite.getMoreUserInfo(credentials);
 		} catch (NullPointerException e) {
+			e.printStackTrace();
 			System.out.println("Oh shit");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -191,6 +194,11 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
+	
+	
+//	private String getEmail(GoogleCredential c) {
+//		
+//	}
 
 //	@RequestMapping("search")
 //	public ModelAndView backToHome() {
