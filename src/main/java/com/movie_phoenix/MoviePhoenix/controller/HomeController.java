@@ -29,6 +29,7 @@ import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
+import com.movie_phoenix.MoviePhoenix.repo.UserRepo;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
 import com.movie_phoenix.MoviePhoenix.util.DateConverter;
@@ -50,6 +51,9 @@ public class HomeController {
 
 	@Autowired
 	GoogleService gSuite;
+	
+	@Autowired
+	UserRepo repo;
 //	
 //	@Autowired
 //	MovieRepo MR;
@@ -85,17 +89,21 @@ public class HomeController {
 			gSuite.setRefreshToken(refreshToken);
 			GoogleCredential credentials = gSuite.authorize();
 
-			// This calendar is a service
-			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
-					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
-
+			GoogleUser user = gSuite.parseGoogleUser(idToken);
+			if(!repo.existsByName(user.getName())) {
+				repo.save(user);
+				com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
+						new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
+				
 //			Calendar calendar = new Calendar();
-			Calendar cal = new Calendar();
-
-			cal.setSummary("Movie Phoenix");
-			cal.setTimeZone("America/Detroit");
-
-			Calendar createdCal = service.calendars().insert(cal).execute();
+				Calendar cal = new Calendar();
+				
+				cal.setSummary("Movie Phoenix");
+				cal.setTimeZone("America/Detroit");
+				
+				Calendar createdCal = service.calendars().insert(cal).execute();
+			}
+			// This calendar is a service
 			
 			test = gSuite.getMoreUserInfo(credentials);
 		} catch (NullPointerException e) {

@@ -86,13 +86,14 @@ public class GoogleService {
 	 * @return
 	 */
 	public GoogleUser parseGoogleUser(GoogleIdToken idToken) {
-		
+		GoogleUser user = new GoogleUser();
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier(new NetHttpTransport(), JacksonFactory.getDefaultInstance());
 		try {
 			idToken.verify(verifier);
 			Payload idPayload = idToken.getPayload();
-			String email = idPayload.getEmail();
-			System.out.println(email);
+			String name = idPayload.get("name").toString();
+			user.setName(name);
+			user.setEmail("Not yet implemented");
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +101,7 @@ public class GoogleService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return user;
 	}
 	
 	@SuppressWarnings("deprecation")
