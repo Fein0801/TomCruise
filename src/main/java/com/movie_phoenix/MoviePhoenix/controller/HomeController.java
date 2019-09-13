@@ -56,7 +56,7 @@ public class HomeController {
 
 	@Autowired
 	GoogleService gSuite;
-	
+
 	@Autowired
 	UserRepo repo;
 //	
@@ -96,52 +96,47 @@ public class HomeController {
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
 			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
-					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials).setApplicationName("Movie Phoenix").build();
-			
-			if(!repo.existsByName(user.getName())) {
-				
-//			Calendar calendar = new Calendar();
+					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials)
+							.setApplicationName("Movie Phoenix").build();
+
+			if (!repo.existsByName(user.getName())) {
 				Calendar cal = new Calendar();
-				
+
 				cal.setSummary("Movie Phoenix");
 				cal.setTimeZone("America/Detroit");
-				
+
 				Calendar createdCal = service.calendars().insert(cal).execute();
 				user.setCalendarId(createdCal.getId());
 				repo.save(user);
+			} else {
+				user = repo.findByName(user.getName());
 			}
-			
-//			Calendar calendar = service.calendars().get(user.getCalendarId()).execute();
-			
-			String calendarId = "778de7lc5r9f6057qa6c1qs5lo@group.calendar.google.com";
-			
-//			vent event = new Event()
+			String calendarId = user.getCalendarId();
+
+//			Event event = new Event()
 //				    .setSummary("Google I/O 2015")
 //				    .setLocation("800 Howard St., San Francisco, CA 94103")
 //				    .setDescription("A chance to hear more about Google's developer products.");
 			Event event = new Event();
-			
-			DateTime startDateTime = new DateTime("2019-09-12T15:15:00-04:00");
-			EventDateTime start = new EventDateTime()
-			    .setDateTime(startDateTime)
-			    .setTimeZone("America/Detroit");
+
+			DateTime startDateTime = new DateTime("2019-09-13T16:15:00-04:00");
+			EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
 			event.setStart(start);
 
-			DateTime endDateTime = new DateTime("2019-09-12T16:00:00-04:00");
-			EventDateTime end = new EventDateTime()
-			    .setDateTime(endDateTime)
-			    .setTimeZone("America/Detroit");
+			DateTime endDateTime = new DateTime("2019-09-13T17:15:00-04:00");
+			EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
 			event.setEnd(end);
-			
-			event.setSummary("MVP Demos");
-			
+
+			event.setSummary("Apply to more jobs");
+
+//			event = service.events().insert(calendarId2, event).execute();
 			event = service.events().insert(calendarId, event).execute();
 			// This calendar is a service
-			
+
 //			test = gSuite.getMoreUserInfo(credentials);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			System.out.println("Oh shit");
+			System.out.println("What's going on?");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -235,15 +230,16 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-	
-	
-//	private String getEmail(GoogleCredential c) {
-//		
-//	}
 
-//	@RequestMapping("search")
-//	public ModelAndView backToHome() {
-//		return new ModelAndView("redirect:/");
-//	}
+	@RequestMapping("/calendar-test")
+	public ModelAndView calTest() {
+		return new ModelAndView("calendar-test");
+	}
+
+	@RequestMapping("/add-event")
+	public ModelAndView event(@RequestParam("title") String summary, @RequestParam("startTime") String startTime,
+			@RequestParam("endTime") String endTime, @RequestParam("description") String description) {
+		return null;
+	}
 
 }

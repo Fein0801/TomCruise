@@ -90,6 +90,8 @@ public class DateConverter {
 			return true;
 		} catch (DateTimeParseException e) {
 			return false;
+		} catch(NullPointerException e) {
+			return false;
 		}
 	}
 
