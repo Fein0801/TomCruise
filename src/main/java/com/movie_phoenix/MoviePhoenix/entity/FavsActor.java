@@ -14,26 +14,33 @@ public class FavsActor {
 	private Integer UserId;
 	private Integer EntryId;
 	private String name;
+	private String birthday;
 	
 	public FavsActor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FavsActor(Integer id, Integer userId, Integer entryId, String name) {
+	
+	public FavsActor(Integer id, Integer userId, Integer entryId, String name, String birthday) {
 		super();
 		Id = id;
 		UserId = userId;
 		EntryId = entryId;
 		this.name = name;
+		this.birthday = birthday;
 	}
+	
 
-	public FavsActor(Integer userId, Integer entryId, String name) {
+
+	public FavsActor(Integer userId, Integer entryId, String name, String birthday) {
 		super();
 		UserId = userId;
 		EntryId = entryId;
 		this.name = name;
+		this.birthday = birthday;
 	}
+
 
 	public Integer getId() {
 		return Id;
@@ -67,10 +74,14 @@ public class FavsActor {
 		this.name = name;
 	}
 
+
 	@Override
 	public String toString() {
-		return "FavsActor [Id=" + Id + ", UserId=" + UserId + ", EntryId=" + EntryId + ", name=" + name + "]";
+		return "FavsActor [Id=" + Id + ", UserId=" + UserId + ", EntryId=" + EntryId + ", name=" + name + ", birthday="
+				+ birthday + "]";
 	}
+
+	
 
 	
 	
