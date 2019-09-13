@@ -16,6 +16,6 @@ public class TimeConverter {
 		int hours = minutes / 60;
 		minutes = minutes % 60;
 		
-		return hours + " h, " + minutes + " m";
+		return hours + " hr, " + minutes + " min";
 	}
 }
