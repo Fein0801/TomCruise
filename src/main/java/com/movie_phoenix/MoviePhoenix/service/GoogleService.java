@@ -50,6 +50,16 @@ public class GoogleService {
 	public GoogleTokenResponse getTokenResponse(GoogleAuthorizationCodeTokenRequest request) throws IOException {
 		return request.setRedirectUri("http://localhost:8080/verify").execute();
 	}
+	
+	public GoogleTokenResponse getTokenResponse(String code) throws IOException {
+		GoogleAuthorizationCodeTokenRequest request = this.getTokenRequest(code);
+		return this.getTokenResponse(request);
+		
+		
+		
+		
+		
+	}
 
 	/**
 	 * Gets a TokenRequest object based on the authorization code. Use this method
@@ -113,6 +123,7 @@ public class GoogleService {
 		builder.setTransport(new NetHttpTransport());
 		credentials = builder.build();
 		credentials.setRefreshToken(refreshToken);
+		credentials.getTokenServerEncodedUrl();
 		return credentials;
 	}
 	
@@ -130,6 +141,12 @@ public class GoogleService {
 		uriVariables.put("key", googleKey);
 		String userInfo = rt.getForObject(url, String.class, uriVariables);
 		return userInfo;
+	}
+	
+	public GoogleCredential getCredentials(GoogleTokenResponse response) throws IOException {
+		String refreshToken = this.getRefreshToken(response);
+		this.setRefreshToken(refreshToken);
+		return this.authorize();
 	}
 	
 //	public Credentials authorize() {
@@ -180,11 +197,6 @@ public class GoogleService {
 //		GoogleAuthorizationCodeRequestUrl authCodeUrl = a.newAuthorizationUrl();
 //		authCodeUrl.setRedirectUri(redirectUri);
 //		return authCodeUrl;
-//	}
-//
-//	private String generateUserId() {
-//		Random rand = new Random();
-//		return "mp" + rand.nextInt();
 //	}
 
 }

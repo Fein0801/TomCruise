@@ -3,6 +3,7 @@
  */
 package com.movie_phoenix.MoviePhoenix.entity.movie;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -16,7 +17,7 @@ import com.movie_phoenix.MoviePhoenix.entity.Genre;
  */
 
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
 	@JsonProperty("poster_path")
 	private String posterUrl;
 	@JsonProperty("backdrop_path")
@@ -160,6 +161,13 @@ public class Movie {
 
 	public void setCharacter(String character) {
 		this.character = character;
+	}
+
+	@Override
+	public int compareTo(Movie movie) {		
+		LocalDate date1 = LocalDate.parse(this.getReleaseDate());
+		LocalDate date2 = LocalDate.parse(movie.getReleaseDate());
+		return date1.compareTo(date2);
 	}
 
 }

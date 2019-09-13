@@ -22,6 +22,7 @@
 		<input type="datetime-local" name="endTime">
 		<label for="description">Description</label>
 		<input name="description">
+		<input type="submit" value="Add">
 	</form>
 </body>
 </html>

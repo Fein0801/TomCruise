@@ -56,12 +56,17 @@ public class HomeController {
 
 	@Autowired
 	private UserRepo repo;
+	private GoogleUser currentUser;
+	private String currentUserName;
+	private static com.google.api.services.calendar.Calendar server;
+	private static GoogleCredential userCredentials;
 
 //	TvShow tvShow1 = new TvShow();
 
+	private RestTemplate rt = new RestTemplate();
+
 	// The base url for api
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
-	private RestTemplate rt = new RestTemplate();
 
 	@RequestMapping("/")
 	public ModelAndView login() {
@@ -87,14 +92,15 @@ public class HomeController {
 			String refreshToken = gSuite.getRefreshToken(response);
 			gSuite.setRefreshToken(refreshToken);
 			GoogleCredential credentials = gSuite.authorize();
+			userCredentials = credentials;
+			server = getCalendarServer();
 
 			String name = idToken.getPayload().get("given_name").toString();
 			mv.addObject("name", name);
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
-			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
-					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials)
-							.setApplicationName("Movie Phoenix").build();
+			currentUser = user;
+			currentUserName = user.getName();
 
 			if (!repo.existsByName(user.getName())) {
 				Calendar cal = new Calendar();
@@ -102,27 +108,12 @@ public class HomeController {
 				cal.setSummary("Movie Phoenix");
 				cal.setTimeZone("America/Detroit");
 
-				Calendar createdCal = service.calendars().insert(cal).execute();
+				Calendar createdCal = server.calendars().insert(cal).execute();
 				user.setCalendarId(createdCal.getId());
 				repo.save(user);
 			} else {
 				user = repo.findByName(user.getName());
 			}
-			String calendarId = user.getCalendarId();
-			
-//			Event event = new Event();
-//
-//			DateTime startDateTime = new DateTime("2019-09-13T16:15:00-04:00");
-//			EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
-//			event.setStart(start);
-//
-//			DateTime endDateTime = new DateTime("2019-09-13T17:15:00-04:00");
-//			EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
-//			event.setEnd(end);
-//
-//			event.setSummary("Apply to more jobs");
-//			event = service.events().insert(calendarId, event).execute();
-			// This calendar is a service
 
 //			test = gSuite.getMoreUserInfo(credentials);
 
@@ -201,6 +192,7 @@ public class HomeController {
 			mv.addObject("pKnown", response1);
 		}
 		mv.addObject("creditType", type.ordinal());
+		
 		return mv;
 	}
 
@@ -234,8 +226,35 @@ public class HomeController {
 
 	@RequestMapping("/add-event")
 	public ModelAndView event(@RequestParam("title") String summary, @RequestParam("startTime") String startTime,
-			@RequestParam("endTime") String endTime, @RequestParam("description") String description) {
+			@RequestParam("endTime") String endTime, @RequestParam("description") String description) throws IOException {
+		
+		System.out.println(currentUserName);
+		
+		currentUser = repo.findByName(currentUserName);
+		String calendarId = currentUser.getCalendarId();
+		
+		Event event = new Event();
+
+		DateTime startDateTime = new DateTime(startTime + ":00-04:00");
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
+		event.setStart(start);
+
+		DateTime endDateTime = new DateTime(endTime + ":00-04:00");
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
+		event.setEnd(end);
+
+		event.setSummary(summary);
+		event.setDescription(description);
+		event = server.events().insert(calendarId, event).execute();
 		return null;
+	}
+
+	public static com.google.api.services.calendar.Calendar getCalendarServer() {
+		if (server == null) {
+			server = new com.google.api.services.calendar.Calendar.Builder(new NetHttpTransport(),
+					JacksonFactory.getDefaultInstance(), userCredentials).setApplicationName("Movie Phoenix").build();
+		}
+		return server;
 	}
 
 }
