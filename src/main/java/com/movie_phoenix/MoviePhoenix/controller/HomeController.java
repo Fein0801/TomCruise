@@ -230,6 +230,11 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
+	
+	@RequestMapping("/home-page")
+	public ModelAndView home() {
+		return new ModelAndView("index");
+	}
 
 	@RequestMapping("/calendar-test")
 	public ModelAndView calTest() {
