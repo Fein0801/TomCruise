@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-<c:forEach var="show" items="${tvResults }" varStatus="i">
+<c:forEach var="show" items="${tvResults}" varStatus="i">
 		<a href="/tv-details?id=${show.id}">
 			<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" alt="broken_image.png" class="thumbnail">
 		</a>

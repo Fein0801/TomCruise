@@ -15,7 +15,7 @@
 	crossorigin="anonymous">
 </head>
 
-<h1 align ="center" class="background"><font color="white"> Welcome to Movie Phoenix</font></h1>
+<h1 align ="center" class="background" style="color: black">Welcome to Movie Phoenix, ${name }</h1>
 <h2 align = "center"><font color="black">Search your favorite Actors, Movies and Tv Shows</font></h2>
 <h2 align = "center"><font color="black">Add them to your Profile!</font></h2>
 <body>
@@ -37,9 +37,6 @@
 			type="submit" value="Search">
 	</form>
 	<br>
-	
-	Code: ${accessCode }
-	<p>Welcome, ${token }</p>
 
 </body>
 </html>

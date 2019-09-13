@@ -4,8 +4,6 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +35,6 @@ import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.repo.UserRepo;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
-import com.movie_phoenix.MoviePhoenix.util.DateConverter;
 
 /**
  * @author Ben
@@ -55,15 +52,12 @@ public class HomeController {
 	private String clientId;
 
 	@Autowired
-	GoogleService gSuite;
+	private GoogleService gSuite;
 
 	@Autowired
-	UserRepo repo;
-//	
-//	@Autowired
-//	MovieRepo MR;
+	private UserRepo repo;
 
-	TvShow tvShow1 = new TvShow();
+//	TvShow tvShow1 = new TvShow();
 
 	// The base url for api
 	public static final String BASE_URL = "https://api.themoviedb.org/3";
@@ -94,6 +88,9 @@ public class HomeController {
 			gSuite.setRefreshToken(refreshToken);
 			GoogleCredential credentials = gSuite.authorize();
 
+			String name = idToken.getPayload().get("given_name").toString();
+			mv.addObject("name", name);
+
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
 			com.google.api.services.calendar.Calendar service = new com.google.api.services.calendar.Calendar.Builder(
 					new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credentials)
@@ -112,28 +109,23 @@ public class HomeController {
 				user = repo.findByName(user.getName());
 			}
 			String calendarId = user.getCalendarId();
-
-//			Event event = new Event()
-//				    .setSummary("Google I/O 2015")
-//				    .setLocation("800 Howard St., San Francisco, CA 94103")
-//				    .setDescription("A chance to hear more about Google's developer products.");
-			Event event = new Event();
-
-			DateTime startDateTime = new DateTime("2019-09-13T16:15:00-04:00");
-			EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
-			event.setStart(start);
-
-			DateTime endDateTime = new DateTime("2019-09-13T17:15:00-04:00");
-			EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
-			event.setEnd(end);
-
-			event.setSummary("Apply to more jobs");
-
-//			event = service.events().insert(calendarId2, event).execute();
-			event = service.events().insert(calendarId, event).execute();
+			
+//			Event event = new Event();
+//
+//			DateTime startDateTime = new DateTime("2019-09-13T16:15:00-04:00");
+//			EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
+//			event.setStart(start);
+//
+//			DateTime endDateTime = new DateTime("2019-09-13T17:15:00-04:00");
+//			EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
+//			event.setEnd(end);
+//
+//			event.setSummary("Apply to more jobs");
+//			event = service.events().insert(calendarId, event).execute();
 			// This calendar is a service
 
 //			test = gSuite.getMoreUserInfo(credentials);
+
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			System.out.println("What's going on?");
@@ -141,7 +133,6 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mv.addObject("token", test);
 		return mv;
 	}
 
@@ -180,11 +171,11 @@ public class HomeController {
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 
-		String s = tvShow1.getFirstAirDate();
+//		String s = tvShow1.getFirstAirDate();
 
 		try {
-			String englishDate = DateConverter.getEnglishDate(s);
-			tvShow1.setFirstAirDate(englishDate);
+//			String englishDate = DateConverter.getEnglishDate(s);
+//			tvShow1.setFirstAirDate(englishDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -230,7 +221,7 @@ public class HomeController {
 		mv.addObject("tvDeets", response);
 		return mv;
 	}
-	
+
 	@RequestMapping("/home-page")
 	public ModelAndView home() {
 		return new ModelAndView("index");
