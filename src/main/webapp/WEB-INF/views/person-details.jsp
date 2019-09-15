@@ -26,28 +26,6 @@
 	<h4>Department:</h4>
 	<p>${pDeets.department }</p>
 
-	<%-- <h4>Known For:</h4>
-	<table class="table">
-		<tr>
-			<th>Release Year</th>
-			<th>Title</th>
-			<th>Character</th>
-		</tr>
-		<c:forEach var="movie" items="${pDeets.department }">
-		<tr>
-			<td>${movie.releaseDate }</td>
-			<td>${movie.title }</td>
-			<td>${movie.character }</td>
-		</tr>
-		</c:forEach>
-	</table> --%>
-
-
-
-
-
-	
-
 	<h4>Credits:</h4>
 	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
 	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
@@ -85,8 +63,5 @@
 		</c:forEach>
 	</table>
 </c:if>
-
-	
-	
 </body>
 </html>

@@ -115,8 +115,6 @@ public class HomeController {
 				user = repo.findByName(user.getName());
 			}
 
-//			test = gSuite.getMoreUserInfo(credentials);
-
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			System.out.println("What's going on?");
@@ -183,6 +181,7 @@ public class HomeController {
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
 		if (type == MediaType.MOVIE) {
+			// Film credits are a separate url
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
 			mv.addObject("pKnown", response1);
@@ -192,7 +191,7 @@ public class HomeController {
 			mv.addObject("pKnown", response1);
 		}
 		mv.addObject("creditType", type.ordinal());
-		
+
 		return mv;
 	}
 
@@ -226,15 +225,16 @@ public class HomeController {
 
 	@RequestMapping("/add-event")
 	public ModelAndView event(@RequestParam("title") String summary, @RequestParam("startTime") String startTime,
-			@RequestParam("endTime") String endTime, @RequestParam("description") String description) throws IOException {
-		
+			@RequestParam("endTime") String endTime, @RequestParam("description") String description)
+			throws IOException {
 		System.out.println(currentUserName);
-		
+
 		currentUser = repo.findByName(currentUserName);
 		String calendarId = currentUser.getCalendarId();
-		
-		Event event = new Event();
 
+		Event event = new Event();
+//		startTime and endTime return in format "2019-09-21T16:00", half of what we need, so we add
+//		seconds and time zone.
 		DateTime startDateTime = new DateTime(startTime + ":00-04:00");
 		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Detroit");
 		event.setStart(start);
@@ -246,7 +246,7 @@ public class HomeController {
 		event.setSummary(summary);
 		event.setDescription(description);
 		event = server.events().insert(calendarId, event).execute();
-		return null;
+		return new ModelAndView("index");
 	}
 
 	public static com.google.api.services.calendar.Calendar getCalendarServer() {

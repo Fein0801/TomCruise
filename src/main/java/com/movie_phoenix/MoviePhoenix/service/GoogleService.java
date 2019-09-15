@@ -54,11 +54,6 @@ public class GoogleService {
 	public GoogleTokenResponse getTokenResponse(String code) throws IOException {
 		GoogleAuthorizationCodeTokenRequest request = this.getTokenRequest(code);
 		return this.getTokenResponse(request);
-		
-		
-		
-		
-		
 	}
 
 	/**
@@ -91,6 +86,8 @@ public class GoogleService {
 	}
 	
 	/**
+	 * 
+	 * 
 	 * 
 	 * @param idToken
 	 * @return
