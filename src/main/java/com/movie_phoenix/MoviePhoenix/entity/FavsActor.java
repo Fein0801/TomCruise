@@ -9,61 +9,57 @@ import javax.persistence.Id;
 public class FavsActor {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer Id;
-	private Integer UserId;
-	private Integer EntryId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer entryId;
+	private Integer actorId;
+	private Integer userId;
 	private String name;
-	private String birthday;
-	
+	private String imageUrl;
+
 	public FavsActor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	public FavsActor(Integer id, Integer userId, Integer entryId, String name, String birthday) {
+	public FavsActor(Integer entryId, Integer actorId, Integer userId, String name, String imageUrl) {
 		super();
-		Id = id;
-		UserId = userId;
-		EntryId = entryId;
+		this.entryId = entryId;
+		this.actorId = actorId;
+		this.userId = userId;
 		this.name = name;
-		this.birthday = birthday;
+		this.imageUrl = imageUrl;
 	}
-	
 
-
-	public FavsActor(Integer userId, Integer entryId, String name, String birthday) {
+	public FavsActor(Integer actorId, Integer userId, String name, String imageUrl) {
 		super();
-		UserId = userId;
-		EntryId = entryId;
+		this.actorId = actorId;
+		this.userId = userId;
 		this.name = name;
-		this.birthday = birthday;
-	}
-
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
-	}
-
-	public Integer getUserId() {
-		return UserId;
-	}
-
-	public void setUserId(Integer userId) {
-		UserId = userId;
+		this.imageUrl = imageUrl;
 	}
 
 	public Integer getEntryId() {
-		return EntryId;
+		return entryId;
 	}
 
 	public void setEntryId(Integer entryId) {
-		EntryId = entryId;
+		this.entryId = entryId;
+	}
+
+	public Integer getActorId() {
+		return actorId;
+	}
+
+	public void setActorId(Integer actorId) {
+		this.actorId = actorId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -74,16 +70,14 @@ public class FavsActor {
 		this.name = name;
 	}
 
-
-	@Override
-	public String toString() {
-		return "FavsActor [Id=" + Id + ", UserId=" + UserId + ", EntryId=" + EntryId + ", name=" + name + ", birthday="
-				+ birthday + "]";
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 	
 
-	
-	
-	
 }

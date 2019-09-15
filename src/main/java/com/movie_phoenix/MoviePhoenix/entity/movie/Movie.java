@@ -28,7 +28,7 @@ public class Movie implements Comparable<Movie> {
 	private String overview;
 	@JsonProperty("release_date")
 	private String releaseDate;
-	private String Status;
+	private String status;
 	private ArrayList<Genre> genre;
 	private Integer id;
 	@JsonProperty("imdb_id")
@@ -38,9 +38,15 @@ public class Movie implements Comparable<Movie> {
 	private String tagline;
 	private Integer runtime;
 	private String character;
+	
+	private ReleaseStatus releaseStatus;
 
 	public Movie() {
 		super();
+	}
+	
+	public static enum ReleaseStatus {
+		RELEASED, POST_PRODUCTION, PLANNED, PRE_PRODUCTION, UNKNOWN
 	}
 
 	public String getPosterUrl() {
@@ -92,11 +98,12 @@ public class Movie implements Comparable<Movie> {
 	}
 
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
+		this.setReleaseStatus(status);
 	}
 
 	public ArrayList<Genre> getGenre() {
@@ -162,6 +169,28 @@ public class Movie implements Comparable<Movie> {
 	public void setCharacter(String character) {
 		this.character = character;
 	}
+	
+	public void setReleaseStatus(String status) {
+		if(status.equalsIgnoreCase("released")) {
+			releaseStatus = ReleaseStatus.RELEASED;
+		} else if (status.equalsIgnoreCase("pre production")) {
+			releaseStatus = ReleaseStatus.PRE_PRODUCTION;
+		}else if(status.equalsIgnoreCase("post production")) {
+			releaseStatus = ReleaseStatus.POST_PRODUCTION;
+		} else if(status.equalsIgnoreCase("planned")) {
+			releaseStatus = ReleaseStatus.PLANNED;
+		} else {
+			releaseStatus = ReleaseStatus.UNKNOWN;
+		}
+	}
+	
+	public void setReleaseStatus(ReleaseStatus status) {
+		releaseStatus = status;
+	}
+	
+	public ReleaseStatus getReleaseStatus() {
+		return this.releaseStatus;
+	}
 
 	@Override
 	public int compareTo(Movie movie) {		
@@ -169,5 +198,4 @@ public class Movie implements Comparable<Movie> {
 		LocalDate date2 = LocalDate.parse(movie.getReleaseDate());
 		return date1.compareTo(date2);
 	}
-
 }

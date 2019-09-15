@@ -125,11 +125,6 @@ public class HomeController {
 		return mv;
 	}
 
-//	@RequestMapping("/")
-//	public ModelAndView search(@RequestParam("code") String code) {
-//		return new ModelAndView("index", "key", mainKey);
-//	}
-
 	@RequestMapping("/test")
 	public ModelAndView test() {
 		ModelAndView mv = new ModelAndView("test-page");

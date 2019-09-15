@@ -12,113 +12,72 @@ public class FavsMovie {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer Id;
-	private Integer EntryId;
-	private Integer UserId;
-	@JsonProperty("original_title")
-	private String ogTitle;
-	@JsonProperty("release_date")
-	private String releaseDate;
-	private Integer runtime;
+	private Integer entryId;
+	private Integer userId;
+	private Integer mediaId;
+	private String title;
+	private String imageUrl;
 	
 	public FavsMovie() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	public FavsMovie(Integer id, Integer entryId, Integer userId, String ogTitle, String releaseDate, Integer runtime) {
+	public FavsMovie(Integer entryId, Integer userId, Integer mediaId, String title, String imageUrl) {
 		super();
-		Id = id;
-		EntryId = entryId;
-		UserId = userId;
-		this.ogTitle = ogTitle;
-		this.releaseDate = releaseDate;
-		this.runtime = runtime;
+		this.entryId = entryId;
+		this.userId = userId;
+		this.mediaId = mediaId;
+		this.title = title;
+		this.imageUrl = imageUrl;
 	}
 
-	
-
-	public FavsMovie(Integer entryId, Integer userId, String ogTitle, String releaseDate, Integer runtime) {
+	public FavsMovie(Integer userId, Integer mediaId, String title, String imageUrl) {
 		super();
-		EntryId = entryId;
-		UserId = userId;
-		this.ogTitle = ogTitle;
-		this.releaseDate = releaseDate;
-		this.runtime = runtime;
-	}
-
-
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
+		this.userId = userId;
+		this.mediaId = mediaId;
+		this.title = title;
+		this.imageUrl = imageUrl;
 	}
 
 	public Integer getEntryId() {
-		return EntryId;
+		return entryId;
 	}
 
 	public void setEntryId(Integer entryId) {
-		EntryId = entryId;
+		this.entryId = entryId;
 	}
 
 	public Integer getUserId() {
-		return UserId;
+		return userId;
 	}
 
 	public void setUserId(Integer userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 
-	
-
-	public String getReleaseDate() {
-		return releaseDate;
+	public Integer getMediaId() {
+		return mediaId;
 	}
 
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setMediaId(Integer mediaId) {
+		this.mediaId = mediaId;
 	}
 
-
-
-	public String getOgTitle() {
-		return ogTitle;
+	public String getTitle() {
+		return title;
 	}
 
-
-
-	public void setOgTitle(String ogTitle) {
-		this.ogTitle = ogTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-
-
-	public Integer getRuntime() {
-		return runtime;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-
-
-	public void setRuntime(Integer runtime) {
-		this.runtime = runtime;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "FavsMovie [Id=" + Id + ", EntryId=" + EntryId + ", UserId=" + UserId + ", ogTitle=" + ogTitle
-				+ ", releaseDate=" + releaseDate + ", runtime=" + runtime + "]";
-	}
-
-	
-	
 	
 	
 	
