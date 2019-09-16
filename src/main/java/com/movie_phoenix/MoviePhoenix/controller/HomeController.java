@@ -40,6 +40,7 @@ import com.movie_phoenix.MoviePhoenix.entity.tv.FavsTv;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCast;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCredits;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvCrew;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.repo.FavActorRepo;
@@ -230,6 +231,10 @@ public class HomeController {
 		TvCredits response1 = rt.getForObject(url1, TvCredits.class);
 		ArrayList<TvCast> cast = response1.getCast();
 		mv.addObject("actors", cast);
+		String url2 = BASE_URL + "/tv/" + id + "/credits?api_key=" + mainKey;
+		TvCredits response2 = rt.getForObject(url2, TvCredits.class);
+		ArrayList<TvCrew> crew = response2.getCrew();
+		mv.addObject("crewMen", crew);
 		return mv;
 	}
 
