@@ -6,8 +6,7 @@ package com.movie_phoenix.MoviePhoenix.entity.movie;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.movie_phoenix.MoviePhoenix.entity.Genre;
 
@@ -16,7 +15,7 @@ import com.movie_phoenix.MoviePhoenix.entity.Genre;
  *
  */
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie implements Comparable<Movie> {
 	@JsonProperty("poster_path")
 	private String posterUrl;
