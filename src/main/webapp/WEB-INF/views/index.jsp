@@ -7,12 +7,8 @@
 <meta charset="ISO-8859-1">
 <title>Movie Phoenix</title>
 <!-- <img src="jeremy-yap-J39X2xX_8CQ-unsplash" height="42" width="42"> -->
-<link rel="stylesheet" type="text/css" href="main2.css">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iqcNtN3rj6Y1HX/R0a3zu3ngmbdwEa9qQGHdkXwSRoiE+Gj71p0UNDSm99LcXiXV"
-	crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
 <h1 align ="center" class="background" style="color: black">Welcome to Movie Phoenix, ${name }</h1>
