@@ -97,7 +97,7 @@ public class HomeController {
 
 	@RequestMapping("/verify")
 	public ModelAndView verify(@RequestParam("code") String code) {
-		ModelAndView mv = new ModelAndView("index", "accessCode", code);
+		ModelAndView mv = new ModelAndView("redirect:/home-page");
 		String test = "";
 		try {
 			today = LocalDate.now();

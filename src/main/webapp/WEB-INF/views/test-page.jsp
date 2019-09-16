@@ -5,13 +5,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
+<title>Testing, testing. 1, 2, 3...</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt"
+	crossorigin="anonymous">
 </head>
 <body>
-	<c:forEach var="i" items="${JSON}">
-		<p>${i }</p>
-		<br>
-	</c:forEach>
+	<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+		<div class="card-header">Header</div>
+		<div class="card-body">
+			<h4 class="card-title">Dark card title</h4>
+			<p class="card-text">Some quick example text to build on the card
+				title and make up the bulk of the card's content.</p>
+		</div>
+	</div>
 </body>
 </html>
