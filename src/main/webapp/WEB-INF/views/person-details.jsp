@@ -36,12 +36,14 @@
 <c:if test="${creditType == 0}">
 	<table class="table">
 		<tr>
+			<th></th>
 			<th>Release Year</th>
 			<th>Title</th>
 			<th>Character</th>
 		</tr>
 		<c:forEach var="movie" items="${cast }">
 		<tr>
+			<td><a href="/movie-details?id="${movie.id }><img src="https://image.tmdb.org/t/p/w500${movie.posterUrl }" class="thumbnail"></a></td>
 			<td>${movie.releaseDate }</td>
 			<td>${movie.title }</td>
 			<td>${movie.character }</td>
