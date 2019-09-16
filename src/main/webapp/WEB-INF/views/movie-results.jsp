@@ -20,6 +20,7 @@
 		</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
+		
 	</c:forEach>
 </body>
 </html>

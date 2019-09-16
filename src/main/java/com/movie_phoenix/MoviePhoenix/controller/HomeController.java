@@ -148,6 +148,9 @@ public class HomeController {
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
+//		String url1 = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
+//		Movie response1 = rt.getForObject(url1, Movie.class);
+//		mv.addObject("movie", response1.getGenre(). );
 		return mv;
 	}
 

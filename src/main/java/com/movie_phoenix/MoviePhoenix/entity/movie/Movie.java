@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.movie_phoenix.MoviePhoenix.entity.Genre;
+import com.movie_phoenix.MoviePhoenix.entity.Genres;
 
 /**
  * @author kevinbusch
@@ -27,7 +27,7 @@ public class Movie implements Comparable<Movie> {
 	@JsonProperty("release_date")
 	private String releaseDate;
 	private String status;
-	private ArrayList<Genre> genre;
+	private ArrayList<Genres> genres;
 	private Integer id;
 	@JsonProperty("imdb_id")
 	private String imbd;
@@ -104,13 +104,7 @@ public class Movie implements Comparable<Movie> {
 		this.setReleaseStatus(status);
 	}
 
-	public ArrayList<Genre> getGenre() {
-		return genre;
-	}
-
-	public void setGenre(ArrayList<Genre> genre) {
-		this.genre = genre;
-	}
+	
 
 	public Integer getId() {
 		return id;
@@ -166,6 +160,14 @@ public class Movie implements Comparable<Movie> {
 
 	public void setCharacter(String character) {
 		this.character = character;
+	}
+
+	public ArrayList<Genres> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(ArrayList<Genres> genres) {
+		this.genres = genres;
 	}
 
 	public void setReleaseStatus(String status) {

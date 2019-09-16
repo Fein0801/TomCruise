@@ -1,10 +1,13 @@
 package com.movie_phoenix.MoviePhoenix.entity;
 
-public class Genre {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Genres {
 	private Integer id;
 	private String name;
 
-	public Genre() {
+	public Genres() {
 		super();
 	}
 
