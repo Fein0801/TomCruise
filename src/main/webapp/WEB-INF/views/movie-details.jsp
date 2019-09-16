@@ -13,6 +13,7 @@
 
 <h1>${movieDeets.title}</h1>
 <img src="https://image.tmdb.org/t/p/w500${movieDeets.posterUrl}" alt="broken_image.png" class="profile">
+<a href="/add-fav?type=movie&id=${pDeets.id}" class="btn btn-danger">Add to Favorites</a>
 <h3>${movieDeets.overview }</h3><p>
 <c:forEach var="mg" items="${movieDeets.genres}">
 		<h4>${mg.name }</h4>

@@ -249,5 +249,12 @@ public class HomeController {
 		}
 		return server;
 	}
+	
+	@RequestMapping("/add-fav")
+	public ModelAndView favList(@RequestParam("type") MediaType type, @RequestParam("id") String id) {
+		
+		
+		return new ModelAndView("favorites");
+	}
 
 }

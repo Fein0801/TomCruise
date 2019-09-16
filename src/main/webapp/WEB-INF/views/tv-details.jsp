@@ -11,12 +11,14 @@
 </head>
 <body>
 	<h1>${tvDeets.name }</h1>
+	<a href="/add-fav?type=tv&id=${pDeets.id}" class="btn btn-danger">Add to Favorites</a>
 	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
 	<br>
 	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
 	<h3>Last episode date: ${tvDeets.lastAirDate }</h3>
-	<a class="btn btn-primary" href="home-page">Back to search</a>
+	
 	<h1>Summary</h1>
 	<p>${tvDeets.overview }</p>
+	<a class="btn btn-primary" href="home-page">Back to search</a>
 </body>
 </html>
