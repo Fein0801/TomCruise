@@ -16,6 +16,7 @@ import com.movie_phoenix.MoviePhoenix.entity.Genres;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie implements Comparable<Movie> {
+	
 	@JsonProperty("poster_path")
 	private String posterUrl;
 	@JsonProperty("backdrop_path")

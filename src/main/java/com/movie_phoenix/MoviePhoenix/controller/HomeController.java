@@ -111,7 +111,6 @@ public class HomeController {
 			mv.addObject("name", name);
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
-			currentUser = user;
 			currentUserName = user.getName();
 
 			if (!userRepo.existsByName(user.getName())) {
@@ -126,6 +125,7 @@ public class HomeController {
 			} else {
 				user = userRepo.findByName(user.getName());
 			}
+			currentUser = user;
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -269,7 +269,7 @@ public class HomeController {
 		if (type.equals("person")) {
 			String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 			Person response = rt.getForObject(url1, Person.class);
-			FavsActor favAct = new FavsActor(id, currentUser.getEntryId(), response.getName(), response.getImageUrl());
+			FavsActor favAct = new FavsActor(id, response.getName(), response.getImageUrl(), currentUser);
 			actorRepo.save(favAct);
 		} else if (type.equals("movie")) {
 			FavsMovie favMov = new FavsMovie();

@@ -1,10 +1,16 @@
 package com.movie_phoenix.MoviePhoenix.service;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
 
 @Entity
 @Table(name = "user")
@@ -17,6 +23,9 @@ public class GoogleUser {
 	private String name;
 	private String calendarId;
 	private String firstName;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<FavsActor> favActors;
 
 	public GoogleUser() {
 		super();
