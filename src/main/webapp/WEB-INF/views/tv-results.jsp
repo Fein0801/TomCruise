@@ -14,6 +14,7 @@
 		<a href="/tv-details?id=${show.id}">
 			<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" alt="broken_image.png" class="thumbnail">
 		</a>
+		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${show.name }</h1>
 		<h3>${show.firstAirDate }</h3>
 	</c:forEach>

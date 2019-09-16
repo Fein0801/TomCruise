@@ -15,6 +15,7 @@
 	<br>
 	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
 	<h3>Last episode date: ${tvDeets.lastAirDate }</h3>
+	<a class="btn btn-primary" href="home-page">Back to search</a>
 	<h1>Summary</h1>
 	<p>${tvDeets.overview }</p>
 </body>

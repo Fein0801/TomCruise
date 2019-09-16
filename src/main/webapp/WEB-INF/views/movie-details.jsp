@@ -17,5 +17,6 @@
 ${movieDeets.releaseDate }
 <h4>${movieDeets.tagline }</h4>
 ${movieDeets.runtime }
+<a class="btn btn-primary" href="home-page">Back to search</a>
 </body>
 </html>

@@ -18,6 +18,7 @@
 		<a href="/movie-details?id=${movie.id}"> 
 			<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}" alt="broken_image.png" class="thumbnail">
 		</a>
+		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
 	</c:forEach>
