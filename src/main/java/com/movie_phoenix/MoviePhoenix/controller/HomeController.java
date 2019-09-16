@@ -4,6 +4,7 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -72,6 +73,8 @@ public class HomeController {
 	private String currentUserName;
 	private static com.google.api.services.calendar.Calendar server;
 	private static GoogleCredential userCredentials;
+	
+	private LocalDate today;
 
 //	TvShow tvShow1 = new TvShow();
 
@@ -97,6 +100,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("index", "accessCode", code);
 		String test = "";
 		try {
+			today = LocalDate.now();
 			// These three lines shall never be deleted! We need id tokens!!!
 			GoogleAuthorizationCodeTokenRequest request = gSuite.getTokenRequest(code);
 			GoogleTokenResponse response = gSuite.getTokenResponse(request);
@@ -201,8 +205,11 @@ public class HomeController {
 	@RequestMapping("/movie-details")
 	public ModelAndView movieDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("movie-details");
+		String unrecognizedChar = "’";
 		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
+		String summary = response.getOverview().replace(unrecognizedChar, "\'");
+		response.setOverview(summary);
 		mv.addObject("movieDeets", response);
 		String url1 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
 		Credits response1 = rt.getForObject(url1, Credits.class);
