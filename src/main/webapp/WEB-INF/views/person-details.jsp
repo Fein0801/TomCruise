@@ -19,7 +19,8 @@
 	<h1>${pDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
 		alt="broken_image.png" class="profile">
-	<a href="/add-fav?type=person&id=${pDeets.id}" class="btn btn-danger">Add to Favorites</a>
+	<a href="/add-fav?type=person&id=${pDeets.id}" class="btn btn-danger">Add
+		to Favorites</a>
 
 	<h3>Bio:</h3>
 	<p>${pDeets.biography }</p>
@@ -29,45 +30,49 @@
 
 	<h4>Credits:</h4>
 	<a class="btn btn-primary" href="home-page">Back to home page</a>
-	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
-	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
+	<a class="btn btn-primary"
+		href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
+	<a class="btn btn-primary"
+		href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
 
-<h4>Filmography:</h4>
-<c:if test="${creditType == 0}">
-	<table class="table">
-		<tr>
-			<th></th>
-			<th>Release Year</th>
-			<th>Title</th>
-			<th>Character</th>
-			<th>ID</th>
-		</tr>
-		<c:forEach var="movie" items="${cast }">
-		<tr>
-			<td><a href="/movie-details?id=${movie.id }"><img src="https://image.tmdb.org/t/p/w500${movie.posterUrl }" class="thumbnail"></a></td>
-			<td>${movie.releaseDate }</td>
-			<td>${movie.title }</td>
-			<td>${movie.character }</td>
-			<td>${movie.id }</td>
-		</tr>
-		</c:forEach>
-	</table>
-</c:if>
-<c:if test="${creditType == 1}">
-	<table class="table">
-		<tr>
-			<th>Release Year</th>
-			<th>Title</th>
-			<th>Character</th>
-		</tr>
-		<c:forEach var="movie" items="${pKnown.cast }">
-		<tr>
-			<td>${movie.firstAirDate }</td>
-			<td>${movie.name }</td>
-			<td>${movie.character }</td>
-		</tr>
-		</c:forEach>
-	</table>
-</c:if>
+	<h4>Filmography:</h4>
+	<c:if test="${creditType == 0}">
+		<table class="table">
+			<tr>
+				<th></th>
+				<th>Release Year</th>
+				<th>Title</th>
+				<th>Character</th>
+
+			</tr>
+			<c:forEach var="movie" items="${cast }">
+				<tr>
+					<td><a href="/movie-details?id=${movie.id }"><img
+							src="https://image.tmdb.org/t/p/w500${movie.posterUrl }"
+							class="thumbnail"></a></td>
+					<td>${movie.releaseDate }</td>
+					<td>${movie.title }</td>
+					<td>${movie.character }</td>
+
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	<c:if test="${creditType == 1}">
+		<table class="table">
+			<tr>
+				<th>Release Year</th>
+				<th>Title</th>
+				<th>Character</th>
+			</tr>
+			<c:forEach var="movie" items="${pKnown.cast }">
+				<tr>
+					<td>${movie.firstAirDate }</td>
+					<td>${movie.name }</td>
+					<td>${movie.character }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 </body>
 </html>
