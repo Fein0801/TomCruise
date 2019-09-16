@@ -2,8 +2,8 @@ package com.movie_phoenix.MoviePhoenix.service;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,29 +23,32 @@ public class GoogleUser {
 	private String name;
 	private String calendarId;
 	private String firstName;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) // , cascade = CascadeType.ALL, orphanRemoval = true
 	private List<FavsActor> favActors;
 
 	public GoogleUser() {
 		super();
 	}
 
-	public GoogleUser(Integer entryId, String email, String name, String calendarId, String firstName) {
+	public GoogleUser(Integer entryId, String email, String name, String calendarId, String firstName,
+			List<FavsActor> favActors) {
 		super();
 		this.entryId = entryId;
 		this.email = email;
 		this.name = name;
 		this.calendarId = calendarId;
 		this.firstName = firstName;
+		this.favActors = favActors;
 	}
 
-	public GoogleUser(String email, String name, String calendarId, String firstName) {
+	public GoogleUser(String email, String name, String calendarId, String firstName, List<FavsActor> favActors) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.calendarId = calendarId;
 		this.firstName = firstName;
+		this.favActors = favActors;
 	}
 
 	public Integer getEntryId() {

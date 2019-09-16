@@ -73,7 +73,7 @@ public class HomeController {
 	private String currentUserName;
 	private static com.google.api.services.calendar.Calendar server;
 	private static GoogleCredential userCredentials;
-	
+
 	private LocalDate today;
 
 //	TvShow tvShow1 = new TvShow();
@@ -229,7 +229,11 @@ public class HomeController {
 
 	@RequestMapping("/home-page")
 	public ModelAndView home() {
-		return new ModelAndView("index", "name", currentUser.getFirstName());
+		if(currentUser != null) {
+			return new ModelAndView("index", "name", currentUser.getFirstName());
+		} else {
+			return new ModelAndView("index");
+		}
 	}
 
 	@RequestMapping("/calendar-test")
@@ -286,7 +290,7 @@ public class HomeController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("/view-favs")
 	public ModelAndView displayFavs() {
 		ModelAndView mv = new ModelAndView("favorites");
