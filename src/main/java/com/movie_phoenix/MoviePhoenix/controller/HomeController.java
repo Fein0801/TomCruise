@@ -25,14 +25,17 @@ import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
+import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
 import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Credits;
+import com.movie_phoenix.MoviePhoenix.entity.movie.FavsMovie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieCast;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
+import com.movie_phoenix.MoviePhoenix.entity.tv.FavsTv;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
@@ -257,8 +260,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/add-fav")
-	public ModelAndView favList(@RequestParam("type") MediaType type, @RequestParam("id") String id) {
+	public ModelAndView favList(@RequestParam("type") String type, @RequestParam("id") String id) {
+		FavsMovie favMov = new FavsMovie();
+		FavsTv favTv = new FavsTv();
+		FavsActor favAct = new FavsActor();
 		
+		if(type.equals("string person")) {
+		
+		}
+			
 		
 		return new ModelAndView("favorites");
 	}
