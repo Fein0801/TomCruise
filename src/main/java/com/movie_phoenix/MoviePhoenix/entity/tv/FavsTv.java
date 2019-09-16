@@ -4,78 +4,78 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "fav_tv")
 public class FavsTv {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer Id;
-	private Integer EntryId;
-	private Integer UserId;
-	private String name;
-	@JsonProperty("first_air_date")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer entryId;
+	private Integer tvId;
+	private Integer userId;
+	private String title;
 	private String firstAirDate;
-	@JsonProperty("last_air_date")
 	private String lastAirDate;
-	
+	private String summary;
+
 	public FavsTv() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public FavsTv(Integer id, Integer entryId, Integer userId, String name, String firstAirDate, String lastAirDate) {
+	public FavsTv(Integer entryId, Integer tvId, Integer userId, String title, String firstAirDate, String lastAirDate,
+			String summary) {
 		super();
-		Id = id;
-		EntryId = entryId;
-		UserId = userId;
-		this.name = name;
+		this.entryId = entryId;
+		this.tvId = tvId;
+		this.userId = userId;
+		this.title = title;
 		this.firstAirDate = firstAirDate;
 		this.lastAirDate = lastAirDate;
+		this.summary = summary;
 	}
-	
 
-	public FavsTv(Integer entryId, Integer userId, String name, String firstAirDate, String lastAirDate) {
+	public FavsTv(Integer tvId, Integer userId, String title, String firstAirDate, String lastAirDate, String summary) {
 		super();
-		EntryId = entryId;
-		UserId = userId;
-		this.name = name;
+		this.tvId = tvId;
+		this.userId = userId;
+		this.title = title;
 		this.firstAirDate = firstAirDate;
 		this.lastAirDate = lastAirDate;
-	}
-
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
+		this.summary = summary;
 	}
 
 	public Integer getEntryId() {
-		return EntryId;
+		return entryId;
 	}
 
 	public void setEntryId(Integer entryId) {
-		EntryId = entryId;
+		this.entryId = entryId;
+	}
+
+	public Integer getTvId() {
+		return tvId;
+	}
+
+	public void setTvId(Integer tvId) {
+		this.tvId = tvId;
 	}
 
 	public Integer getUserId() {
-		return UserId;
+		return userId;
 	}
 
 	public void setUserId(Integer userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getFirstAirDate() {
@@ -94,12 +94,12 @@ public class FavsTv {
 		this.lastAirDate = lastAirDate;
 	}
 
-	@Override
-	public String toString() {
-		return "FavsTv [Id=" + Id + ", EntryId=" + EntryId + ", UserId=" + UserId + ", name=" + name + ", firstAirDate="
-				+ firstAirDate + ", lastAirDate=" + lastAirDate + "]";
+	public String getSummary() {
+		return summary;
 	}
-	
-	
-	
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 }

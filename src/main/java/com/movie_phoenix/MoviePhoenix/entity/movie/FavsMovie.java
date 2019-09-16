@@ -4,39 +4,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "fav_movie")
 public class FavsMovie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer entryId;
 	private Integer userId;
 	private Integer mediaId;
 	private String title;
 	private String imageUrl;
-	
+	private String summary;
+
 	public FavsMovie() {
 		super();
 	}
 
-	public FavsMovie(Integer entryId, Integer userId, Integer mediaId, String title, String imageUrl) {
+	public FavsMovie(Integer entryId, Integer userId, Integer mediaId, String title, String imageUrl, String summary) {
 		super();
 		this.entryId = entryId;
 		this.userId = userId;
 		this.mediaId = mediaId;
 		this.title = title;
 		this.imageUrl = imageUrl;
+		this.summary = summary;
 	}
 
-	public FavsMovie(Integer userId, Integer mediaId, String title, String imageUrl) {
+	public FavsMovie(Integer userId, Integer mediaId, String title, String imageUrl, String summary) {
 		super();
 		this.userId = userId;
 		this.mediaId = mediaId;
 		this.title = title;
 		this.imageUrl = imageUrl;
+		this.summary = summary;
 	}
 
 	public Integer getEntryId() {
@@ -78,7 +81,13 @@ public class FavsMovie {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
-	
-	
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 }
