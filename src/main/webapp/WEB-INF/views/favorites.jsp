@@ -5,10 +5,22 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Favorites</title>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
 </head>
 <body>
+	<table class="table">
+  <tr>
+    <th></th>
+    <th>Name</th>
+  </tr>
+  <c:forEach var="actor" items="${favActors}">
+  <tr>
+    <td><img src="https://image.tmdb.org/t/p/w500${actor.imageUrl }" class="thumbnail"></td>
+    <td>${actor.name }</td>
+  </tr>
+  </c:forEach>
+</table>
 
 </body>
 </html>

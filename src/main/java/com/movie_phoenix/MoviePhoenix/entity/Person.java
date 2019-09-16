@@ -19,7 +19,7 @@ public class Person {
 
 	private Integer id;
 	private String name;
-	@JsonProperty("Known_for_department")
+	@JsonProperty("known_for_department")
 	private String department;
 	@JsonProperty("profile_path")
 	private String imageUrl;

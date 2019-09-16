@@ -13,6 +13,12 @@
 
 	<c:forEach var="person" items="${personResults }">
 	<h4>${person.name }</h4>
+	<h4>
+	${person.department } :
+	<c:forEach var="movie" items="${person.knownFor }">
+		${movie.title },
+	</c:forEach>
+	</h4>
 	<a href="/person-details?id=${person.id}&credit_type=MOVIE">
 	<c:choose>
 		<c:when test="${person.imageUrl != null}">

@@ -88,4 +88,12 @@ public class GoogleUser {
 		this.firstName = firstName;
 	}
 
+	public List<FavsActor> getFavActors() {
+		return favActors;
+	}
+
+	public void setFavActors(List<FavsActor> favActors) {
+		this.favActors = favActors;
+	}
+
 }

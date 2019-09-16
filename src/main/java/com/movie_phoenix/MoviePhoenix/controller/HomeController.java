@@ -175,7 +175,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/person-details")
-	public ModelAndView personDetails(@RequestParam("id") String id, @RequestParam("credit_type") MediaType type) {
+	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
@@ -199,7 +199,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/movie-details")
-	public ModelAndView movieDetails(@RequestParam("id") String id) {
+	public ModelAndView movieDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("movie-details");
 		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
@@ -212,7 +212,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/tv-details")
-	public ModelAndView tvDetails(@RequestParam("id") String id) {
+	public ModelAndView tvDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("tv-details");
 		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
 		TvShow response = rt.getForObject(url, TvShow.class);
@@ -265,7 +265,8 @@ public class HomeController {
 	}
 
 	@RequestMapping("/add-fav")
-	public ModelAndView favList(@RequestParam("type") String type, @RequestParam("id") Integer id) {
+	public ModelAndView addFav(@RequestParam("type") String type, @RequestParam("id") Integer id) {
+		ModelAndView mv = new ModelAndView("redirect:/view-favs");
 		if (type.equals("person")) {
 			String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 			Person response = rt.getForObject(url1, Person.class);
@@ -276,7 +277,14 @@ public class HomeController {
 		} else if (type.equals("tv")) {
 			FavsTv favTv = new FavsTv();
 		}
-		return new ModelAndView("favorites");
+		return mv;
+	}
+	
+	@RequestMapping("/view-favs")
+	public ModelAndView displayFavs() {
+		ModelAndView mv = new ModelAndView("favorites");
+		mv.addObject("favActors", currentUser.getFavActors());
+		return mv;
 	}
 
 }
