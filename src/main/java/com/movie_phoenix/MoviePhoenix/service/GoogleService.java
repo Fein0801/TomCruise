@@ -100,7 +100,7 @@ public class GoogleService {
 			Payload idPayload = idToken.getPayload();
 			String name = idPayload.get("name").toString();
 			user.setName(name);
-			user.setEmail("Not yet implemented");
+			user.setEmail(idToken.getPayload().getEmail());
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

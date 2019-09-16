@@ -76,7 +76,7 @@ public class HomeController {
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
 		StringBuilder urlParams = new StringBuilder(
-				"?scope=profile https://www.googleapis.com/auth/calendar&client_id=");
+				"?scope=profile email https://www.googleapis.com/auth/calendar&client_id=");
 		urlParams.append(clientId);
 		urlParams.append("&redirect_uri=http://localhost:8080/verify&response_type=code&access_type=offline");
 		mv.addObject("params", urlParams.toString());
