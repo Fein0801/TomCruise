@@ -17,13 +17,13 @@ import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 
 public class Person {
 
-	private Integer Id;
+	private Integer id;
 	private String name;
 	@JsonProperty("Known_for_department")
 	private String department;
 	@JsonProperty("profile_path")
 	private String imageUrl;
-	@JsonProperty("Known_for")
+	@JsonProperty("known_for")
 	List<Movie> knownFor;
 	private String birthday;
 	private String deathday;
@@ -38,11 +38,11 @@ public class Person {
 	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {

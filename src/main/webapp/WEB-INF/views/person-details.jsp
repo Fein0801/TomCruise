@@ -28,9 +28,9 @@
 	<p>${pDeets.department }</p>
 
 	<h4>Credits:</h4>
+	<a class="btn btn-primary" href="home-page">Back to home page</a>
 	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
 	<a class="btn btn-primary" href="/person-details?id=${pDeets.id}&credit_type=TV">TV Shows</a>
-	<a class="btn btn-primary" href="home-page">Back to search</a>
 
 <h4>Filmography:</h4>
 <c:if test="${creditType == 0}">

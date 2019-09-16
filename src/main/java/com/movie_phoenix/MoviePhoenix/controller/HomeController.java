@@ -39,6 +39,7 @@ import com.movie_phoenix.MoviePhoenix.entity.tv.FavsTv;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
+import com.movie_phoenix.MoviePhoenix.repo.FavActorRepo;
 import com.movie_phoenix.MoviePhoenix.repo.UserRepo;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
@@ -62,7 +63,11 @@ public class HomeController {
 	private GoogleService gSuite;
 
 	@Autowired
-	private UserRepo repo;
+	private UserRepo userRepo;
+
+	@Autowired
+	private FavActorRepo actorRepo;
+
 	private GoogleUser currentUser;
 	private String currentUserName;
 	private static com.google.api.services.calendar.Calendar server;
@@ -109,7 +114,7 @@ public class HomeController {
 			currentUser = user;
 			currentUserName = user.getName();
 
-			if (!repo.existsByName(user.getName())) {
+			if (!userRepo.existsByName(user.getName())) {
 				Calendar cal = new Calendar();
 
 				cal.setSummary("Movie Phoenix");
@@ -117,9 +122,9 @@ public class HomeController {
 
 				Calendar createdCal = server.calendars().insert(cal).execute();
 				user.setCalendarId(createdCal.getId());
-				repo.save(user);
+				userRepo.save(user);
 			} else {
-				user = repo.findByName(user.getName());
+				user = userRepo.findByName(user.getName());
 			}
 
 		} catch (NullPointerException e) {
@@ -217,7 +222,7 @@ public class HomeController {
 
 	@RequestMapping("/home-page")
 	public ModelAndView home() {
-		return new ModelAndView("index");
+		return new ModelAndView("index", "name", currentUserName);
 	}
 
 	@RequestMapping("/calendar-test")
@@ -231,7 +236,7 @@ public class HomeController {
 			throws IOException {
 		System.out.println(currentUserName);
 
-		currentUser = repo.findByName(currentUserName);
+		currentUser = userRepo.findByName(currentUserName);
 		String calendarId = currentUser.getCalendarId();
 
 		Event event = new Event();
@@ -258,18 +263,19 @@ public class HomeController {
 		}
 		return server;
 	}
-	
+
 	@RequestMapping("/add-fav")
-	public ModelAndView favList(@RequestParam("type") String type, @RequestParam("id") String id) {
-		FavsMovie favMov = new FavsMovie();
-		FavsTv favTv = new FavsTv();
-		FavsActor favAct = new FavsActor();
-		
-		if(type.equals("string person")) {
-		
+	public ModelAndView favList(@RequestParam("type") String type, @RequestParam("id") Integer id) {
+		if (type.equals("person")) {
+			String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
+			Person response = rt.getForObject(url1, Person.class);
+			FavsActor favAct = new FavsActor(id, currentUser.getEntryId(), response.getName(), response.getImageUrl());
+			actorRepo.save(favAct);
+		} else if (type.equals("movie")) {
+			FavsMovie favMov = new FavsMovie();
+		} else if (type.equals("tv")) {
+			FavsTv favTv = new FavsTv();
 		}
-			
-		
 		return new ModelAndView("favorites");
 	}
 

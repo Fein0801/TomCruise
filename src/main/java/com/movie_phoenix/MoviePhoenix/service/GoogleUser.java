@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class GoogleUser {
 
 	@Id
@@ -16,24 +16,27 @@ public class GoogleUser {
 	private String email;
 	private String name;
 	private String calendarId;
+	private String firstName;
 
 	public GoogleUser() {
 		super();
 	}
 
-	public GoogleUser(String email, String name, String calendarId) {
-		super();
-		this.email = email;
-		this.name = name;
-		this.calendarId = calendarId;
-	}
-
-	public GoogleUser(Integer entryId, String email, String name, String calendarId) {
+	public GoogleUser(Integer entryId, String email, String name, String calendarId, String firstName) {
 		super();
 		this.entryId = entryId;
 		this.email = email;
 		this.name = name;
 		this.calendarId = calendarId;
+		this.firstName = firstName;
+	}
+
+	public GoogleUser(String email, String name, String calendarId, String firstName) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.calendarId = calendarId;
+		this.firstName = firstName;
 	}
 
 	public Integer getEntryId() {
@@ -66,6 +69,14 @@ public class GoogleUser {
 
 	public void setCalendarId(String calendarId) {
 		this.calendarId = calendarId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 }

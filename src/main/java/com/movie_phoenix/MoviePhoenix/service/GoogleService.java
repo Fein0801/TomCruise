@@ -100,7 +100,8 @@ public class GoogleService {
 			Payload idPayload = idToken.getPayload();
 			String name = idPayload.get("name").toString();
 			user.setName(name);
-			user.setEmail(idToken.getPayload().getEmail());
+			user.setEmail(idPayload.getEmail());
+			user.setFirstName(idPayload.get("given_name").toString());
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
