@@ -4,6 +4,8 @@
 package com.movie_phoenix.MoviePhoenix.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -146,6 +148,9 @@ public class HomeController {
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
+//		String url1 = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
+//		Movie response1 = rt.getForObject(url1, Movie.class);
+//		mv.addObject("movie", response1.getGenre(). );
 		return mv;
 	}
 
@@ -154,16 +159,6 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("tv-results");
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
-
-//		String s = tvShow1.getFirstAirDate();
-
-		try {
-//			String englishDate = DateConverter.getEnglishDate(s);
-//			tvShow1.setFirstAirDate(englishDate);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		mv.addObject("tvResults", response.getResults());
 
 		return mv;
@@ -179,7 +174,10 @@ public class HomeController {
 			// Film credits are a separate url
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
-			mv.addObject("pKnown", response1);
+			ArrayList<Movie> cast = response1.getCast();
+			Collections.sort(cast, Collections.reverseOrder());
+//			mv.addObject("unreleased", unreleased);
+			mv.addObject("cast", cast);
 		} else {
 			String url2 = BASE_URL + "/person/" + id + "/tv_credits?api_key=" + mainKey;
 			TvCreditsByPerson response1 = rt.getForObject(url2, TvCreditsByPerson.class);

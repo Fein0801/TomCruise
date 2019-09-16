@@ -24,29 +24,8 @@
 	</c:choose>
 	</a>
 		<a class="btn btn-primary" href="home-page">Back to search</a>
-		
-	
- 
-<%-- <tr>
-   
-<td class="center">
-    <input type="table" name="selection" value="${Person.index}" required title="Please select a schedule." />
-</td>
-   
-    
-    <td>${person.department}</td>
-    <td>${person.birthday}</td>
-    <td>${Person.deathday}</td>
-    <td>${Person.placeOfBirth}</td>
-</tr> --%>
 
 
 </c:forEach>
-<%-- <h1>${person.birthday }</h1>
-		<h1>${person.placeOfBirth }</h1>
-		
-		<h1>
-		${person.biography }
-		</h1> --%>
 </body>
 </html>

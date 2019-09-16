@@ -21,6 +21,7 @@
 		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
+		
 	</c:forEach>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Movie Phoenix: ${pDeets.name }</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,6 +19,7 @@
 	<h1>${pDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
 		alt="broken_image.png" class="profile">
+	<a href="/add-fav?type=person&id=${pDeets.id}" class="btn btn-danger">Add to Favorites</a>
 
 	<h3>Bio:</h3>
 	<p>${pDeets.biography }</p>
@@ -39,7 +40,7 @@
 			<th>Title</th>
 			<th>Character</th>
 		</tr>
-		<c:forEach var="movie" items="${pKnown.cast }">
+		<c:forEach var="movie" items="${cast }">
 		<tr>
 			<td>${movie.releaseDate }</td>
 			<td>${movie.title }</td>

@@ -7,53 +7,45 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="fav_actor")
-public class FavsActor {
+@Table(name = "watchlist")
+public class WatchlistItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer entryId;
-	private Integer actorId;
+	private Integer id;
 	private Integer userId;
-	private String name;
+	private Integer mediaId;
+	private String summary;
 	private String imageUrl;
 
-	public FavsActor() {
+	public WatchlistItem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public FavsActor(Integer entryId, Integer actorId, Integer userId, String name, String imageUrl) {
+	public WatchlistItem(Integer id, Integer userId, Integer mediaId, String summary, String imageUrl) {
 		super();
-		this.entryId = entryId;
-		this.actorId = actorId;
+		this.id = id;
 		this.userId = userId;
-		this.name = name;
+		this.mediaId = mediaId;
+		this.summary = summary;
 		this.imageUrl = imageUrl;
 	}
 
-	public FavsActor(Integer actorId, Integer userId, String name, String imageUrl) {
+	public WatchlistItem(Integer userId, Integer mediaId, String summary, String imageUrl) {
 		super();
-		this.actorId = actorId;
 		this.userId = userId;
-		this.name = name;
+		this.mediaId = mediaId;
+		this.summary = summary;
 		this.imageUrl = imageUrl;
 	}
 
-	public Integer getEntryId() {
-		return entryId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setEntryId(Integer entryId) {
-		this.entryId = entryId;
-	}
-
-	public Integer getActorId() {
-		return actorId;
-	}
-
-	public void setActorId(Integer actorId) {
-		this.actorId = actorId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getUserId() {
@@ -64,12 +56,20 @@ public class FavsActor {
 		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getMediaId() {
+		return mediaId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMediaId(Integer mediaId) {
+		this.mediaId = mediaId;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	public String getImageUrl() {
@@ -79,7 +79,5 @@ public class FavsActor {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
-	
 
 }

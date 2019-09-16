@@ -3,20 +3,18 @@
  */
 package com.movie_phoenix.MoviePhoenix.entity.movie;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.movie_phoenix.MoviePhoenix.entity.Genre;
+import com.movie_phoenix.MoviePhoenix.entity.Genres;
 
 /**
  * @author kevinbusch
  *
  */
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie implements Comparable<Movie> {
 	@JsonProperty("poster_path")
 	private String posterUrl;
@@ -29,7 +27,7 @@ public class Movie implements Comparable<Movie> {
 	@JsonProperty("release_date")
 	private String releaseDate;
 	private String status;
-	private ArrayList<Genre> genre;
+	private ArrayList<Genres> genres;
 	private Integer id;
 	@JsonProperty("imdb_id")
 	private String imbd;
@@ -38,13 +36,13 @@ public class Movie implements Comparable<Movie> {
 	private String tagline;
 	private Integer runtime;
 	private String character;
-	
+
 	private ReleaseStatus releaseStatus;
 
 	public Movie() {
 		super();
 	}
-	
+
 	public static enum ReleaseStatus {
 		RELEASED, POST_PRODUCTION, PLANNED, PRE_PRODUCTION, UNKNOWN
 	}
@@ -106,13 +104,7 @@ public class Movie implements Comparable<Movie> {
 		this.setReleaseStatus(status);
 	}
 
-	public ArrayList<Genre> getGenre() {
-		return genre;
-	}
-
-	public void setGenre(ArrayList<Genre> genre) {
-		this.genre = genre;
-	}
+	
 
 	public Integer getId() {
 		return id;
@@ -161,7 +153,7 @@ public class Movie implements Comparable<Movie> {
 	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
 	}
-	
+
 	public String getCharacter() {
 		return character;
 	}
@@ -169,33 +161,41 @@ public class Movie implements Comparable<Movie> {
 	public void setCharacter(String character) {
 		this.character = character;
 	}
-	
+
+	public ArrayList<Genres> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(ArrayList<Genres> genres) {
+		this.genres = genres;
+	}
+
 	public void setReleaseStatus(String status) {
-		if(status.equalsIgnoreCase("released")) {
+		if (status.equalsIgnoreCase("released")) {
 			releaseStatus = ReleaseStatus.RELEASED;
 		} else if (status.equalsIgnoreCase("pre production")) {
 			releaseStatus = ReleaseStatus.PRE_PRODUCTION;
-		}else if(status.equalsIgnoreCase("post production")) {
+		} else if (status.equalsIgnoreCase("post production")) {
 			releaseStatus = ReleaseStatus.POST_PRODUCTION;
-		} else if(status.equalsIgnoreCase("planned")) {
+		} else if (status.equalsIgnoreCase("planned")) {
 			releaseStatus = ReleaseStatus.PLANNED;
 		} else {
 			releaseStatus = ReleaseStatus.UNKNOWN;
 		}
 	}
-	
+
 	public void setReleaseStatus(ReleaseStatus status) {
 		releaseStatus = status;
 	}
-	
+
 	public ReleaseStatus getReleaseStatus() {
 		return this.releaseStatus;
 	}
 
 	@Override
-	public int compareTo(Movie movie) {		
-		LocalDate date1 = LocalDate.parse(this.getReleaseDate());
-		LocalDate date2 = LocalDate.parse(movie.getReleaseDate());
+	public int compareTo(Movie movie) {
+		String date1 = this.getReleaseDate();
+		String date2 = movie.getReleaseDate();
 		return date1.compareTo(date2);
 	}
 }
