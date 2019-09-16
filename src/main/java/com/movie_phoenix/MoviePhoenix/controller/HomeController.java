@@ -222,7 +222,7 @@ public class HomeController {
 
 	@RequestMapping("/home-page")
 	public ModelAndView home() {
-		return new ModelAndView("index", "name", currentUserName);
+		return new ModelAndView("index", "name", currentUser.getFirstName());
 	}
 
 	@RequestMapping("/calendar-test")

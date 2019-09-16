@@ -16,12 +16,20 @@
 <body>
 	<c:forEach var="movie" items="${movieResults }">
 		<a href="/movie-details?id=${movie.id}"> 
-			<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}" alt="broken_image.png" class="thumbnail">
+			<c:choose>
+				<c:when test="${movie.posterUrl != null}">
+					<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}"
+						class="thumbnail">
+				</c:when>
+				<c:otherwise>
+					<img src="broken_image.png" class="thumbnail">
+				</c:otherwise>
+			</c:choose>
 		</a>
 		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
-		
+
 	</c:forEach>
 </body>
 </html>

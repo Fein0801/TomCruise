@@ -20,19 +20,19 @@
 <h2 align = "center"><font color="black">Add them to your Profile!</font></h2>
 <body>
 
-	<form action="person-search" method="post">
+	<form action="person-search" method="get">
 		<input type="text" name="query" placeholder="Search by actor">
 		<input type="submit" value="Search">
 	</form>
 	<br>
 
-	<form action="movie-search" method="post">
+	<form action="movie-search" method="get">
 		<input type="text" name="query" placeholder="Search by movie">
 		<input type="submit" value="Search">
 	</form>
 	<br>
 
-	<form action="tv-search" method="post">
+	<form action="tv-search" method="get">
 		<input type="text" name="query" placeholder="Search by tv"> <input
 			type="submit" value="Search">
 	</form>

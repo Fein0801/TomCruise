@@ -197,6 +197,10 @@ public class Movie implements Comparable<Movie> {
 	public int compareTo(Movie movie) {
 		String date1 = this.getReleaseDate();
 		String date2 = movie.getReleaseDate();
-		return date1.compareTo(date2);
+		if(date1 != null && date2 != null) {
+			return date1.compareTo(date2);
+		} else {
+			return Integer.MAX_VALUE;
+		}
 	}
 }
