@@ -22,5 +22,21 @@ ${movieDeets.releaseDate }
 <h4>${movieDeets.tagline }</h4>
 ${movieDeets.runtime }
 <a class="btn btn-primary" href="home-page">Back to search</a>
+
+,<table class="table">
+  <tr>
+    <th></th>
+    <th>Actor</th>
+    <th>Character</th>
+  </tr>
+  <c:forEach var="c" items="${ actors}"> 
+  <tr>
+    <td><a href="/person-details?id=${c.castId }&credit_type=MOVIE"><img src="https://image.tmdb.org/t/p/w500${c.profilePath}" class="thumbnail"></a></td>
+    <td>${c.name }</td>
+    <td>${c.character }</td>
+  </tr>
+    </c:forEach>
+</table>
+
 </body>
 </html>

@@ -28,8 +28,10 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.movie_phoenix.MoviePhoenix.entity.MediaType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
+import com.movie_phoenix.MoviePhoenix.entity.movie.Credits;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
+import com.movie_phoenix.MoviePhoenix.entity.movie.MovieCast;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
@@ -194,6 +196,10 @@ public class HomeController {
 		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
 		mv.addObject("movieDeets", response);
+		String url1 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
+		Credits response1 = rt.getForObject(url1, Credits.class);
+		ArrayList<MovieCast> cast = response1.getCast();
+		mv.addObject("actors", cast);
 		return mv;
 	}
 
