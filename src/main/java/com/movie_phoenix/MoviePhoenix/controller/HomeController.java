@@ -37,6 +37,8 @@ import com.movie_phoenix.MoviePhoenix.entity.movie.Movie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieCast;
 import com.movie_phoenix.MoviePhoenix.entity.movie.MovieResults;
 import com.movie_phoenix.MoviePhoenix.entity.tv.FavsTv;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvCast;
+import com.movie_phoenix.MoviePhoenix.entity.tv.TvCredits;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvCreditsByPerson;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
@@ -224,6 +226,10 @@ public class HomeController {
 		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
 		TvShow response = rt.getForObject(url, TvShow.class);
 		mv.addObject("tvDeets", response);
+		String url1 = BASE_URL + "/tv/" + id + "/credits?api_key=" + mainKey;
+		TvCredits response1 = rt.getForObject(url1, TvCredits.class);
+		ArrayList<TvCast> cast = response1.getCast();
+		mv.addObject("actors", cast);
 		return mv;
 	}
 
