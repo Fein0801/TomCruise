@@ -122,7 +122,7 @@ public class HomeController {
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
 			currentUserName = user.getName();
 
-			if (!userRepo.existsByName(user.getName())) {
+			if (!userRepo.existsByEmail(user.getEmail())) {
 				Calendar cal = new Calendar();
 
 				cal.setSummary("Movie Phoenix");
@@ -132,7 +132,7 @@ public class HomeController {
 				user.setCalendarId(createdCal.getId());
 				userRepo.save(user);
 			} else {
-				user = userRepo.findByName(user.getName());
+				user = userRepo.findByEmail(user.getEmail());
 			}
 			currentUser = user;
 
@@ -274,10 +274,11 @@ public class HomeController {
 	public ModelAndView event(@RequestParam("title") String summary, @RequestParam("startTime") String startTime,
 			@RequestParam("endTime") String endTime, @RequestParam("description") String description,@RequestParam("date") String date)
 			throws IOException {
-		System.out.println(currentUserName);
-
-		currentUser = userRepo.findByName(currentUserName);
-		String calendarId = currentUser.getCalendarId();
+		
+		String calendarId = "";
+		if(currentUser != null) {
+			calendarId = currentUser.getCalendarId();
+		}
 
 		Event event = new Event();
 //		startTime and endTime return in format "2019-09-21T16:00", half of what we need, so we add
@@ -288,7 +289,7 @@ public class HomeController {
 		event.setStart(start);
 		
 
-		DateTime endDateTime = new DateTime(date + "T" +endTime + ":00-04:00");
+		DateTime endDateTime = new DateTime(date + "T" + endTime + ":00-04:00");
 		System.out.println("end time: "+ endTime);
 		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Detroit");
 		event.setEnd(end);

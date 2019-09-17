@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
 
 @Entity
 @Table(name = "fav_movie")
@@ -13,33 +17,36 @@ public class FavsMovie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer entryId;
-	private Integer userId;
 	private Integer mediaId;
 	private String title;
 	private String imageUrl;
 	private String summary;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id_fk")
+	private GoogleUser user;
 
 	public FavsMovie() {
 		super();
 	}
 
-	public FavsMovie(Integer entryId, Integer userId, Integer mediaId, String title, String imageUrl, String summary) {
+	public FavsMovie(Integer entryId, Integer mediaId, String title, String imageUrl, String summary, GoogleUser user) {
 		super();
 		this.entryId = entryId;
-		this.userId = userId;
 		this.mediaId = mediaId;
 		this.title = title;
 		this.imageUrl = imageUrl;
 		this.summary = summary;
+		this.user = user;
 	}
 
-	public FavsMovie(Integer userId, Integer mediaId, String title, String imageUrl, String summary) {
+	public FavsMovie(Integer mediaId, String title, String imageUrl, String summary, GoogleUser user) {
 		super();
-		this.userId = userId;
 		this.mediaId = mediaId;
 		this.title = title;
 		this.imageUrl = imageUrl;
 		this.summary = summary;
+		this.user = user;
 	}
 
 	public Integer getEntryId() {
@@ -48,14 +55,6 @@ public class FavsMovie {
 
 	public void setEntryId(Integer entryId) {
 		this.entryId = entryId;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 	public Integer getMediaId() {
@@ -90,4 +89,13 @@ public class FavsMovie {
 		this.summary = summary;
 	}
 
+	public GoogleUser getUser() {
+		return user;
+	}
+
+	public void setUser(GoogleUser user) {
+		this.user = user;
+	}
+	
+	
 }
