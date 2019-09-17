@@ -30,7 +30,7 @@
 	        <a class="nav-link" href="/view-favs">Favorites</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">About</a>
+	        <a class="nav-link" href="https://calendar.google.com/calendar/r" target="_blank">Google Calendar</a>
 	      </li>
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0" action="/all-search">
