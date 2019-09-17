@@ -235,6 +235,21 @@ public class HomeController {
 		mv.addObject("crewMen", crew);
 		return mv;
 	}
+	@RequestMapping("/all-search")
+	public ModelAndView searchAll(@RequestParam("query")String query) {
+		ModelAndView mv = new ModelAndView("all-search");
+		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
+		TvShowResults response = rt.getForObject(url, TvShowResults.class);
+		mv.addObject("tvResults", response.getResults());
+		String url1 = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
+		MovieResults response1 = rt.getForObject(url1, MovieResults.class);
+		mv.addObject("movieResults", response1.getResults());
+		String url2 = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
+		PersonResults response2 = rt.getForObject(url2, PersonResults.class);
+		mv.addObject("personResults", response2.getResults());
+		return mv;
+		
+	}
 
 	@RequestMapping("/home-page")
 	public ModelAndView home() {

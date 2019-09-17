@@ -33,6 +33,12 @@
 			type="submit" value="Search">
 	</form>
 	<br>
+	
+	<form action="all-search" method="get">
+	<input type="text" name="query" placeholder="Search"> <input
+	type="submit" value="Search">
+	</form>
+	<br>
 
 </body>
 </html>
