@@ -52,7 +52,7 @@ body {
 }
 
 .list {
-	padding: 75px 100px;
+	padding: 20px 75px;
 }
 
 .content {
@@ -64,6 +64,7 @@ body {
 	max-width: 30rem;
 	height: 150px;
 }
+<<<<<<< HEAD
 .Center {
   display: flex;
   align-items: center;
@@ -75,3 +76,34 @@ body {
 #child1 {
 	line-height: 600px
 }
+=======
+
+.footer {
+	background-color: #1A1A1A;
+	height: 100px;
+}
+
+.footer img {
+	max-height: 50px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.header {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	height: 100px;
+	max-height: 100px;
+}
+
+.page-content {
+	padding-top: 120px;
+}
+
+/* .logo { */
+/* 	height: 90px; */
+/* } */
+>>>>>>> c41d9e2cb134a74155ff30cfad4aabe0bfcd09cf

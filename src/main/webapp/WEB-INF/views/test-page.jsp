@@ -59,7 +59,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 </body>
+<%@include file="partials/footer.jsp"%>
 </html>

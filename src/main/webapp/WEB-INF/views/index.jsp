@@ -10,15 +10,15 @@
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<%@include file="partials/header.jsp"%>
 	<h1 align="center" class="background">Welcome to Movie Phoenix, ${name }</h1>
 	<h2 align="center">Search your favorite Actors, Movies and Tv Shows</h2>
 	<h2 align="center">Add them to your Profile!</h2>
 
-	<form action="person-search" method="get">
-		<input type="text" name="query" placeholder="Search by actor">
-		<input type="submit" value="Search">
+	<form action="person-search" method="get" class="form-inline">
+		<input type="text" name="query" placeholder="Search by actor" class="form-control">
+		<input type="submit" value="Search" class="btn btn-secondary">
 	</form>
 	<br>
 
@@ -39,6 +39,5 @@
 	type="submit" value="Search">
 	</form>
 	<br>
-
 </body>
 </html>

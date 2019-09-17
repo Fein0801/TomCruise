@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css"
@@ -13,7 +13,8 @@
 	crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body>
+<%@include file="partials/header.jsp"%>
+<body class="dark-theme">
 	<c:forEach var="movie" items="${movieResults }">
 		<a href="/movie-details?id=${movie.id}"> <c:choose>
 				<c:when test="${movie.posterUrl != null}">
@@ -28,8 +29,9 @@
 		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
-
 	</c:forEach>
+	
+	
 	<c:forEach var="person" items="${personResults }">
 		<h4>${person.name }</h4>
 		<h4>
@@ -49,6 +51,12 @@
 			</c:choose>
 		</a>
 	</c:forEach>
+	
+	
+	
+	
+	
+	
 	<c:forEach var="show" items="${tvResults}" varStatus="i">
 		<a href="/tv-details?id=${show.id}"> <img
 			src="https://image.tmdb.org/t/p/w500${show.imageUrl}"
