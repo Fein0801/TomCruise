@@ -42,9 +42,11 @@
 	<h4>${movieDeets.tagline }</h4>
 	${movieDeets.runtime }
 	<a class="btn btn-primary" href="home-page">Back to search</a>
-	<br><br>
+	<br>
+	<br>
 	<h1>Cast</h1>
-	<table class="table table-striped" > <!-- WIP: new backround color makes table borders look bad -->
+	<table class="table table-striped">
+		<!-- WIP: new backround color makes table borders look bad -->
 		<tr>
 			<th></th>
 			<th>Actor</th>
@@ -52,16 +54,31 @@
 		</tr>
 		<c:forEach var="c" items="${ actors}">
 			<tr>
-				<td>
-				<a href="/person-details?id=${c.castId }&credit_type=MOVIE">
-				<img src="https://image.tmdb.org/t/p/w500${c.profilePath}" class="thumbnail">
-				</a>
-				</td>
+				<td><a href="/person-details?id=${c.castId }&credit_type=MOVIE">
+						<img src="https://image.tmdb.org/t/p/w500${c.profilePath}"
+						class="thumbnail">
+				</a></td>
 				<td>${c.name }</td>
 				<td>${c.character }</td>
 			</tr>
 		</c:forEach>
 	</table>
+	<h1>Crew</h1>
+	<table class="table">
+		<tr>
+			<th></th>
+			<th>Crew Name</th>
+			<th>Job</th>
+		</tr>
 
+		<c:forEach var="c" items="${ crewMen}">
+			<tr>
+				<td><a href="/person-details?id=${c.crewId }&credit_type=TV"><img
+						src="https://image.tmdb.org/t/p/w500${c.profilePath}"
+						class="thumbnail"></a></td>
+				<td>${c.name }</td>
+				<td>${c.job }</td>
+			</tr>
+		</c:forEach>
 </body>
 </html>
