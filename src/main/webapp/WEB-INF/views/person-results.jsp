@@ -14,24 +14,34 @@
 <div class="page-content">
 	<div class="list">
 		<c:forEach var="person" items="${personResults }">
-			<a href="/person-details?id=${person.id}&credit_type=MOVIE">
-				<c:choose>
-					<c:when test="${person.imageUrl != null}">
-						<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}"
-							alt="broken_image.png" class="thumbnail">
-					</c:when>
-					<c:otherwise>
-						<img src="broken_image.png" class="thumbnail">
-					</c:otherwise>
-				</c:choose>
-			</a>
-			<h4>${person.name }</h4>
-			<h4>
-				${person.department } :
-				<c:forEach var="movie" items="${person.knownFor }">
-					${movie.title },
-				</c:forEach>
-			</h4>
+			<div class="card text-white bg-dark mb-3 mp-card">
+				<div class="card-body">
+					<div class="avatar">
+						<a href="/person-details?id=${person.id}&credit_type=MOVIE">
+							<c:choose>
+								<c:when test="${person.imageUrl != null}">
+									<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}"
+										alt="broken_image.png" class="thumbnail">
+								</c:when>
+								<c:otherwise>
+									<img src="broken_image.png" class="thumbnail">
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</div>
+					<div class="content">
+						<h4>${person.name }</h4>
+						<p>
+							${person.department } :
+							<c:forEach var="movie" items="${person.knownFor }">
+								${movie.title },
+							</c:forEach>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			
 		</c:forEach>
 	</div>
 </div>
