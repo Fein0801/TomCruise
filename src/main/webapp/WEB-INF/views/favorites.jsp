@@ -16,6 +16,7 @@
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
 <div class="page-content">
+<h1>People</h1>
 	<table class="table">
 		<tr>
 			<th></th>
@@ -27,6 +28,25 @@
 					src="https://image.tmdb.org/t/p/w500${actor.imageUrl }"
 					class="thumbnail"></td>
 				<td>${actor.name }</td>
+			</tr>
+		</c:forEach>
+	</table>
+<h1>Movies</h1>
+<table class="table">
+		<tr>
+			<th></th>
+			<th>Title</th>
+		</tr>
+		<c:forEach var="movie" items="${favMovies}">
+			<tr>
+				<td>
+				<a href="/movie-details?id=${movie.mediaId }">
+				<img
+					src="https://image.tmdb.org/t/p/w500${movie.imageUrl }"
+					class="thumbnail">
+				</a>
+				</td>
+				<td>${movie.title }</td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -46,6 +46,8 @@ import com.movie_phoenix.MoviePhoenix.entity.tv.TvCrew;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShow;
 import com.movie_phoenix.MoviePhoenix.entity.tv.TvShowResults;
 import com.movie_phoenix.MoviePhoenix.repo.FavActorRepo;
+import com.movie_phoenix.MoviePhoenix.repo.FavMovieRepo;
+import com.movie_phoenix.MoviePhoenix.repo.FavTvRepo;
 import com.movie_phoenix.MoviePhoenix.repo.UserRepo;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
@@ -73,6 +75,12 @@ public class HomeController {
 
 	@Autowired
 	private FavActorRepo actorRepo;
+	
+	@Autowired
+	private FavMovieRepo movieRepo;
+	
+	@Autowired
+	private FavTvRepo tvRepo;
 
 	private GoogleUser currentUser;
 	private String currentUserName;
@@ -116,11 +124,9 @@ public class HomeController {
 			userCredentials = credentials;
 			server = getCalendarServer();
 
-			String name = idToken.getPayload().get("given_name").toString();
-			mv.addObject("name", name);
-
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
-			currentUserName = user.getName();
+			currentUserName = user.getFirstName();
+			System.out.println(user.getEmail());
 
 			if (!userRepo.existsByEmail(user.getEmail())) {
 				Calendar cal = new Calendar();
@@ -155,6 +161,7 @@ public class HomeController {
 	@RequestMapping("/person-search")
 	public ModelAndView personResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("person-results");
+		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
@@ -164,6 +171,7 @@ public class HomeController {
 	@RequestMapping("/movie-search")
 	public ModelAndView movieResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("movie-results");
+		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
@@ -173,6 +181,7 @@ public class HomeController {
 	@RequestMapping("/tv-search")
 	public ModelAndView tvResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("tv-results");
+		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -183,6 +192,7 @@ public class HomeController {
 	@RequestMapping("/person-details")
 	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
 		ModelAndView mv = new ModelAndView("person-details");
+		mv.addObject("name", currentUser.getFirstName());
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
@@ -207,6 +217,7 @@ public class HomeController {
 	@RequestMapping("/movie-details")
 	public ModelAndView movieDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("movie-details");
+		mv.addObject("name", currentUser.getFirstName());
 		String unrecognizedChar = "’";
 		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
@@ -227,6 +238,7 @@ public class HomeController {
 	@RequestMapping("/tv-details")
 	public ModelAndView tvDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("tv-details");
+		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
 		TvShow response = rt.getForObject(url, TvShow.class);
 		mv.addObject("tvDeets", response);
@@ -243,6 +255,7 @@ public class HomeController {
 	@RequestMapping("/all-search")
 	public ModelAndView searchAll(@RequestParam("query")String query) {
 		ModelAndView mv = new ModelAndView("all-search");
+		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -313,17 +326,26 @@ public class HomeController {
 	@RequestMapping("/add-fav")
 	public ModelAndView addFav(@RequestParam("type") String type, @RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("name", currentUser.getFirstName());
+		Integer userId = currentUser.getEntryId();
 		if (type.equals("person")) {
 			String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 			Person response = rt.getForObject(url1, Person.class);
-			List<FavsActor> faves = actorRepo.findByUserAndActor(id, currentUser.getEntryId());
+			List<FavsActor> faves = actorRepo.findByUserAndActor(id, userId);
 			if (faves.size() == 0) {
 				FavsActor favAct = new FavsActor(id, response.getName(), response.getImageUrl(), currentUser);
 				actorRepo.save(favAct);
 			}
 			mv.setViewName("redirect:/person-details?id=" + id + "&credit_type=MOVIE");
 		} else if (type.equals("movie")) {
-			FavsMovie favMov = new FavsMovie();
+			String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
+			Movie response = rt.getForObject(url, Movie.class);
+			List<FavsMovie> faves = movieRepo.findByUserAndMovie(id, userId);
+			if(faves.size() == 0) {
+				FavsMovie favMov = new FavsMovie(id, userId, response.getTitle(), response.getPosterUrl());
+				movieRepo.save(favMov);
+			}
+			mv.setViewName("redirect:/movie-details?id=" + id);
 		} else if (type.equals("tv")) {
 			FavsTv favTv = new FavsTv();
 		}
@@ -333,7 +355,9 @@ public class HomeController {
 	@RequestMapping("/view-favs")
 	public ModelAndView displayFavs() {
 		ModelAndView mv = new ModelAndView("favorites");
+		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("favActors", actorRepo.findByUser(currentUser));
+		mv.addObject("favMovies", movieRepo.findByUserId(currentUser.getEntryId()));
 		return mv;
 	}
 

@@ -4,11 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
 
 @Entity
 @Table(name = "fav_movie")
@@ -18,36 +14,36 @@ public class FavsMovie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer entryId;
 	private Integer mediaId;
+	private Integer userId;
 	private String title;
 	private String imageUrl;
-	private String summary;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id_fk")
-	private GoogleUser user;
 
 	public FavsMovie() {
 		super();
 	}
 
-	public FavsMovie(Integer entryId, Integer mediaId, String title, String imageUrl, String summary, GoogleUser user) {
+	
+
+	public FavsMovie(Integer entryId, Integer mediaId, Integer userId, String title, String imageUrl) {
 		super();
 		this.entryId = entryId;
 		this.mediaId = mediaId;
+		this.userId = userId;
 		this.title = title;
 		this.imageUrl = imageUrl;
-		this.summary = summary;
-		this.user = user;
 	}
 
-	public FavsMovie(Integer mediaId, String title, String imageUrl, String summary, GoogleUser user) {
+
+
+	public FavsMovie(Integer mediaId, Integer userId, String title, String imageUrl) {
 		super();
 		this.mediaId = mediaId;
+		this.userId = userId;
 		this.title = title;
 		this.imageUrl = imageUrl;
-		this.summary = summary;
-		this.user = user;
 	}
+
+
 
 	public Integer getEntryId() {
 		return entryId;
@@ -81,20 +77,12 @@ public class FavsMovie {
 		this.imageUrl = imageUrl;
 	}
 
-	public String getSummary() {
-		return summary;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-
-	public GoogleUser getUser() {
-		return user;
-	}
-
-	public void setUser(GoogleUser user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	

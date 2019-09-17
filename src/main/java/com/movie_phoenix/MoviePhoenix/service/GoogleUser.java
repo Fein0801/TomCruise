@@ -11,8 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
-import com.movie_phoenix.MoviePhoenix.entity.movie.FavsMovie;
-import com.movie_phoenix.MoviePhoenix.entity.tv.FavsTv;
 
 @Entity
 @Table(name = "user")
@@ -28,10 +26,6 @@ public class GoogleUser {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) // , cascade = CascadeType.ALL, orphanRemoval = true
 	private List<FavsActor> favActors;
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) // , cascade = CascadeType.ALL, orphanRemoval = true
-	private List<FavsMovie> favMovies;
-	@OneToMany(mappedBy = "userTv", fetch = FetchType.EAGER) // , cascade = CascadeType.ALL, orphanRemoval = true
-	private List<FavsTv> favTv;
 
 	public GoogleUser() {
 		super();
