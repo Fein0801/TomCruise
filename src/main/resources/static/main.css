@@ -64,3 +64,14 @@ body {
 	max-width: 30rem;
 	height: 150px;
 }
+.Center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#child {
+    line-height: 666px;
+}
+#child1 {
+	line-height: 600px
+}
