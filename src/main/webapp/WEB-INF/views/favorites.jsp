@@ -9,6 +9,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" rel="stylesheet" integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
+<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
 	<table class="table">
   <tr>

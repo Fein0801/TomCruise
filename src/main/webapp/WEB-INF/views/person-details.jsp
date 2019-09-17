@@ -13,9 +13,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
+<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
-
-
 	<h1>${pDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
 		alt="broken_image.png" class="profile">

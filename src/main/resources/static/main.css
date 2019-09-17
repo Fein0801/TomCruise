@@ -50,3 +50,17 @@ body {
 .error-message {
 	background-color: red;
 }
+
+.list {
+	padding: 75px 100px;
+}
+
+.content {
+	 margin-top: -100px;
+	 margin-left: 90px;
+}
+
+.mp-card {
+	max-width: 30rem;
+	height: 150px;
+}
