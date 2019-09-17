@@ -1,3 +1,7 @@
+body {
+	background-color: #ededed;
+}
+
 .thumbnail {
 	max-width: 75px;
 }
@@ -7,10 +11,42 @@
 }
 
 .bgImage {
-  background-image: url("akshay-chauhan-tJ8VGRqEUDg-unsplash.jpg");
-  background-size: 1400px 700px;
+	background-image: url("akshay-chauhan-tJ8VGRqEUDg-unsplash.jpg");
+	background-size: 1400px 700px;
 }
 
-body {
-	background-color: #ededed;
+.dark-theme {
+	background-color: #15202B;
+}
+
+.dark-theme h1 {
+	color: white;
+}
+
+.dark-theme h2 {
+	color: white;
+}
+
+.dark-theme h3 {
+	color: white;
+}
+
+.dark-theme h4 {
+	color: white;
+}
+
+.dark-theme h5 {
+	color: white;
+}
+
+.dark-theme h6 {
+	color: white;
+}
+
+.table {
+	border: 0px 0px 1px 0px solid white;
+}
+
+.error-message {
+	background-color: red;
 }

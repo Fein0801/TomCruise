@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -165,9 +166,6 @@ public class HomeController {
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
-//		String url1 = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
-//		Movie response1 = rt.getForObject(url1, Movie.class);
-//		mv.addObject("movie", response1.getGenre(). );
 		return mv;
 	}
 
@@ -240,7 +238,7 @@ public class HomeController {
 
 	@RequestMapping("/home-page")
 	public ModelAndView home() {
-		if(currentUser != null) {
+		if (currentUser != null) {
 			return new ModelAndView("index", "name", currentUser.getFirstName());
 		} else {
 			return new ModelAndView("index");
@@ -288,12 +286,16 @@ public class HomeController {
 
 	@RequestMapping("/add-fav")
 	public ModelAndView addFav(@RequestParam("type") String type, @RequestParam("id") Integer id) {
-		ModelAndView mv = new ModelAndView("redirect:/view-favs");
+		ModelAndView mv = new ModelAndView();
 		if (type.equals("person")) {
 			String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 			Person response = rt.getForObject(url1, Person.class);
-			FavsActor favAct = new FavsActor(id, response.getName(), response.getImageUrl(), currentUser);
-			actorRepo.save(favAct);
+			List<FavsActor> faves = actorRepo.findByUserAndActor(id, currentUser.getEntryId());
+			if (faves.size() == 0) {
+				FavsActor favAct = new FavsActor(id, response.getName(), response.getImageUrl(), currentUser);
+				actorRepo.save(favAct);
+			}
+			mv.setViewName("redirect:/person-details?id=" + id + "&credit_type=MOVIE");
 		} else if (type.equals("movie")) {
 			FavsMovie favMov = new FavsMovie();
 		} else if (type.equals("tv")) {
@@ -305,7 +307,7 @@ public class HomeController {
 	@RequestMapping("/view-favs")
 	public ModelAndView displayFavs() {
 		ModelAndView mv = new ModelAndView("favorites");
-		mv.addObject("favActors", currentUser.getFavActors());
+		mv.addObject("favActors", actorRepo.findByUser(currentUser));
 		return mv;
 	}
 

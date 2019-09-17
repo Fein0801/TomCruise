@@ -13,12 +13,11 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body>
+<body class="dark-theme">
 	<h1>${tvDeets.name }</h1>
+	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
 	<a href="/add-fav?type=tv&id=${pDeets.id}" class="btn btn-danger">Add
 		to Favorites</a>
-	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }"
-		class="profile">
 	<br>
 	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
 	<h3>Last episode date: ${tvDeets.lastAirDate }</h3>
@@ -26,7 +25,7 @@
 	<h1>Summary</h1>
 	<p>${tvDeets.overview }</p>
 	<a class="btn btn-primary" href="home-page">Back to search</a>
-	<table class="table">
+	<table class="table table-striped">
 		<tr>
 			<th></th>
 			<th>Actor</th>

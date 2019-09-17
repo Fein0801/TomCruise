@@ -13,7 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body>
+<body class="dark-theme">
 	<c:forEach var="movie" items="${movieResults }">
 		<a href="/movie-details?id=${movie.id}"> 
 			<c:choose>
@@ -29,7 +29,6 @@
 		<a class="btn btn-primary" href="home-page">Back to search</a>
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
-
 	</c:forEach>
 </body>
 </html>

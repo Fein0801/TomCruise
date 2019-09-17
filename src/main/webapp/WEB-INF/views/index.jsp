@@ -11,10 +11,10 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
-<h1 align ="center" class="background" style="color: black">Welcome to Movie Phoenix, ${name }</h1>
-<h2 align = "center"><font color="black">Search your favorite Actors, Movies and Tv Shows</font></h2>
-<h2 align = "center"><font color="black">Add them to your Profile!</font></h2>
-<body>
+<h1 align ="center" class="background">Welcome to Movie Phoenix, ${name }</h1>
+<h2 align = "center">Search your favorite Actors, Movies and Tv Shows</h2>
+<h2 align = "center">Add them to your Profile!</h2>
+<body class="dark-theme">
 
 	<form action="person-search" method="get">
 		<input type="text" name="query" placeholder="Search by actor">

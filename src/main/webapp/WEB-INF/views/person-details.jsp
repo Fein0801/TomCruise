@@ -13,7 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body>
+<body class="dark-theme">
 
 
 	<h1>${pDeets.name }</h1>
