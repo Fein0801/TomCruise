@@ -16,10 +16,12 @@
 	<form action="add-event">
 		<label for="title">Title</label>
 		<input type="text" name="title">
+		<label for="date">Date</label>
+		<input type="date" name="date" min="2019-09-20">
 		<label for="startTime">Start Time</label> 
-		<input type="datetime-local" name="startTime">
+		<input type="time" name="startTime">
 		<label for="endTime">End Time</label> 
-		<input type="datetime-local" name="endTime">
+		<input type="time" name="endTime">
 		<label for="description">Description</label>
 		<input name="description">
 		<input type="submit" value="Add">
