@@ -120,7 +120,7 @@ public class HomeController {
 			mv.addObject("name", name);
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
-			currentUserName = user.getName();
+			currentUserName = user.getFirstName();
 
 			if (!userRepo.existsByName(user.getName())) {
 				Calendar cal = new Calendar();
@@ -158,6 +158,7 @@ public class HomeController {
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
+		mv.addObject("name", currentUserName);
 		return mv;
 	}
 
@@ -167,6 +168,7 @@ public class HomeController {
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
+		mv.addObject("name", currentUserName);
 		return mv;
 	}
 
@@ -176,17 +178,18 @@ public class HomeController {
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
-
+		mv.addObject("name", currentUserName);
 		return mv;
 	}
 
 	@RequestMapping("/person-details")
-	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
+	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") SearchType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
+		mv.addObject("name", currentUserName);
 		mv.addObject("pDeets", response);
-		if (type == MediaType.MOVIE) {
+		if (type == SearchType.MOVIE) {
 			// Film credits are a separate url
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
@@ -194,10 +197,13 @@ public class HomeController {
 			Collections.sort(cast, Collections.reverseOrder());
 //			mv.addObject("unreleased", unreleased);
 			mv.addObject("cast", cast);
-		} else {
+		} else if (type == SearchType.TV) {
 			String url2 = BASE_URL + "/person/" + id + "/tv_credits?api_key=" + mainKey;
 			TvCreditsByPerson response1 = rt.getForObject(url2, TvCreditsByPerson.class);
 			mv.addObject("pKnown", response1);
+		} else {
+			// if credit type was invalid, default to movie details
+			return new ModelAndView("redirect:/person-details?id=" + id + "&credit_type=MOVIE");
 		}
 		mv.addObject("creditType", type.ordinal());
 
@@ -207,6 +213,7 @@ public class HomeController {
 	@RequestMapping("/movie-details")
 	public ModelAndView movieDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("movie-details");
+		mv.addObject("name", currentUserName);
 		String unrecognizedChar = "’";
 		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
 		Movie response = rt.getForObject(url, Movie.class);
@@ -227,6 +234,7 @@ public class HomeController {
 	@RequestMapping("/tv-details")
 	public ModelAndView tvDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("tv-details");
+		mv.addObject("name", currentUserName);
 		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
 		TvShow response = rt.getForObject(url, TvShow.class);
 		mv.addObject("tvDeets", response);
@@ -240,9 +248,18 @@ public class HomeController {
 		mv.addObject("crewMen", crew);
 		return mv;
 	}
+	
+	// This pertains to the method below
+	public static enum SearchType {
+		MOVIE, TV, PERSON, ALL
+	}
+	
 	@RequestMapping("/all-search")
-	public ModelAndView searchAll(@RequestParam("query")String query) {
+	public ModelAndView searchAll(@RequestParam("result_type") SearchType type, @RequestParam("query")String query) {
 		ModelAndView mv = new ModelAndView("all-search");
+		mv.addObject("name", currentUserName);
+		// passes a numeric representation of the enum to the page
+		mv.addObject("resultType", type.ordinal());
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -328,6 +345,7 @@ public class HomeController {
 	public ModelAndView displayFavs() {
 		ModelAndView mv = new ModelAndView("favorites");
 		mv.addObject("favActors", actorRepo.findByUser(currentUser));
+		mv.addObject("name", currentUserName);
 		return mv;
 	}
 

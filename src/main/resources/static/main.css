@@ -64,3 +64,27 @@ body {
 	max-width: 30rem;
 	height: 150px;
 }
+
+.footer {
+	background-color: #1A1A1A;
+	height: 100px;
+}
+
+.footer img {
+	max-height: 50px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.header {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: 10;
+}
+
+.page-content {
+	position: relative;
+	top: 100px;
+}
