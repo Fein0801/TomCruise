@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body class="dark-theme">
+<div class="page content">
 <div id="parent" style="text-align:center">  
 	<div id="child">
 	<h1>Welcome!</h1>
@@ -22,6 +23,7 @@
 	</div>
 </div>
 
-	<!-- 	<a class="btn btn-primary" href="https://accounts.google.com/o/oauth2/v2/auth?client_id=490474699637-28km14ohul4qfafmc0h429lslt19irgs.apps.googleusercontent.com&key=AIzaSyAZqRL8cxDO252QcnlzquJUhcyUjb3lWKA&&response_type=coderedirect_uri=https://movie-phoenix.herokuapp.com/&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">Login take 2</a> -->
+
+</div>	<!-- 	<a class="btn btn-primary" href="https://accounts.google.com/o/oauth2/v2/auth?client_id=490474699637-28km14ohul4qfafmc0h429lslt19irgs.apps.googleusercontent.com&key=AIzaSyAZqRL8cxDO252QcnlzquJUhcyUjb3lWKA&&response_type=coderedirect_uri=https://movie-phoenix.herokuapp.com/&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">Login take 2</a> -->
 </body>
 </html>

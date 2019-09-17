@@ -14,8 +14,10 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body class="dark-theme">
+<div class="page-content">
 	<div class="error-message">
 		<p>Error</p>
+	</div>
 	</div>
 </body>
 </html>

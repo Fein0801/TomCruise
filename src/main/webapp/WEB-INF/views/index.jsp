@@ -12,6 +12,7 @@
 </head>
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
+<div class="page-content">
 	<h1 align="center" class="background">Welcome to Movie Phoenix, ${name }</h1>
 	<h2 align="center">Search your favorite Actors, Movies and Tv Shows</h2>
 	<h2 align="center">Add them to your Profile!</h2>
@@ -39,5 +40,6 @@
 	type="submit" value="Search">
 	</form>
 	<br>
+	</div>
 </body>
 </html>

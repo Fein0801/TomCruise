@@ -11,6 +11,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<div class="page-content">
 <c:forEach var="show" items="${tvResults}" varStatus="i">
 		<a href="/tv-details?id=${show.id}">
 			<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" alt="broken_image.png" class="thumbnail">
@@ -19,5 +20,6 @@
 		<h1>${show.name }</h1>
 		<h3>${show.firstAirDate }</h3>
 	</c:forEach>
+	</div>
 </body>
 </html>

@@ -15,6 +15,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<div class="page-content">
 	<c:forEach var="movie" items="${movieResults }">
 		<a href="/movie-details?id=${movie.id}"> 
 			<c:choose>
@@ -31,5 +32,6 @@
 		<h1>${movie.title }</h1>
 		<h3>${movie.releaseDate }</h3>
 	</c:forEach>
+	</div>
 </body>
 </html>

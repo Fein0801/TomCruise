@@ -13,6 +13,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
+<div class="page-content">
 	<form action="add-event">
 		<label for="title">Title</label>
 		<input type="text" name="title">
@@ -26,5 +27,6 @@
 		<input name="description">
 		<input type="submit" value="Add">
 	</form>
+	</div>
 </body>
 </html>

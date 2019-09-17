@@ -15,7 +15,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
-
+<div class="page-content">
 	<h1>${movieDeets.title}</h1>
 
 	<c:choose>
@@ -80,5 +80,7 @@
 				<td>${c.job }</td>
 			</tr>
 		</c:forEach>
+		</table>
+		</div>
 </body>
 </html>

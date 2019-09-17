@@ -15,6 +15,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<div class="page-content">
 	<table class="table">
 		<tr>
 			<th></th>
@@ -29,6 +30,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-
+</div>
 </body>
 </html>

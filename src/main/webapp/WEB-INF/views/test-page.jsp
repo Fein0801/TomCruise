@@ -15,6 +15,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<div class="page-content">
 	<div class="list">
 		<div class="card text-white bg-dark mb-3 mp-card">
 			<div class="card-body">
@@ -58,6 +59,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 <%@include file="partials/footer.jsp"%>

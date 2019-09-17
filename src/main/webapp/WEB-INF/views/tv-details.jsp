@@ -15,6 +15,7 @@
 </head>
 <%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<div class="page-content">
 	<h1>${tvDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
 	<a href="/add-fav?type=tv&id=${pDeets.id}" class="btn btn-danger">Add
@@ -60,5 +61,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div class="page-content">
 </body>
 </html>
