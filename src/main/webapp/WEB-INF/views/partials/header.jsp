@@ -11,25 +11,36 @@
 	integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
+<style>
+.mynav {
+	padding-top: 25px;
+}
+</style>
+
 </head>
 <!-- Make a header -->
 <header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary header">
 <!-- 		<a href="#"><img src="MoviePhoenixLogo.png" class="logo"></a> -->
-	  <a class="navbar-brand" href="#">Welcome, ${name }</a>
+<%-- 	  <a class="navbar-brand" href="#">Welcome, ${name }</a> --%>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 	
 	  <div class="collapse navbar-collapse" id="navbarColor01">
 	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
+	    	<li class="nav-item">
+	    		<a href="/home-page">
+	    		<img src="MoviePhoenixLogo.png" style="max-width: 75px;">
+	    		</a>
+	    	</li>
+	      <li class="nav-item active mynav">
 	        <a class="nav-link" href="/home-page">Home <span class="sr-only">(current)</span></a>
 	      </li>
-	      <li class="nav-item">
+	      <li class="nav-item mynav">
 	        <a class="nav-link" href="/view-favs">Favorites</a>
 	      </li>
-	      <li class="nav-item">
+	      <li class="nav-item mynav">
 	        <a class="nav-link" href="https://calendar.google.com/calendar/r" target="_blank">Google Calendar</a>
 	      </li>
 	    </ul>
