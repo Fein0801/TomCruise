@@ -161,3 +161,10 @@ html, body {
 .credits {
 	padding: 20px 20px 20px 20px;
 }
+
+.pic-collage {
+	text-align: center;
+	height: 200px;
+	max-width: auto;
+	
+}
