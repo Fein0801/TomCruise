@@ -34,6 +34,11 @@
 	
 		<h3>Bio:</h3>
 		<p>${pDeets.biography }</p>
+		<h5>Birthday:</h5>
+		<p>${pDeets.birthday }</p>
+		<h5>Date of birth:</h5>
+		<p>${pDeets.placeOfBirth }</p>
+		<p>${pDeets.deathday }
 	
 		<h4>Department:</h4>
 		<p>${pDeets.department }</p>
