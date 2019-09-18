@@ -221,6 +221,7 @@ public class HomeController {
 			mv.addObject("pKnown", response1);
 		}
 		mv.addObject("creditType", type.ordinal());
+		
 
 		return mv;
 	}
