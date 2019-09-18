@@ -19,7 +19,7 @@ public class DateConverter {
 	 * @return date in format "mm/dd/yyyy", returns the original string if incorrect
 	 *         format
 	 */
-	public static String dashToSlash(String s) {
+	public String dashToSlash(String s) {
 		if (s.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
 			try {
 				LocalDate date = LocalDate.parse(s);
@@ -41,7 +41,7 @@ public class DateConverter {
 	 * @return date in format "yyyy-mm-dd", returns original string if incorrect
 	 *         format
 	 */
-	public static String slashToDash(String s) {
+	public String slashToDash(String s) {
 		if (s.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
 			String[] parts = s.split("/");
 			int year = Integer.parseInt(parts[2]);
@@ -59,7 +59,7 @@ public class DateConverter {
 	 * @param s
 	 * @return Date in english. Returns original string if incorrect format.
 	 */
-	public static String getEnglishDate(String s) {
+	public String getEnglishDate(String s) {
 		LocalDate date;
 		if (isValidDate(s) && s.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
 			date = LocalDate.parse(s);
@@ -80,7 +80,7 @@ public class DateConverter {
 	 * @return true if the date is valid by the java.time.LocalDate class, false if
 	 *         the date is invalid
 	 */
-	public static boolean isValidDate(String s) {
+	public boolean isValidDate(String s) {
 		try {
 			if (s.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
 				s = slashToDash(s);
@@ -102,7 +102,7 @@ public class DateConverter {
 	 * @param date
 	 * @return English month and day
 	 */
-	public static String getEnglishMonthAndDay(String date) {
+	public String getEnglishMonthAndDay(String date) {
 		LocalDate dateFormat;
 		if (date.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
 			dateFormat = LocalDate.parse(slashToDash(date));
@@ -126,7 +126,7 @@ public class DateConverter {
 	 * @param day
 	 * @return
 	 */
-	public static String getEnglishMonthAndDay(int month, int day) {
+	public String getEnglishMonthAndDay(int month, int day) {
 		return getCapitalizedWord(Month.of(month).toString().toLowerCase()) + " " + getRankedNumber(day);
 	}
 
@@ -137,7 +137,7 @@ public class DateConverter {
 	 * @param date
 	 * @return year
 	 */
-	public static int getYearFromDate(String date) {
+	public int getYearFromDate(String date) {
 		try {
 			LocalDate d = LocalDate.parse(date);
 			return d.getYear();
@@ -154,7 +154,7 @@ public class DateConverter {
 	 * @param dayOfMonth
 	 * @return
 	 */
-	public static String getRankedNumber(int dayOfMonth) {
+	public String getRankedNumber(int dayOfMonth) {
 		String str = Integer.toString(dayOfMonth);
 
 		if (str.endsWith("1")) {
@@ -174,7 +174,7 @@ public class DateConverter {
 	 * @param word
 	 * @return
 	 */
-	public static String getCapitalizedWord(String word) {
+	public String getCapitalizedWord(String word) {
 		if (word.length() < 2) {
 			return word;
 		}

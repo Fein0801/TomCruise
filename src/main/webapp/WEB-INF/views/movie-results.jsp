@@ -40,7 +40,7 @@
 								${movie.title }
 							</a>
 						</h4>
-						<p>
+						<p style="text-overflow: ellipsis;">
 							${movie.overview }
 						</p>
 					</div>

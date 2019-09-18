@@ -51,6 +51,7 @@ import com.movie_phoenix.MoviePhoenix.repo.FavTvRepo;
 import com.movie_phoenix.MoviePhoenix.repo.UserRepo;
 import com.movie_phoenix.MoviePhoenix.service.GoogleService;
 import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
+import com.movie_phoenix.MoviePhoenix.util.DateConverter;
 
 /**
  * @author Ben
@@ -81,6 +82,7 @@ public class HomeController {
 	
 	@Autowired
 	private FavTvRepo tvRepo;
+	private DateConverter dc;
 
 	private GoogleUser currentUser;
 	private String currentUserName;
@@ -164,6 +166,7 @@ public class HomeController {
 	public ModelAndView personResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("person-results");
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("dc", dc);
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
@@ -174,6 +177,7 @@ public class HomeController {
 	public ModelAndView movieResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("movie-results");
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("dc", dc);
 		mv.addObject("query", query);
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
@@ -184,6 +188,7 @@ public class HomeController {
 	@RequestMapping("/tv-search")
 	public ModelAndView tvResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("tv-results");
+		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
@@ -196,6 +201,7 @@ public class HomeController {
 	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("dc", dc);
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
@@ -222,21 +228,18 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("movie-details");
 		mv.addObject("name", currentUser.getFirstName());
 		String unrecognizedChar = "’";
-		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
-		Movie response = rt.getForObject(url, Movie.class);
-		String summary = response.getOverview().replace(unrecognizedChar, "\'");
-		response.setOverview(summary);
-		mv.addObject("movieDeets", response);
+		Movie returnedMovie = getMovieById(id);
+		String summary = returnedMovie.getOverview().replace(unrecognizedChar, "\'");
+		returnedMovie.setOverview(summary);
+		mv.addObject("movieDeets", returnedMovie);
 		boolean upcoming = false;
-		String releaseDate = response.getReleaseDate();
-		if(releaseDate != null && today.compareTo(LocalDate.parse(releaseDate)) <= 0) {
+		String releaseDate = returnedMovie.getReleaseDate();
+		if(releaseDate != null && !releaseDate.equals("") && today.compareTo(LocalDate.parse(releaseDate)) <= 0) {
 			upcoming = true;
 		}
 		mv.addObject("upcoming", upcoming);
+		mv.addObject("dc", dc);
 		System.out.println(upcoming);
-		
-		
-		
 		String url1 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
 		Credits response1 = rt.getForObject(url1, Credits.class);
 		ArrayList<MovieCast> cast = response1.getCast();
@@ -253,8 +256,8 @@ public class HomeController {
 	public ModelAndView tvDetails(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView("tv-details");
 		mv.addObject("name", currentUser.getFirstName());
-		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
-		TvShow response = rt.getForObject(url, TvShow.class);
+		mv.addObject("dc", dc);
+		TvShow response = getTvShowById(id);
 		mv.addObject("tvDeets", response);
 		String url1 = BASE_URL + "/tv/" + id + "/credits?api_key=" + mainKey;
 		TvCredits response1 = rt.getForObject(url1, TvCredits.class);
@@ -269,6 +272,7 @@ public class HomeController {
 	@RequestMapping("/all-search")
 	public ModelAndView searchAll(@RequestParam("query")String query) {
 		ModelAndView mv = new ModelAndView("all-search");
+		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
@@ -280,7 +284,6 @@ public class HomeController {
 		PersonResults response2 = rt.getForObject(url2, PersonResults.class);
 		mv.addObject("personResults", response2.getResults());
 		return mv;
-		
 	}
 
 	@RequestMapping("/home-page")
@@ -299,7 +302,7 @@ public class HomeController {
 
 	@RequestMapping("/add-event")
 	public ModelAndView event(@RequestParam("title") String summary, @RequestParam("startTime") String startTime,
-			@RequestParam("endTime") String endTime, @RequestParam("description") String description,@RequestParam("date") String date)
+			@RequestParam("endTime") String endTime, @RequestParam("description") String description, @RequestParam("date") String date)
 			throws IOException {
 		
 		String calendarId = "";
@@ -381,6 +384,32 @@ public class HomeController {
 		mv.addObject("favMovies", movieRepo.findByUserId(currentUser.getEntryId()));
 		mv.addObject("favTv", tvRepo.findByUserId(currentUser.getEntryId()));
 		return mv;
+	}
+	
+	@RequestMapping("/schedule-viewing")
+	public ModelAndView scheduleViewing(@RequestParam("movie_id") Integer movieId) {
+		ModelAndView mv = new ModelAndView("schedule-movie-date");
+		Movie movie = getMovieById(movieId);
+		mv.addObject("movie", movie);
+		return mv;
+	}
+	
+	public Movie getMovieById(int id) {
+		String url = BASE_URL + "/movie/" + id + "?api_key=" + mainKey;
+		Movie response = rt.getForObject(url, Movie.class);
+		return response;
+	}
+	
+	public TvShow getTvShowById(int id) {
+		String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
+		TvShow response = rt.getForObject(url, TvShow.class);
+		return response;
+	}
+	
+	public Person getPersonById(int id) {
+		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
+		Person response = rt.getForObject(url1, Person.class);
+		return response;
 	}
 
 }
