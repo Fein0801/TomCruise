@@ -371,7 +371,7 @@ public class HomeController {
 			TvShow response = rt.getForObject(url, TvShow.class);
 			List<FavsTv> faves = tvRepo.findByUserAndShow(id, userId);
 			if(faves.size() == 0) {
-				FavsTv favTv = new FavsTv(id, response.getName(), userId);
+				FavsTv favTv = new FavsTv(id, response.getName(), userId, response.getImageUrl());
 				tvRepo.save(favTv);
 			}
 			mv.setViewName("redirect:/tv-details?id=" + id);
@@ -400,13 +400,13 @@ public class HomeController {
 	@RequestMapping("/remove-favorite")
 	public ModelAndView removeFavorite(@RequestParam("id") Integer entryId, @RequestParam("type") ResultType type) {
 		if(type == ResultType.MOVIE) {
-			
+			movieRepo.deleteById(entryId);
 		} else if (type == ResultType.PERSON) {
-			
+			actorRepo.deleteById(entryId);
 		} else if (type == ResultType.TV) {
-			
+			tvRepo.deleteById(entryId);
 		}
-		return null; //TODO stuff
+		return new ModelAndView("redirect:/view-favs"); //TODO stuff
 	}
 	
 	public Movie getMovieById(int id) {

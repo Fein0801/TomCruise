@@ -49,10 +49,6 @@ html, body {
 	color: white;
 }
 
-.table {
-	border: 0px 0px 1px 0px solid white;
-}
-
 .error-message {
 	background-color: red;
 }
@@ -160,4 +156,14 @@ html, body {
 	padding-bottom: 25px;
 	padding-top: 25px;
 	background-color: #0b1014;
+}
+
+table a:link, a:visited {
+	color: #919AA1;
+	text-decoration: none;
+}
+
+table a:hover {
+	color: #919AA1;
+	text-decoration: underline;
 }

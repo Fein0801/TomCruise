@@ -21,14 +21,20 @@
 		<tr>
 			<th></th>
 			<th>Name</th>
-			<th></th>
+			<th>Remove</th>
 		</tr>
 		<c:forEach var="actor" items="${favActors}">
 			<tr>
-				<td><img
-					src="https://image.tmdb.org/t/p/w500${actor.imageUrl }"
-					class="thumbnail"></td>
-				<td>${actor.name }</td>
+				<td>
+					<a href="/person-details?id=${actor.actorId}&credit_type=MOVIE">
+					<img src="https://image.tmdb.org/t/p/w500${actor.imageUrl }" class="thumbnail">
+					</a>
+				</td>
+				<td>
+					<a href="/person-details?id=${actor.actorId}&credit_type=MOVIE">
+						${actor.name }
+					</a>
+				</td>
 				<td>
 					<a href="/remove-favorite?id=${actor.entryId }&type=PERSON" class="btn btn-danger">Remove</a>
 				</td>
@@ -36,10 +42,11 @@
 		</c:forEach>
 	</table>
 <h1>Movies</h1>
-<table class="table">
+	<table class="table table-striped">
 		<tr>
 			<th></th>
 			<th>Title</th>
+			<th>Remove</th>
 		</tr>
 		<c:forEach var="movie" items="${favMovies}">
 			<tr>
@@ -50,7 +57,46 @@
 					class="thumbnail">
 				</a>
 				</td>
-				<td>${movie.title }</td>
+				<td>
+					<a href="/movie-details?id=${movie.mediaId }">
+						${movie.title}
+					</a>
+				</td>
+				<td>
+					<a href="/remove-favorite?id=${movie.entryId }&type=MOVIE" class="btn btn-danger">Remove</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<h1>Tv shows</h1>
+	<table class="table table-striped">
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Remove</th>
+		</tr>
+		<c:forEach var="show" items="${favTv}">
+			<tr>
+				<td>
+					<a href="/tv-details?id=${show.tvId }">
+						<c:choose>
+							<c:when test="${show.imageUrl != null }">
+								<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" class="thumbnail">
+							</c:when>
+							<c:otherwise>
+								<img src="broken_image.png" class="thumbnail">
+							</c:otherwise>
+						</c:choose>
+					</a>
+				</td>			
+				<td>
+					<a href="/tv-details?id=${show.tvId}">
+						${show.title }
+					</a>
+				</td>
+				<td>
+					<a href="/remove-favorite?id=${show.entryId }&type=TV" class="btn btn-danger">Remove</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
