@@ -91,7 +91,7 @@
 				</td>			
 				<td>
 					<a href="/tv-details?id=${show.tvId}">
-						${show.title }
+						${show.title}
 					</a>
 				</td>
 				<td>

@@ -121,9 +121,9 @@
 	</div>
 	</div>
 	<div class="col-lg-6" id="buttons" style="position: fixed; padding-top: 20px; right: 20px;">
-		<a href="/movie-search?query=${query}" class="btn btn-info">Show movie results</a>
-		<a href="/tv-search?query=${query}" class="btn btn-info">Show TV results</a>
-		<a href="/person-search?query=${query}" class="btn btn-info">Show person results</a>
+		<a href="/movie-search?query=${query}" class="btn btn-primary">Show movie results</a>
+		<a href="/tv-search?query=${query}" class="btn btn-primary">Show TV results</a>
+		<a href="/person-search?query=${query}" class="btn btn-primary">Show person results</a>
 	</div>
 </div>
 </div>

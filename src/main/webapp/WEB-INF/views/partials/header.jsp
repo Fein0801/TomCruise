@@ -41,8 +41,11 @@
 	        <a class="nav-link" href="/view-favs">Favorites</a>
 	      </li>
 	      <li class="nav-item mynav">
-	        <a class="nav-link" href="https://calendar.google.com/calendar/r" target="_blank">Calendar</a>
+	        <a class="nav-link" href="/check-calendar">Calendar</a>
 	      </li>
+<!-- 	      <li class="nav-item mynav"> -->
+<!-- 	        <a class="nav-link" href="https://calendar.google.com/calendar/r" target="_blank">Calendar</a> -->
+<!-- 	      </li> -->
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0" action="/all-search">
 	      <input type="hidden" name="result_type" value="ALL">

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Movie Phoenix: ${pDeets.name }</title>
+<title>Movie Phoenix: ${pDeets.name}</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css"
 	rel="stylesheet"
@@ -38,7 +38,7 @@
 		<h4>Department:</h4>
 		<p>${pDeets.department }</p>
 	</div>
-	<div class="cast-crew">
+	<div class="credits">
 		<h4>Credits:</h4>
 		<a class="btn btn-primary"
 			href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>

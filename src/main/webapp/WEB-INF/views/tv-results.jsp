@@ -12,6 +12,8 @@
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
 <div class="page-content">
+<div class="row">
+<div class="col-lg-6">
 <div class="list">
 	<c:forEach var="show" items="${tvResults}" varStatus="i">
 		
@@ -43,8 +45,14 @@
 			</div>
 		
 	</c:forEach>
+	</div>
 </div>
-	
+	<div class="col-lg-6" id="buttons" style="position: fixed; padding-top: 20px; right: 20px;">
+		<a href="/movie-search?query=${query}" class="btn btn-primary">Show movie results</a>
+		<a href="/person-search?query=${query}" class="btn btn-primary">Show person results</a>
+		<a href="/all-search?query=${query}" class="btn btn-primary">Show all results</a>
+	</div>
+</div>
 </div>
 <%@include file="partials/footer.jsp"%>
 </body>
