@@ -39,8 +39,8 @@
 							</h4>
 							<p>
 								${person.department } :
-								<c:forEach var="movie" items="${person.knownFor }">
-									${movie.title },
+								<c:forEach var="movie" items="${person.knownFor }" varStatus="i">
+									${movie.title }<c:if test="${i.count < personResults.size()}">,</c:if>
 								</c:forEach>
 							</p>
 						</div>

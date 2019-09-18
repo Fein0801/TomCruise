@@ -42,9 +42,6 @@
 								${movie.title }
 							</a>
 						</h4>
-						<p style="text-overflow: ellipsis;">
-							${movie.overview }
-						</p>
 					</div>
 				</div>
 			</div>

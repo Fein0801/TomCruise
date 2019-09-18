@@ -38,8 +38,7 @@
 								${show.name }
 							</a>
 						</h4>
-						<p>${show.firstAirDate}</p>
-						<p>${show.overview}</p>
+						<p>First Air Date: ${show.firstAirDate}</p>
 					</div>
 				</div>
 			</div>
