@@ -17,10 +17,11 @@
 <div class="page-content">
 <%@include file="partials/header.jsp"%>
 <h1>People</h1>
-	<table class="table">
+	<table class="table table-striped">
 		<tr>
 			<th></th>
 			<th>Name</th>
+			<th></th>
 		</tr>
 		<c:forEach var="actor" items="${favActors}">
 			<tr>
@@ -28,6 +29,9 @@
 					src="https://image.tmdb.org/t/p/w500${actor.imageUrl }"
 					class="thumbnail"></td>
 				<td>${actor.name }</td>
+				<td>
+					<a href="/remove-favorite?id=${actor.entryId }&type=PERSON" class="btn btn-danger">Remove</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

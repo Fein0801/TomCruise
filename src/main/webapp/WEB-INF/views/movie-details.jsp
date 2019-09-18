@@ -16,8 +16,7 @@
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
 <div class="page-content">
-	<h1>${movieDeets.title}</h1>
-
+<div class="avatar-profile">
 	<c:choose>
 		<c:when test="${movieDeets.posterUrl != null}">
 			<img src="https://image.tmdb.org/t/p/w500${movieDeets.posterUrl}"
@@ -27,25 +26,28 @@
 			<img src="broken_image.png" class="profile">
 		</c:otherwise>
 	</c:choose>
-	<br>
-	<br>
+</div>
+<div class="summary dark-theme">
+	<h1>${movieDeets.title}</h1>
 	<a href="/add-fav?type=movie&id=${movieDeets.id}"
 		class="btn btn-danger">Add to Favorites</a>
+		<br>
+		<br>
 		<c:if test="${upcoming == true }">
 			<a href="/schedule-viewing?movie_id=${movieDeets.id }"
 				class="btn btn-success">Schedule a viewing</a>
 		</c:if>
-	<h3>${movieDeets.overview }</h3>
+		<h3>Plot Summary:</h3>
+	<p>${movieDeets.overview }</p>
 	<p>
 		<c:forEach var="mg" items="${movieDeets.genres}">
 			<h4>${mg.name }</h4>
 		</c:forEach>
-		${dc.getEnglishDate(movieDeets.releaseDate) }
+		${movieDeets.releaseDate }
 	<h4>${movieDeets.tagline }</h4>
 	${movieDeets.runtime }
-	<a class="btn btn-primary" href="home-page">Back to search</a>
-	<br>
-	<br>
+</div>
+<div class="credits">
 	<h1>Cast</h1>
 	<table class="table table-striped">
 		<!-- WIP: new backround color makes table borders look bad -->
@@ -56,10 +58,18 @@
 		</tr>
 		<c:forEach var="c" items="${ actors}">
 			<tr>
-				<td><a href="/person-details?id=${c.castId }&credit_type=MOVIE">
-						<img src="https://image.tmdb.org/t/p/w500${c.profilePath}"
-						class="thumbnail">
-				</a></td>
+				<td>
+				<a href="/person-details?id=${c.castId }&credit_type=MOVIE">
+					<c:choose>
+						<c:when test="${c.profilePath != null }">
+							<img src="https://image.tmdb.org/t/p/w500${c.profilePath }" class="thumbnail">
+						</c:when>
+						<c:otherwise>
+							<img src="broken_image.png" class="thumbnail">
+						</c:otherwise>
+					</c:choose>
+				</a>
+				</td>
 				<td>${c.name }</td>
 				<td>${c.character }</td>
 			</tr>
@@ -75,15 +85,24 @@
 
 		<c:forEach var="c" items="${ crewMen}">
 			<tr>
-				<td><a href="/person-details?id=${c.crewId }&credit_type=TV"><img
-						src="https://image.tmdb.org/t/p/w500${c.profilePath}"
-						class="thumbnail"></a></td>
+				<td>
+				<a href="/person-details?id=${c.crewId }&credit_type=TV">
+					<c:choose>
+						<c:when test="${c.profilePath != null }">
+							<img src="https://image.tmdb.org/t/p/w500${c.profilePath }" class="thumbnail">
+						</c:when>
+						<c:otherwise>
+							<img src="broken_image.png" class="thumbnail">
+						</c:otherwise>
+					</c:choose>
+				</a></td>
 				<td>${c.name }</td>
 				<td>${c.job }</td>
 			</tr>
 		</c:forEach>
 		</table>
 		</div>
+</div>
 <%@include file="partials/footer.jsp"%>
 </body>
 </html>

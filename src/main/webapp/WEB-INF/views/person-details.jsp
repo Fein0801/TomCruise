@@ -16,10 +16,19 @@
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
 <div class="page-content">
-	<div class="summary">
+	<div class="avatar-profile">
+		<c:choose>
+			<c:when test="${pDeets.imageUrl != null}">
+				<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
+					class="profile">
+			</c:when>
+			<c:otherwise>
+				<img src="broken_image.png" class="profile">
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div class="summary dark-theme">
 		<h1>${pDeets.name }</h1>
-		<img src="https://image.tmdb.org/t/p/w500${pDeets.imageUrl}"
-			alt="broken_image.png" class="profile">
 		<a href="/add-fav?type=person&id=${pDeets.id}" class="btn btn-danger">Add
 			to Favorites</a>
 	
@@ -31,7 +40,6 @@
 	</div>
 	<div class="cast-crew">
 		<h4>Credits:</h4>
-		<a class="btn btn-primary" href="home-page">Back to home page</a>
 		<a class="btn btn-primary"
 			href="/person-details?id=${pDeets.id}&credit_type=MOVIE">Movies</a>
 		<a class="btn btn-primary"
@@ -42,7 +50,7 @@
 			<table class="table table-striped">
 				<tr>
 					<th></th>
-					<th>Release Year</th>
+					<th>Release Date</th>
 					<th>Title</th>
 					<th>Character</th>
 	
@@ -72,7 +80,7 @@
 		<c:if test="${creditType == 1}">
 			<table class="table">
 				<tr>
-					<th>Release Year</th>
+					<th>First Air Date</th>
 					<th>Title</th>
 					<th>Character</th>
 				</tr>

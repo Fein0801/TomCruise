@@ -28,7 +28,7 @@ import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
-import com.movie_phoenix.MoviePhoenix.entity.MediaType;
+import com.movie_phoenix.MoviePhoenix.entity.ResultType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Credits;
@@ -198,14 +198,14 @@ public class HomeController {
 	}
 
 	@RequestMapping("/person-details")
-	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
+	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") ResultType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("dc", dc);
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		if (type == MediaType.MOVIE) {
+		if (type == ResultType.MOVIE) {
 			// Film credits are a separate url
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
@@ -392,6 +392,18 @@ public class HomeController {
 		Movie movie = getMovieById(movieId);
 		mv.addObject("movie", movie);
 		return mv;
+	}
+	
+	@RequestMapping("/remove-favorite")
+	public ModelAndView removeFavorite(@RequestParam("id") Integer entryId, @RequestParam("type") ResultType type) {
+		if(type == ResultType.MOVIE) {
+			
+		} else if (type == ResultType.PERSON) {
+			
+		} else if (type == ResultType.TV) {
+			
+		}
+		return null; //TODO stuff
 	}
 	
 	public Movie getMovieById(int id) {
