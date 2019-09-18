@@ -25,7 +25,7 @@
 		<input type="time" name="startTime">
 		<label for="endTime">End Time</label> 
 		<input type="time" name="endTime">
-		<label for="description">Description</label>
+		<label for="description"></label>
 		<input name="description" value="" type="hidden">
 		<input type="submit" value="Add">
 	</form>
