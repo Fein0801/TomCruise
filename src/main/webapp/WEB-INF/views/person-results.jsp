@@ -10,8 +10,10 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body class="dark-theme">
-<div class="page-content">
 <%@include file="partials/header.jsp"%>
+<div class="page-content">
+<div class="row">
+	<div class="col-lg-6">
 	<div class="list">
 		<c:forEach var="person" items="${personResults }">
 			<div class="card text-white bg-dark mb-3 mp-card">
@@ -47,6 +49,13 @@
 
 			
 		</c:forEach>
+	</div>
+	</div>
+	<div class="col-lg-6" id="buttons" style="position: fixed; padding-top: 20px; right: 20px;">
+		<a href="/movie-search?query=${query}" class="btn btn-info">Show movie results</a>
+		<a href="/tv-search?query=${query}" class="btn btn-info">Show TV results</a>
+		<a href="/all-search?query=${query}" class="btn btn-info">Show all results</a>
+	</div>
 	</div>
 </div>
 <%@include file="partials/footer.jsp"%>

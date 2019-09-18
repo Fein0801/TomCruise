@@ -21,14 +21,14 @@ public class WatchlistItem {
 	private String imageUrl;
 
 	@Enumerated(EnumType.STRING)
-	private MediaType mediaType;
+	private ResultType mediaType;
 
 	public WatchlistItem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public WatchlistItem(Integer userId, Integer mediaId, String summary, String imageUrl, MediaType mediaType) {
+	public WatchlistItem(Integer userId, Integer mediaId, String summary, String imageUrl, ResultType mediaType) {
 		super();
 		this.userId = userId;
 		this.mediaId = mediaId;
@@ -38,7 +38,7 @@ public class WatchlistItem {
 	}
 
 	public WatchlistItem(Integer id, Integer userId, Integer mediaId, String summary, String imageUrl,
-			MediaType mediaType) {
+			ResultType mediaType) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -88,11 +88,11 @@ public class WatchlistItem {
 		this.imageUrl = imageUrl;
 	}
 
-	public MediaType getMediaType() {
+	public ResultType getMediaType() {
 		return mediaType;
 	}
 
-	public void setMediaType(MediaType mediaType) {
+	public void setMediaType(ResultType mediaType) {
 		this.mediaType = mediaType;
 	}
 

@@ -4,11 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.movie_phoenix.MoviePhoenix.service.GoogleUser;
 
 @Entity
 @Table(name = "fav_tv")
@@ -20,24 +16,27 @@ public class FavsTv {
 	private Integer tvId;
 	private String title;
 	private Integer userId;
+	private String imageUrl;
 
 	public FavsTv() {
 		super();
 	}
 
-	public FavsTv(Integer entryId, Integer tvId, String title, Integer userId) {
+	public FavsTv(Integer entryId, Integer tvId, String title, Integer userId, String imageUrl) {
 		super();
 		this.entryId = entryId;
 		this.tvId = tvId;
 		this.title = title;
 		this.userId = userId;
+		this.imageUrl = imageUrl;
 	}
 
-	public FavsTv(Integer tvId, String title, Integer userId) {
+	public FavsTv(Integer tvId, String title, Integer userId, String imageUrl) {
 		super();
 		this.tvId = tvId;
 		this.title = title;
 		this.userId = userId;
+		this.imageUrl = imageUrl;
 	}
 
 	public Integer getEntryId() {
@@ -70,6 +69,14 @@ public class FavsTv {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

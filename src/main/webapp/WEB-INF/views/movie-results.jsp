@@ -26,7 +26,7 @@
 							<c:choose>
 								<c:when test="${movie.posterUrl != null}">
 									<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}"
-										alt="broken_image.png" class="thumbnail">
+										class="thumbnail">
 								</c:when>
 								<c:otherwise>
 									<img src="broken_image.png" class="thumbnail">

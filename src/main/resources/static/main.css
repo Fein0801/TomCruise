@@ -49,10 +49,6 @@ html, body {
 	color: white;
 }
 
-.table {
-	border: 0px 0px 1px 0px solid white;
-}
-
 .error-message {
 	background-color: red;
 }
@@ -148,4 +144,26 @@ html, body {
 .summary {
 	padding-left: 25px;
 	padding-right: 25px;
+	margin-left: 365px;
+	margin-top: 25px;
+	position: absolute;
+	top: 100px;
+}
+
+.avatar-profile {
+	width: 365px;
+	padding-left: 20px;
+	padding-bottom: 25px;
+	padding-top: 25px;
+	background-color: #0b1014;
+}
+
+table a:link, a:visited {
+	color: #919AA1;
+	text-decoration: none;
+}
+
+table a:hover {
+	color: #919AA1;
+	text-decoration: underline;
 }

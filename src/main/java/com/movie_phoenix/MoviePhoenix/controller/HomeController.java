@@ -28,7 +28,7 @@ import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
-import com.movie_phoenix.MoviePhoenix.entity.MediaType;
+import com.movie_phoenix.MoviePhoenix.entity.ResultType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Credits;
@@ -167,6 +167,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("person-results");
 		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("dc", dc);
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
@@ -190,6 +191,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("tv-results");
 		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -198,14 +200,14 @@ public class HomeController {
 	}
 
 	@RequestMapping("/person-details")
-	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") MediaType type) {
+	public ModelAndView personDetails(@RequestParam("id") Integer id, @RequestParam("credit_type") ResultType type) {
 		ModelAndView mv = new ModelAndView("person-details");
 		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("dc", dc);
 		String url1 = BASE_URL + "/person/" + id + "?api_key=" + mainKey;
 		Person response = rt.getForObject(url1, Person.class);
 		mv.addObject("pDeets", response);
-		if (type == MediaType.MOVIE) {
+		if (type == ResultType.MOVIE) {
 			// Film credits are a separate url
 			String url2 = BASE_URL + "/person/" + id + "/movie_credits?api_key=" + mainKey;
 			FilmCreditsByPerson response1 = rt.getForObject(url2, FilmCreditsByPerson.class);
@@ -274,6 +276,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("all-search");
 		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -368,7 +371,7 @@ public class HomeController {
 			TvShow response = rt.getForObject(url, TvShow.class);
 			List<FavsTv> faves = tvRepo.findByUserAndShow(id, userId);
 			if(faves.size() == 0) {
-				FavsTv favTv = new FavsTv(id, response.getName(), userId);
+				FavsTv favTv = new FavsTv(id, response.getName(), userId, response.getImageUrl());
 				tvRepo.save(favTv);
 			}
 			mv.setViewName("redirect:/tv-details?id=" + id);
@@ -392,6 +395,18 @@ public class HomeController {
 		Movie movie = getMovieById(movieId);
 		mv.addObject("movie", movie);
 		return mv;
+	}
+	
+	@RequestMapping("/remove-favorite")
+	public ModelAndView removeFavorite(@RequestParam("id") Integer entryId, @RequestParam("type") ResultType type) {
+		if(type == ResultType.MOVIE) {
+			movieRepo.deleteById(entryId);
+		} else if (type == ResultType.PERSON) {
+			actorRepo.deleteById(entryId);
+		} else if (type == ResultType.TV) {
+			tvRepo.deleteById(entryId);
+		}
+		return new ModelAndView("redirect:/view-favs"); //TODO stuff
 	}
 	
 	public Movie getMovieById(int id) {
