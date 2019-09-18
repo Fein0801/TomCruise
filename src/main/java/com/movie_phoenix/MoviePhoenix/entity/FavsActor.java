@@ -85,7 +85,4 @@ public class FavsActor {
 	public void setUser(GoogleUser user) {
 		this.user = user;
 	}
-
-	
-
 }

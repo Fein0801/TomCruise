@@ -12,21 +12,38 @@
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
 <div class="page-content">
-
+<div class="list">
 	<c:forEach var="show" items="${tvResults}" varStatus="i">
-		<a href="/tv-details?id=${show.id}">
-			<c:choose>
-				<c:when test="${show.imageUrl != null }">
-					<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" class="thumbnail">
-				</c:when>
-				<c:otherwise>
-					<img src="broken_image.png" class="thumbnail">
-				</c:otherwise>
-			</c:choose>
-		</a>
-		<h1>${show.name }</h1>
-		<h3>${show.firstAirDate }</h3>
+		
+		<div class="card text-white bg-dark mb-3 mp-card">
+				<div class="card-body">
+					<div class="avatar">
+						<a href="/tv-details?id=${show.id}">
+							<c:choose>
+								<c:when test="${show.imageUrl != null }">
+									<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" class="thumbnail">
+								</c:when>
+								<c:otherwise>
+									<img src="broken_image.png" class="thumbnail">
+								</c:otherwise>
+							</c:choose>
+						</a>
+						
+					</div>
+					<div class="card-content">
+						<h4>
+							<a href="/tv-details?id=${show.id}">
+								${show.name }
+							</a>
+						</h4>
+						<p>${show.firstAirDate}</p>
+						<p>${show.overview}</p>
+					</div>
+				</div>
+			</div>
+		
 	</c:forEach>
+</div>
 	
 </div>
 <%@include file="partials/footer.jsp"%>

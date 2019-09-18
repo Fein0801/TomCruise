@@ -16,41 +16,73 @@
 <body class="dark-theme">
 <%@include file="partials/header.jsp"%>
 <div class="page-content">
-	<c:forEach var="movie" items="${movieResults }">
-		<a href="/movie-details?id=${movie.id}"> <c:choose>
-				<c:when test="${movie.posterUrl != null}">
-					<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}"
-						class="thumbnail">
-				</c:when>
-				<c:otherwise>
-					<img src="broken_image.png" class="thumbnail">
-				</c:otherwise>
-			</c:choose>
-		</a>
-		<a class="btn btn-primary" href="home-page">Back to search</a>
-		<h1>${movie.title }</h1>
-		<h3>${movie.releaseDate }</h3>
+<div class="row">
+<div id="sticking-point" style="width: 100%;">
+</div>
+<div class="col-lg-6" id="searchResults">
+<div class="list">
+	<c:forEach var="movie" items="${movieResults}">
+		<div class="card text-white bg-dark mb-3 mp-card" style="overflow: hidden;">
+			<div class="card-body">
+				<div class="avatar">
+					<a href="/movie-details?id=${movie.id}">
+						<c:choose>
+							<c:when test="${movie.posterUrl != null}">
+								<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl}"
+									class="thumbnail">
+							</c:when>
+							<c:otherwise>
+								<img src="broken_image.png" class="thumbnail">
+							</c:otherwise>
+						</c:choose>
+					</a>
+				</div>
+				<div class="card-content">
+					<h4>
+						<a href="/movie-details?id=${movie.id}">
+							${movie.title }
+						</a>
+					</h4>
+					<p style="text-overflow: ellipsis;">
+						${movie.overview }
+					</p>
+				</div>
+			</div>
+		</div>
 	</c:forEach>
 	
 	
 	<c:forEach var="person" items="${personResults }">
-		<h4>${person.name }</h4>
-		<h4>
-			${person.department } :
-			<c:forEach var="movie" items="${person.knownFor }">
-		${movie.title },
-	</c:forEach>
-		</h4>
-		<a href="/person-details?id=${person.id}&credit_type=MOVIE"> <c:choose>
-				<c:when test="${person.imageUrl != null}">
-					<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}"
-						alt="broken_image.png" class="thumbnail">
-				</c:when>
-				<c:otherwise>
-					<img src="broken_image.png" class="thumbnail">
-				</c:otherwise>
-			</c:choose>
-		</a>
+		<div class="card text-white bg-dark mb-3 mp-card">
+				<div class="card-body">
+					<div class="avatar">
+						<a href="/person-details?id=${person.id}&credit_type=MOVIE">
+							<c:choose>
+								<c:when test="${person.imageUrl != null}">
+									<img src="https://image.tmdb.org/t/p/w500${person.imageUrl}"
+										alt="broken_image.png" class="thumbnail">
+								</c:when>
+								<c:otherwise>
+									<img src="broken_image.png" class="thumbnail">
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</div>
+					<div class="card-content">
+						<h4>
+							<a href="/person-details?id=${person.id}&credit_type=MOVIE">
+								${person.name }
+							</a>
+						</h4>
+						<p>
+							${person.department } :
+							<c:forEach var="movie" items="${person.knownFor }">
+								${movie.title },
+							</c:forEach>
+						</p>
+					</div>
+				</div>
+			</div>
 	</c:forEach>
 	
 	
@@ -59,14 +91,41 @@
 	
 	
 	<c:forEach var="show" items="${tvResults}" varStatus="i">
-		<a href="/tv-details?id=${show.id}"> <img
-			src="https://image.tmdb.org/t/p/w500${show.imageUrl}"
-			alt="broken_image.png" class="thumbnail">
-		</a>
-		<a class="btn btn-primary" href="home-page">Back to search</a>
-		<h1>${show.name }</h1>
-		<h3>${show.firstAirDate }</h3>
+		<div class="card text-white bg-dark mb-3 mp-card">
+				<div class="card-body">
+					<div class="avatar">
+						<a href="/tv-details?id=${show.id}">
+							<c:choose>
+								<c:when test="${show.imageUrl != null }">
+									<img src="https://image.tmdb.org/t/p/w500${show.imageUrl}" class="thumbnail">
+								</c:when>
+								<c:otherwise>
+									<img src="broken_image.png" class="thumbnail">
+								</c:otherwise>
+							</c:choose>
+						</a>
+						
+					</div>
+					<div class="card-content">
+						<h4>
+							<a href="/tv-details?id=${show.id}">
+								${show.name }
+							</a>
+						</h4>
+						<p>${show.firstAirDate}</p>
+						<p>${show.overview}</p>
+					</div>
+				</div>
+			</div>
 	</c:forEach>
+	</div>
+	</div>
+	<div class="col-lg-6" id="buttons" style="position: fixed; padding-top: 20px; right: 20px;">
+		<a href="/movie-search?query=${query}" class="btn btn-info">Show movie results</a>
+		<a href="/tv-search?query=${query}" class="btn btn-info">Show TV results</a>
+		<a href="/person-search?query=${query}" class="btn btn-info">Show person results</a>
+	</div>
+</div>
 </div>
 <%@include file="partials/footer.jsp"%>
 </body>

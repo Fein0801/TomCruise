@@ -167,6 +167,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("person-results");
 		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("dc", dc);
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/person?api_key=" + mainKey + "&query=" + query;
 		PersonResults response = rt.getForObject(url, PersonResults.class);
 		mv.addObject("personResults", response.getResults());
@@ -190,6 +191,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("tv-results");
 		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
@@ -274,6 +276,7 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("all-search");
 		mv.addObject("dc", dc);
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/tv?api_key=" + mainKey + "&query=" + query;
 		TvShowResults response = rt.getForObject(url, TvShowResults.class);
 		mv.addObject("tvResults", response.getResults());
