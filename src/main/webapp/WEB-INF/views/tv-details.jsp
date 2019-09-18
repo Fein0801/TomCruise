@@ -13,12 +13,12 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<%@include file="partials/header.jsp"%>
 <div class="page-content">
 	<h1>${tvDeets.name }</h1>
 	<img src="https://image.tmdb.org/t/p/w500${tvDeets.imageUrl }" class="profile">
-	<a href="/add-fav?type=tv&id=${pDeets.id}" class="btn btn-danger">Add
+	<a href="/add-fav?type=tv&id=${tvDeets.id}" class="btn btn-danger">Add
 		to Favorites</a>
 	<br>
 	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
@@ -61,6 +61,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<div class="page-content">
+	</div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>

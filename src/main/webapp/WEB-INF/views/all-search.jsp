@@ -13,8 +13,8 @@
 	crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<%@include file="partials/header.jsp"%>
 <div class="page-content">
 	<c:forEach var="movie" items="${movieResults }">
 		<a href="/movie-details?id=${movie.id}"> <c:choose>
@@ -68,5 +68,6 @@
 		<h3>${show.firstAirDate }</h3>
 	</c:forEach>
 </div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>

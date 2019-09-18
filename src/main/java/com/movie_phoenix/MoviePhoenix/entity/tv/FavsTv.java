@@ -19,35 +19,24 @@ public class FavsTv {
 	private Integer entryId;
 	private Integer tvId;
 	private String title;
-	private String firstAirDate;
-	private String lastAirDate;
-	private String summary;
 	private Integer userId;
 
 	public FavsTv() {
 		super();
 	}
 
-	public FavsTv(Integer entryId, Integer tvId, String title, String firstAirDate, String lastAirDate, String summary,
-			Integer userId) {
+	public FavsTv(Integer entryId, Integer tvId, String title, Integer userId) {
 		super();
 		this.entryId = entryId;
 		this.tvId = tvId;
 		this.title = title;
-		this.firstAirDate = firstAirDate;
-		this.lastAirDate = lastAirDate;
-		this.summary = summary;
 		this.userId = userId;
 	}
 
-	public FavsTv(Integer tvId, String title, String firstAirDate, String lastAirDate, String summary,
-			Integer userId) {
+	public FavsTv(Integer tvId, String title, Integer userId) {
 		super();
 		this.tvId = tvId;
 		this.title = title;
-		this.firstAirDate = firstAirDate;
-		this.lastAirDate = lastAirDate;
-		this.summary = summary;
 		this.userId = userId;
 	}
 
@@ -73,30 +62,6 @@ public class FavsTv {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getFirstAirDate() {
-		return firstAirDate;
-	}
-
-	public void setFirstAirDate(String firstAirDate) {
-		this.firstAirDate = firstAirDate;
-	}
-
-	public String getLastAirDate() {
-		return lastAirDate;
-	}
-
-	public void setLastAirDate(String lastAirDate) {
-		this.lastAirDate = lastAirDate;
-	}
-
-	public String getSummary() {
-		return summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
 	}
 
 	public Integer getUserId() {

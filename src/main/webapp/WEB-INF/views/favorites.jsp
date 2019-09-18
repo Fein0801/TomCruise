@@ -13,9 +13,9 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
 <div class="page-content">
+<%@include file="partials/header.jsp"%>
 <h1>People</h1>
 	<table class="table">
 		<tr>
@@ -51,5 +51,6 @@
 		</c:forEach>
 	</table>
 </div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>

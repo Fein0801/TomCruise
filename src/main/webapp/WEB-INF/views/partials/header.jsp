@@ -31,7 +31,7 @@
 	    <ul class="navbar-nav mr-auto">
 	    	<li class="nav-item">
 	    		<a href="/home-page">
-	    		<img src="MoviePhoenixLogo.png" style="max-width: 75px;">
+	    			<img src="MoviePhoenixLogo.png" style="max-width: 75px;">
 	    		</a>
 	    	</li>
 	      <li class="nav-item active mynav">
