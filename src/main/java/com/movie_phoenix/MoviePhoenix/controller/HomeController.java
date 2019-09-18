@@ -99,8 +99,8 @@ public class HomeController {
 	@RequestMapping("/")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("login");
-//		String redirectUri = "http://localhost:8080/verify";
-		String redirectUri = "https://movie-phoenix.herokuapp.com/verify";
+		String redirectUri = "http://localhost:8080/verify";
+//		String redirectUri = "https://movie-phoenix.herokuapp.com/verify";
 		StringBuilder urlParams = new StringBuilder(
 				"?scope=profile email https://www.googleapis.com/auth/calendar&client_id=");
 		urlParams.append(clientId);
