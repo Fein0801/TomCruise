@@ -20,7 +20,7 @@
 		<label for="title">Event name</label>
 		<input type="text" name="title" value="Watch ${movie.title}" readonly>
 		<label for="date">Date</label>
-		<input type="date" name="date" min="${movie.releaseDate}">
+		<input type="date" name="date" min="${movie.releaseDate}" value="${movie.releaseDate}">
 		<label for="startTime">Start Time</label> 
 		<input type="time" name="startTime">
 		<label for="endTime">End Time</label> 
@@ -29,6 +29,13 @@
 		<input name="description" value="" type="hidden">
 		<input type="submit" value="Add">
 	</form>
+	<iframe src="/movie-details2?id=${movie.id }" style="width:100%; height: 500px;"></iframe>
+<%-- 	<img src="https://image.tmdb.org/t/p/w500${movie.posterUrl }" class="thumbnail">
+	<br>
+	<h2>Description</h2>
+	<p>${movie.overview }</p>
+	<h2>Release Date</h2>
+	<p>${movie.releaseDate }</p> --%>
 </div>
 </body>
 </html>

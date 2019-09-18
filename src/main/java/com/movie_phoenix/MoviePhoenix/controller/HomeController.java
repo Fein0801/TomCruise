@@ -255,6 +255,18 @@ public class HomeController {
 		mv.addObject("crewMen", crew);
 		return mv;
 	}
+	@RequestMapping("/movie-details2")
+	public ModelAndView movieDetails2(@RequestParam("id") Integer id) {
+		ModelAndView mv = new ModelAndView("movie-details2");
+		mv.addObject("name", currentUser.getFirstName());
+		String unrecognizedChar = "’";
+		Movie returnedMovie = getMovieById(id);
+		String summary = returnedMovie.getOverview().replace(unrecognizedChar, "\'");
+		returnedMovie.setOverview(summary);
+		mv.addObject("movieDeets", returnedMovie);
+		
+		return mv;
+	}
 
 	@RequestMapping("/tv-details")
 	public ModelAndView tvDetails(@RequestParam("id") Integer id) {

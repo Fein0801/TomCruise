@@ -47,9 +47,9 @@
 		 ${movieDeets.releaseDate }
 		 <p></p>
 	<h4>Runtime: </h4>
-	${movieDeets.runtime } minutes
-	<p>
-	<h6>"${movieDeets.tagline }"</h6></p>
+	${movieDeets.runtime } minutes <br>
+	<br>
+	<h6>"${movieDeets.tagline }"</h6>
 </div>
 <div class="credits">
 	<h1>Cast</h1>
