@@ -1,6 +1,8 @@
 package com.movie_phoenix.MoviePhoenix.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,26 +20,32 @@ public class WatchlistItem {
 	private String summary;
 	private String imageUrl;
 
+	@Enumerated(EnumType.STRING)
+	private MediaType mediaType;
+
 	public WatchlistItem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public WatchlistItem(Integer id, Integer userId, Integer mediaId, String summary, String imageUrl) {
+	public WatchlistItem(Integer userId, Integer mediaId, String summary, String imageUrl, MediaType mediaType) {
+		super();
+		this.userId = userId;
+		this.mediaId = mediaId;
+		this.summary = summary;
+		this.imageUrl = imageUrl;
+		this.mediaType = mediaType;
+	}
+
+	public WatchlistItem(Integer id, Integer userId, Integer mediaId, String summary, String imageUrl,
+			MediaType mediaType) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.mediaId = mediaId;
 		this.summary = summary;
 		this.imageUrl = imageUrl;
-	}
-
-	public WatchlistItem(Integer userId, Integer mediaId, String summary, String imageUrl) {
-		super();
-		this.userId = userId;
-		this.mediaId = mediaId;
-		this.summary = summary;
-		this.imageUrl = imageUrl;
+		this.mediaType = mediaType;
 	}
 
 	public Integer getId() {
@@ -78,6 +86,14 @@ public class WatchlistItem {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public MediaType getMediaType() {
+		return mediaType;
+	}
+
+	public void setMediaType(MediaType mediaType) {
+		this.mediaType = mediaType;
 	}
 
 }

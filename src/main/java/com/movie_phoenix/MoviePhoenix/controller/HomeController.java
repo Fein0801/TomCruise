@@ -174,6 +174,7 @@ public class HomeController {
 	public ModelAndView movieResult(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("movie-results");
 		mv.addObject("name", currentUser.getFirstName());
+		mv.addObject("query", query);
 		String url = BASE_URL + "/search/movie?api_key=" + mainKey + "&query=" + query;
 		MovieResults response = rt.getForObject(url, MovieResults.class);
 		mv.addObject("movieResults", response.getResults());
@@ -226,13 +227,24 @@ public class HomeController {
 		String summary = response.getOverview().replace(unrecognizedChar, "\'");
 		response.setOverview(summary);
 		mv.addObject("movieDeets", response);
+		boolean upcoming = false;
+		String releaseDate = response.getReleaseDate();
+		if(releaseDate != null && today.compareTo(LocalDate.parse(releaseDate)) <= 0) {
+			upcoming = true;
+		}
+		mv.addObject("upcoming", upcoming);
+		System.out.println(upcoming);
+		
+		
+		
 		String url1 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
 		Credits response1 = rt.getForObject(url1, Credits.class);
 		ArrayList<MovieCast> cast = response1.getCast();
 		mv.addObject("actors", cast);
-		String url2 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
-		Credits response2 = rt.getForObject(url2, Credits.class);
-		ArrayList<MovieCrew> crew = response2.getCrew();
+		// No need to call the api twice lol. If it turns out I'm wrong, we can add those lines back in.
+//		String url2 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;
+//		Credits response2 = rt.getForObject(url2, Credits.class);
+		ArrayList<MovieCrew> crew = response1.getCrew();
 		mv.addObject("crewMen", crew);
 		return mv;
 	}
@@ -349,7 +361,14 @@ public class HomeController {
 			}
 			mv.setViewName("redirect:/movie-details?id=" + id);
 		} else if (type.equals("tv")) {
-			FavsTv favTv = new FavsTv();
+			String url = BASE_URL + "/tv/" + id + "?api_key=" + mainKey;
+			TvShow response = rt.getForObject(url, TvShow.class);
+			List<FavsTv> faves = tvRepo.findByUserAndShow(id, userId);
+			if(faves.size() == 0) {
+				FavsTv favTv = new FavsTv(id, response.getName(), userId);
+				tvRepo.save(favTv);
+			}
+			mv.setViewName("redirect:/tv-details?id=" + id);
 		}
 		return mv;
 	}
@@ -360,6 +379,7 @@ public class HomeController {
 		mv.addObject("name", currentUser.getFirstName());
 		mv.addObject("favActors", actorRepo.findByUser(currentUser));
 		mv.addObject("favMovies", movieRepo.findByUserId(currentUser.getEntryId()));
+		mv.addObject("favTv", tvRepo.findByUserId(currentUser.getEntryId()));
 		return mv;
 	}
 

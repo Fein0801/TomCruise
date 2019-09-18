@@ -13,8 +13,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<%@include file="partials/header.jsp"%>
 <body class="dark-theme">
+<%@include file="partials/header.jsp"%>
 <div class="page-content">
 	<h1>${movieDeets.title}</h1>
 
@@ -31,8 +31,10 @@
 	<br>
 	<a href="/add-fav?type=movie&id=${movieDeets.id}"
 		class="btn btn-danger">Add to Favorites</a>
-	<a href="/schedule-viewing?movie_id=${movieDeets.id }"
-		class="btn btn-success">Schedule a viewing</a>
+		<c:if test="${upcoming == true }">
+			<a href="/schedule-viewing?movie_id=${movieDeets.id }"
+				class="btn btn-success">Schedule a viewing</a>
+		</c:if>
 	<h3>${movieDeets.overview }</h3>
 	<p>
 		<c:forEach var="mg" items="${movieDeets.genres}">
@@ -82,5 +84,6 @@
 		</c:forEach>
 		</table>
 		</div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>

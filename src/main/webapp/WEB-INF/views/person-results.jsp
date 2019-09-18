@@ -10,8 +10,8 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body class="dark-theme">
-<%@include file="partials/header.jsp"%>
 <div class="page-content">
+<%@include file="partials/header.jsp"%>
 	<div class="list">
 		<c:forEach var="person" items="${personResults }">
 			<div class="card text-white bg-dark mb-3 mp-card">
@@ -29,8 +29,12 @@
 							</c:choose>
 						</a>
 					</div>
-					<div class="content">
-						<h4>${person.name }</h4>
+					<div class="card-content">
+						<h4>
+							<a href="/person-details?id=${person.id}&credit_type=MOVIE">
+								${person.name }
+							</a>
+						</h4>
 						<p>
 							${person.department } :
 							<c:forEach var="movie" items="${person.knownFor }">
@@ -45,5 +49,6 @@
 		</c:forEach>
 	</div>
 </div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>

@@ -13,8 +13,9 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <footer>
-<div class="footer">
-	<a href="https://www.themoviedb.org/">
+<div class="footer" style="">
+	<p>All images and information pulled from <a href="https://www.themoviedb.org/" target="_blank" style="color: white;">themoviedb.org</a></p>
+	<a href="https://www.themoviedb.org/" target="_blank">
 		<img src="TMDBAttribution-img.png">
 	</a>
 </div>

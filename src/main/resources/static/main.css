@@ -4,6 +4,8 @@ body {
 
 .thumbnail {
 	max-width: 75px;
+	width: 75px;
+	max-height: 115px;
 }
 
 .profile {
@@ -55,14 +57,18 @@ body {
 	padding: 20px 75px;
 }
 
-.content {
-	margin-top: -100px;
+.card-content {
+	margin-top: -115px;
 	margin-left: 90px;
+	max-height: 150px;
+	margin-bottom: 10px;
 }
 
 .mp-card {
-	max-width: 30rem;
-	height: 150px;
+	max-width: 35rem;
+/* 	min-height: 150px; */
+	height: 200px;
+	overflow: hidden;
 }
 
 .center {
@@ -73,15 +79,32 @@ body {
 	padding-top: 200px;
 }
 
+.footer p {
+	color: white;
+}
+
+.footer a:link {
+	color: #919AA1;
+	text-decoration: none;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+}
+
 .footer {
 	background-color: #1A1A1A;
-	height: 100px;
+	height: 120px;
+	position: relative;
+	bottom: 0;
+	max-height: 120px;
+	padding-left: 20px;
+	padding-top: 20px;
+	width: 100%;
 }
 
 .footer img {
 	max-height: 50px;
-	margin-left: 20px;
-	margin-top: 20px;
 }
 
 .header {
@@ -96,4 +119,23 @@ body {
 
 .page-content {
 	padding-top: 120px;
+}
+
+.mp-card a:link {
+	color: white;
+	text-decoration: none;
+}
+
+.mp-card a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.mp-card a:hover {
+  text-decoration: underline;
+}
+
+.summary {
+	padding-left: 25px;
+	padding-right: 25px;
 }

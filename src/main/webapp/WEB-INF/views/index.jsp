@@ -40,6 +40,7 @@
 	type="submit" value="Search">
 	</form>
 	<br>
-	</div>
+</div>
+<%@include file="partials/footer.jsp"%>
 </body>
 </html>
