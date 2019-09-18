@@ -2,6 +2,10 @@ body {
 	background-color: #ededed;
 }
 
+html, body {
+	height: 100%;
+}
+
 .thumbnail {
 	max-width: 75px;
 	width: 75px;
@@ -79,31 +83,36 @@ body {
 	padding-top: 200px;
 }
 
-.footer p {
-	color: white;
-}
-
-.footer a:link {
-	color: #919AA1;
-	text-decoration: none;
-}
-
-.footer a:hover {
-	text-decoration: underline;
-}
-
-.footer {
+.foot {
 	background-color: #1A1A1A;
 	height: 120px;
 	position: relative;
-	bottom: 0;
-	max-height: 120px;
+	bottom: 0px;
 	padding-left: 20px;
 	padding-top: 20px;
+	margin-bottom: 0px;
 	width: 100%;
 }
 
-.footer img {
+.foot p {
+	color: white;
+}
+
+.foot a:link {
+	color: white;
+	text-decoration: none;
+}
+
+.foot a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.foot a:hover {
+	text-decoration: underline;
+}
+
+.foot img {
 	max-height: 50px;
 }
 
@@ -119,6 +128,7 @@ body {
 
 .page-content {
 	padding-top: 120px;
+	min-height: 100%;
 }
 
 .mp-card a:link {
@@ -132,7 +142,7 @@ body {
 }
 
 .mp-card a:hover {
-  text-decoration: underline;
+  	text-decoration: underline;
 }
 
 .summary {

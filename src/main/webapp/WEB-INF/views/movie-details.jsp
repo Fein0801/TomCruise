@@ -40,7 +40,7 @@
 		<c:forEach var="mg" items="${movieDeets.genres}">
 			<h4>${mg.name }</h4>
 		</c:forEach>
-		${movieDeets.releaseDate }
+		${dc.getEnglishDate(movieDeets.releaseDate) }
 	<h4>${movieDeets.tagline }</h4>
 	${movieDeets.runtime }
 	<a class="btn btn-primary" href="home-page">Back to search</a>
