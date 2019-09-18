@@ -61,12 +61,13 @@ html, body {
 	margin-top: -115px;
 	margin-left: 90px;
 	max-height: 150px;
+	text-overflow: ellipses;
 	margin-bottom: 10px;
 }
 
 .mp-card {
 	max-width: 30rem;
-/* 	min-height: 150px; */
+/* 	min-height: 200px; */
 	height: 200px;
 	overflow: hidden;
 }

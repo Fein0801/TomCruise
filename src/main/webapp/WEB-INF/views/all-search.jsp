@@ -43,16 +43,13 @@
 							${movie.title }
 						</a>
 					</h4>
-					<p style="text-overflow: ellipsis;">
-						${movie.overview }
-					</p>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
 	
 	
-	<c:forEach var="person" items="${personResults }">
+	<c:forEach var="person" items="${personResults }" >
 		<div class="card text-white bg-dark mb-3 mp-card">
 				<div class="card-body">
 					<div class="avatar">
@@ -76,8 +73,8 @@
 						</h4>
 						<p>
 							${person.department } :
-							<c:forEach var="movie" items="${person.knownFor }">
-								${movie.title },
+							<c:forEach var="movie" items="${person.knownFor }" varStatus="i">
+								${movie.title }<c:if test="${i.count < personResults.size()}">,</c:if>
 							</c:forEach>
 						</p>
 					</div>
@@ -112,8 +109,7 @@
 								${show.name }
 							</a>
 						</h4>
-						<p>${show.firstAirDate}</p>
-						<p>${show.overview}</p>
+						<p>First Air Date: ${show.firstAirDate}</p>
 					</div>
 				</div>
 			</div>

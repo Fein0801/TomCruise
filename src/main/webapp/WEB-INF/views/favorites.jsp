@@ -12,6 +12,17 @@
 	integrity="sha384-hVpXlpdRmJ+uXGwD5W6HZMnR9ENcKVRn855pPbuI/mwPIEKAuKgTKgGksVGmlAvt"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="main.css">
+<style>
+.name a:link, a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.name a:hover {
+	color: white;
+	text-decoration: underline;
+}
+</style>
 </head>
 <body class="dark-theme">
 <div class="page-content">
@@ -30,7 +41,7 @@
 					<img src="https://image.tmdb.org/t/p/w500${actor.imageUrl }" class="thumbnail">
 					</a>
 				</td>
-				<td>
+				<td class="name">
 					<a href="/person-details?id=${actor.actorId}&credit_type=MOVIE">
 						${actor.name }
 					</a>
@@ -57,7 +68,7 @@
 					class="thumbnail">
 				</a>
 				</td>
-				<td>
+				<td class="name">
 					<a href="/movie-details?id=${movie.mediaId }">
 						${movie.title}
 					</a>
@@ -89,13 +100,13 @@
 						</c:choose>
 					</a>
 				</td>			
-				<td>
+				<td class="name">
 					<a href="/tv-details?id=${show.tvId}">
 						${show.title}
 					</a>
 				</td>
 				<td>
-					<a href="/remove-favorite?id=${show.entryId }&type=TV" class="btn btn-danger">Remove</a>
+					<a href="/remove-favorite?id=${show.entryId}&type=TV" class="btn btn-danger">Remove</a>
 				</td>
 			</tr>
 		</c:forEach>
