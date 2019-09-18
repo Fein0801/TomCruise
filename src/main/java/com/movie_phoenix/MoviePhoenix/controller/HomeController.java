@@ -241,7 +241,7 @@ public class HomeController {
 			upcoming = true;
 		}
 		mv.addObject("upcoming", upcoming);
-		returnedMovie.setReleaseDate(dc.getEnglishDate(releaseDate));
+//		returnedMovie.setReleaseDate(dc.getEnglishDate(releaseDate));
 		
 		System.out.println(upcoming);
 		String url1 = BASE_URL + "/movie/" + id + "/credits?api_key=" + mainKey;

@@ -29,6 +29,9 @@
 </div>
 <div class="summary dark-theme">
 	<h1>${movieDeets.title}</h1>
+		<c:forEach var="mg" items="${movieDeets.genres}">
+			<h6>${mg.name }</h6>
+		</c:forEach>
 	<a href="/add-fav?type=movie&id=${movieDeets.id}"
 		class="btn btn-danger">Add to Favorites</a>
 		<br>
@@ -38,14 +41,15 @@
 				class="btn btn-success">Schedule a viewing</a>
 		</c:if>
 		<h3>Plot Summary:</h3>
+
 	<p>${movieDeets.overview }</p>
+		<h4> Release Date:</h4>
+		 ${movieDeets.releaseDate }
+		 <p></p>
+	<h4>Runtime: </h4>
+	${movieDeets.runtime } minutes
 	<p>
-		<c:forEach var="mg" items="${movieDeets.genres}">
-			<h4>${mg.name }</h4>
-		</c:forEach>
-		${movieDeets.releaseDate }
-	<h4>${movieDeets.tagline }</h4>
-	${movieDeets.runtime }
+	<h6>"${movieDeets.tagline }"</h6></p>
 </div>
 <div class="credits">
 	<h1>Cast</h1>
