@@ -15,8 +15,8 @@ public class TvShow {
 	@JsonProperty("poster_path")
 	private String imageUrl;
 	private String overview;
-	@JsonProperty("genre_ids")
-	private ArrayList<Integer> genreIds;
+	@JsonProperty("genres")
+	private ArrayList<Tvgenres> genres;
 	@JsonProperty("last_air_date")
 	private String lastAirDate;
 	private String character;
@@ -73,12 +73,12 @@ public class TvShow {
 		this.overview = overview;
 	}
 
-	public ArrayList<Integer> getGenreIds() {
-		return genreIds;
+	
+	public ArrayList<Tvgenres> getGenres() {
+		return genres;
 	}
-
-	public void setGenreIds(ArrayList<Integer> genreIds) {
-		this.genreIds = genreIds;
+	public void setGenres(ArrayList<Tvgenres> genres) {
+		this.genres = genres;
 	}
 	public String getCharacter() {
 		return character;

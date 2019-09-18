@@ -29,15 +29,21 @@
 </div>
 <div class="summary">
 	<h1>${tvDeets.name }</h1>
+	<c:forEach var="mg" items="${tvDeets.genres}">
+			<h6>${mg.name }</h6>
+		</c:forEach>
+		<p>
 	<a href="/add-fav?type=tv&id=${tvDeets.id}" class="btn btn-danger">Add
 		to Favorites</a>
+	</p>
 	<br>
-	<h3>First episode date: ${tvDeets.firstAirDate }</h3>
-	<h3>Last episode date: ${tvDeets.lastAirDate }</h3>
+	<h5>First episode date: ${tvDeets.firstAirDate }</h5>
+	<h5>Last episode date: ${tvDeets.lastAirDate }</h5>
+		<br>
 
 	<h1>Summary</h1>
 	<p>${tvDeets.overview }</p>
-	
+	<br>
 </div>
 <div class="credits">	
 	<h1>CAst</h1>
