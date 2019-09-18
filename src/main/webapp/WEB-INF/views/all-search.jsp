@@ -43,6 +43,7 @@
 							${movie.title }
 						</a>
 					</h4>
+					<p>${movie.releaseDate }</p>
 				</div>
 			</div>
 		</div>
