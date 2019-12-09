@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,9 +30,9 @@ import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.movie_phoenix.MoviePhoenix.entity.FavsActor;
-import com.movie_phoenix.MoviePhoenix.entity.ResultType;
 import com.movie_phoenix.MoviePhoenix.entity.Person;
 import com.movie_phoenix.MoviePhoenix.entity.PersonResults;
+import com.movie_phoenix.MoviePhoenix.entity.ResultType;
 import com.movie_phoenix.MoviePhoenix.entity.movie.Credits;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FavsMovie;
 import com.movie_phoenix.MoviePhoenix.entity.movie.FilmCreditsByPerson;
@@ -81,6 +83,9 @@ public class HomeController {
 	private FavMovieRepo movieRepo;
 	
 	@Autowired
+	private HttpSession session;
+	
+	@Autowired
 	private FavTvRepo tvRepo;
 	private DateConverter dc;
 
@@ -129,28 +134,27 @@ public class HomeController {
 			server = getCalendarServer();
 
 			GoogleUser user = gSuite.parseGoogleUser(idToken);
-			currentUserName = user.getFirstName();
+			session.setAttribute("name", user.getFirstName());
+			currentUserName = (String) session.getAttribute("name");
 			System.out.println(user.getEmail());
-
 			if (!userRepo.existsByEmail(user.getEmail())) {
 				Calendar cal = new Calendar();
 
 				cal.setSummary("Movie Phoenix");
 				cal.setTimeZone("America/Detroit");
 
+				// this is the line that is throwing an error
 				Calendar createdCal = server.calendars().insert(cal).execute();
 				user.setCalendarId(createdCal.getId());
 				userRepo.save(user);
 			} else {
 				user = userRepo.findByEmail(user.getEmail());
 			}
-			currentUser = user;
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			System.out.println("What's going on?");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return mv;
@@ -346,7 +350,8 @@ public class HomeController {
 		event.setDescription(description);
 		event = server.events().insert(calendarId, event).execute();
 		System.out.println(event.toString());
-		return new ModelAndView("index");
+		System.out.println(currentUser.getEmail());
+		return new ModelAndView("index", "name", currentUser.getFirstName());
 	}
 
 	public static com.google.api.services.calendar.Calendar getCalendarServer() {

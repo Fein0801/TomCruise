@@ -84,7 +84,7 @@
 			</table>
 		</c:if>
 		<c:if test="${creditType == 1}">
-			<table class="table">
+			<table class="table table-striped">
 				<tr>
 					<th>First Air Date</th>
 					<th>Title</th>
